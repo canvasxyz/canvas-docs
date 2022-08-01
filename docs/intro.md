@@ -26,7 +26,6 @@ Canvas is built on new technologies from the last 10 years:
 * A JavaScript and WebAssembly virtual machine
 * A new peer-to-peer stack which we've written, built on IPFS
 * Support for common Web3 wallets, like Metamask, for login
-* An "edge computing" model, similar to Cloudflare/Vercel edge functions
 
 The basic idea behind Canvas is that user actions are **signed messages**, relayed over a peer-to-peer network. Each peer maintains an **append-only log** of actions and their effects, combining them using a CRDT (conflict-free replicated data type) so actions don't have to be processed in order.
 
@@ -36,14 +35,12 @@ Compared to crypto-based Web3 networks, Canvas makes a few tradeoffs:
 * Blockchains generally reach some state of finality, either immediately (with Tendermint) or after 15-30 blocks (with PoW or PoS gadgets). Canvas nodes don't have a strict concept of finality.
 * Node operators don't bond ETH, so there is no penalty for misbehavior or going offline.
 
-On the other hand:
+These issues are expected to be addressed with a future Canvas "guardian network", where Canvas data will be archived to backends like Filecoin and Arweave, and Canvas nodes will commit to their latest updates they have accepted.
+
+We think most "general-purpose" uses of computers are a better fit for Canvas than blockchains:
 
 * Canvas apps don't require cryptocurrency to use. To prevent spam, some applications may require one to hold an NFT, or a verifiable credential, an off-chain signed message that shows you have permission to write to a network.
 * Canvas is easier to program (in JavaScript) and query (in SQL).
 * Canvas actions are more flexible; they're just signed data, that can be forked and recombined into new applications.
 
-Canvas is optimized for writing useful applications, rather than creating new financial instruments. We think most "general-purpose" uses of computers are a better fit for Canvas than blockchains.
-
 In general, we recommend that contentious/ordering-sensitive operations, like giving someone write access to a restricted channel in a Canvas application, be conducted on a blockchain like an Ethereum L2. Canvas provides an API for *reading from smart contracts* for this purpose.
-
-Finally, many of the issues around finality are expected to be addressed with a future Canvas "guardian network", where Canvas data will be archived to backends like Filecoin and Arweave, and Canvas nodes will commit to their latest updates they have accepted.
