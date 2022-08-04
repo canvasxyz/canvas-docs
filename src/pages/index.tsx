@@ -26,5 +26,5 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
-  return <Redirect to="./docs" />
+  return <HomepageHeader />
 }
