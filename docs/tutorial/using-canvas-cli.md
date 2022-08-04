@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Now that we’ve written a Canvas application, it’s time to try running it.
 
-### Setting up Node
+### Setting up
 
 Make sure you are running Node v16. If you aren't sure, try running `node -v`:
 
@@ -15,7 +15,7 @@ Make sure you are running Node v16. If you aren't sure, try running `node -v`:
 v16.15.1
 ```
 
-If you're on a more recent version of Node, Canvas won't run because of an unpatched issue with OpenSSL libraries. You should use NVM to get Node v16, which should be mostly painless.
+If you're on a more recent version of Node, Canvas won't run because of an unpatched issue with OpenSSL libraries. You should use NVM to get Node v16, which should be straightforward.
 
 Go to https://github.com/nvm-sh/nvm#installing-and-updating, which should give you a `curl` command for installing NVM. Once you have it installed, open a new command line window, and run:
 
