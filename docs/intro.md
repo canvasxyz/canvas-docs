@@ -5,7 +5,7 @@ slug: /
 
 # Introduction
 
-Canvas is a platform for building decentralized “Web3” applications.
+Canvas is a platform for building decentralized applications.
 
 Like email or IRC are protocols, and unlike Twitter or Discord which are centralized apps with a centralized backend, we make it easy for any developer to create any application as a decentralized protocol from the start.
 
@@ -14,27 +14,14 @@ Like email or IRC are protocols, and unlike Twitter or Discord which are central
 
 Every Canvas application is defined as an **offchain contract**. This is a single JavaScript file, that specifies the models, routes, and actions in the application's backend.
 
-To run an application, anyone with the offchain contract can execute `canvas run <contract.js>` from the command line. This launches a decentralized backend for the application, and exposes an API and routes that you can connect to from the frontend.
+To run an application, anyone with the offchain contract can execute `canvas run <contract.js>` from the command line. This launches a decentralized backend for the application, and exposes an API that you can connect to from the frontend.
 
-From the frontend, users can log in with a crypto wallet like Metamask, which gives them a temporary session key stored in the browser. Their interactions are signed and broadcast to the peer-to-peer network, where they can be verified by every node.
+From the frontend, users can log in with a crypto wallet like Metamask, and create a temporary session key stored in the browser. Their interactions are signed and broadcast to the peer-to-peer network, where they can be verified by every node.
 
-## Technology and tradeoffs
+## Technology
 
-The basic idea behind Canvas is that user actions are **signed messages**, relayed over a peer-to-peer network. Each peer maintains an **append-only log** of actions and their effects, combining them using a CRDT (conflict-free replicated data type, the same ones used to synchronize Google Docs).
+The basic idea behind Canvas is that user actions are **signed messages**, relayed over a peer-to-peer network. Each peer maintains an append-only log of actions and their effects, combining them using a CRDT (conflict-free replicated data type, the same data structures used to synchronize Google Docs).
 
-Signed messages are executed on a JavaScript and WebAssembly virtual machine, using a new peer-to-peer stack which we've written, built on IPFS. Compared to building on smart contracts, this stack makes a few tradeoffs:
+Building on this foundation, we can add tools like a light client for reading from blockchains, finality by writing to networks like Arweave and Filecoin, and more powerful runtimes and database backends. For more about the tech, see the [Technology and tradeoffs](./technology) page.
 
-* **We don't save data to a blockchain.** This makes Canvas fast (each node can accept actions instantaneously, rather than waiting for consensus), but it also means that contentious operations - like competing to be in the first 1000 minters of an NFT - are impractical to implement on Canvas.
-* **Blockchains generally reach some state of finality**, either immediately (with Tendermint) or after 15-30 blocks (with PoW or PoS gadgets). Canvas nodes don't have a strict concept of finality, and have limited shared global state.
-* Node operators don't bond ETH, so there is no penalty for misbehavior or going offline.
-
-These issues will be addressed with a future Canvas guardian network, where Canvas nodes will commit to the latest updates they have accepted, and data is archived to backends like Filecoin and Arweave.
-
-In general, we recommend that ordering-sensitive operations happen on a blockchain like an Ethereum L2. Canvas provides an API for *reading from smart contracts* for this purpose.
-
-On the other hand, we think most "general-purpose" uses of computers are a better fit for Canvas than blockchains:
-
-* Canvas apps are much faster.
-* Canvas apps don't require cryptocurrency to use. To prevent spam, some applications may require one to hold an NFT, or a verifiable credential, an off-chain signed message that shows you have permission to write to a network.
-* Canvas is easier to program (in JavaScript) and query (in SQL).
-* Canvas actions are more flexible; they're just signed data, that can be forked and recombined into new applications.
+Otherwise, we recommend checking out the tutorial!
