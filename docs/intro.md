@@ -22,6 +22,6 @@ From the frontend, users can log in with a crypto wallet like Metamask, and crea
 
 The basic idea behind Canvas is that user actions are **signed messages**, relayed over a peer-to-peer network. Each peer maintains an append-only log of actions and their effects, combining them using a CRDT (conflict-free replicated data type, the same data structures used to synchronize Google Docs).
 
-Building on this foundation, we can add tools like a light client for reading from blockchains, finality by writing to networks like Arweave and Filecoin, and more powerful runtimes and database backends. For more about the tech, see the [Technology and tradeoffs](./technology) page.
+Building on this foundation, we can add tools like a light client for reading from blockchains, finality by writing to networks like Arweave and Filecoin, and more powerful runtimes and database backends. For more about the tech, see the Technology and Tradeoffs page.
 
 Otherwise, we recommend checking out the tutorial!
