@@ -4,11 +4,23 @@ sidebar_position: 3
 
 # Writing a Canvas frontend
 
-Now we have a working Canvas backend, let's connect it to a frontend so we can do a few things with it!
+Now we have a working Canvas backend, let's connect it to a frontend so we can start interacting with it.
 
 If you're following along with this tutorial in your browser, make sure you have Metamask installed with a working wallet. You won't need any tokens, but you will need an Ethereum address later in this tutorial.
 
-Start by creating a React app, and installing the Canvas frontend package:
+### Start a Canvas node
+
+First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/spec.canvas.js), which includes a few more views.
+
+Save it as spec.canvas.js, and start a local node:
+
+```bash
+canvas run spec.canvas.js
+```
+
+### Set up a new frontend
+
+Now, start by creating a React app, and installing the Canvas frontend package:
 
 
 ```bash
@@ -22,48 +34,47 @@ You should now have a starter React application running in your browser.
 
 ![Screenshot of React starter app](/img/react-starter.png)
 
-Let's customize it with the spec from the last tutorial. Inside the starter app, open `src/index.js` with your favorite editor, and replace the existing imports and demo code:
+Let's customize it with the spec from the last tutorial. Inside the starter app, open `src/index.js` with your favorite editor, and add the Canvas context provider:
 
 ```jsx
-import { useRef } from 'react';
-import { useCore } from 'canvas-hooks';
+import { Canvas } from '@canvas-js/hooks';
+// other imports...
 
-const core = {
-  models: {
-    notes: {
-      text: "string",
-      creator: "string",
-    },
-  },
-  routes: {
-    "/latest": `SELECT * FROM notes
-        ORDER BY notes.timestamp DESC
-        LIMIT 30`,
-    "/latest/:offset": `SELECT * FROM notes
-        ORDER BY notes.timestamp DESC
-        OFFSET :offset
-        LIMIT 30`,
-  },
-  actions: {
-    note: function (title) {
-      this.db.notes.set(this.hash, { creator: this.from, title })
-    },
-  }
-}
-
-export default const Index = ({ props }) => {
-    const {
-      views, signAndSendAction, login, logout,
-      sessionAddress, address, core
-    } = useCore(spec)
-
-    return <>
-        <div>{core?.actions.length}</div>
-    </>
-}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Canvas host="http://localhost:8000">
+      <App />
+    </Canvas>
+  </React.StrictMode>
+);
 ```
 
-Notice that we brought the spec inline. The last tutorial's spec exported `{ models, routes, actions }`, but here we provide those in a JavaScript object.
+Now, we can add the React hooks to `src/App.tsx`. We'll also replace the existing demo code that shows create-react-app is working:
+
+```
+import { useRoute, useCanvas } from "@canvas-js/hooks"
+// other imports...
+
+function App() {
+  const {
+    error: canvasError,
+    multihash,
+    dispatch,
+    connect,
+    connectNewSession,
+    disconnect,
+    address,
+    session,
+  } = useCanvas()
+
+  const { error, data } = useRoute<Post>("/posts")
+
+  return <>
+    <div>{core?.actions.length}</div>
+  </>
+}
+```
 
 Save and refresh, you should see some text on the screen: `0 actions`.
 
@@ -78,7 +89,7 @@ Add this block of code, right underneath the <div\> element:
 
 ```jsx
 <form onSubmit={() => {
-    signAndSendAction("note", inputRef.current.value)
+    dispatch("note", inputRef.current.value)
 }}>
   <input type="text" ref={inputRef} placeholder="Thread text" autoFocus="on" />
   <input type="submit" value="Save" />
@@ -89,7 +100,7 @@ While we’re here, we should display the notes that we’ve been creating too. 
 
 ```jsx
 <div>
-    {views.get("/latest")?.map((row, index) =>
+    {data?.map((row, index) =>
         <div key={index}>{row.text} -{row.creator}</div>
     )}
 </div>
@@ -114,18 +125,19 @@ As long as the session key isn’t expired, you can use it to sign interactions,
 
 To use session logins, this is the API you should be familiar with:
 
-- `login` and `logout` are used to create a session, and to clear it from local storage.
-- `walletAddress` is the address of your connected wallet.
-- `sessionAddress` is the address of the generated session key.
+- `connect` is used to connect your wallet, but doesn't automatically start a session.
+- `connectNewSession` and `disconnect` are used to start a session, and to clear it from local storage.
+- `address` is the address of your connected wallet.
+- `session` is an object that contains your session key.
 
-If your sessionAddress variable is non-null, that means you’re logged into a session. Try adding this code at the top of your application:
+If your session object is non-null, that means you’re logged into a session. Try adding this code at the top of your application:
 
 ```jsx
 <input
   type="button"
-  value={sessionAddress ? `Logout ${address?.slice(0, 5)}...` : "Login"}
+  value={session?.address ? `Logout ${session?.address?.slice(0, 5)}...` : "Login"}
   onClick={(e) => {
-    sessionAddress ? logout() : login()
+    !address ? connect() : !session?.address ? connectNewSession() : disconnect()
   }}
 />
 ```
