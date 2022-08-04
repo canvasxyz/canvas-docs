@@ -9,7 +9,7 @@ const config = {
   title: "Canvas",
   tagline: "A programming framework for P2P applications",
   url: "https://canvasxyz.github.io",
-  baseUrl: "/",
+  baseUrl: "/canvas-docs/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
