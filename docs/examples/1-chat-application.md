@@ -4,4 +4,4 @@ sidebar_position: 1
 
 # Simple Chat
 
-An example of a chat application.
+Coming soon: An example of a chat application.

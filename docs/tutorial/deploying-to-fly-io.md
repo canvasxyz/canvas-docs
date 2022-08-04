@@ -8,7 +8,7 @@ Fly.io is an application hosting platform which uses micro-virtual machines, run
 
 Unlike most other hosting platforms, Fly.io apps have access to block storage volumes (disk storage), while other hosts force you to store data on a managed database like Postgres. This means we can deploy Canvas apps that use SQLite databases, just like we do in development.
 
-Fly has a liberal free tier, enough to run both a client and a server for free. It also supports more modern technologies, and it's developed by a top team.
+Fly has a liberal free tier, enough to run both a client and a server. It also supports more modern technologies, and it's developed by a top team.
 
 
 ### Getting started

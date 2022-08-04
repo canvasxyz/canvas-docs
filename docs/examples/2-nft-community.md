@@ -4,4 +4,4 @@ sidebar_position: 2
 
 # NFT Community
 
-An example of an NFT community with token gating.
+Coming soon: An example of an NFT community with token gating.
