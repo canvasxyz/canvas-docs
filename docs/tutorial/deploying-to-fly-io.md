@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Deploying a server to Fly.io
+# Deploying to Fly.io
 
 Fly.io is an application hosting platform which uses micro-virtual machines, running on a global network, much like a CDN.
 

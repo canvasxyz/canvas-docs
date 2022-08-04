@@ -143,3 +143,11 @@ If your session object is non-null, that means you’re logged into a session. T
 ```
 
 Now you have the ability to create a note, without opening Metamask every time.
+
+### Deploying
+
+Since this is a create-react-app application, it's easy to deploy on the platform of your choice.
+
+If you're using Vercel, run `vercel` to build and deploy to the Vercel edge network. For production, use `vercel --prod` instead.
+
+Remember to switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. Setting up your own peer? Continue to the next tutorial to find out how.
