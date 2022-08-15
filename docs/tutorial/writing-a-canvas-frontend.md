@@ -50,11 +50,12 @@ root.render(
 );
 ```
 
-Now, we can add the React hooks to `src/App.tsx`. We'll also replace the existing demo code that shows create-react-app is working:
+Now, we can add the React hooks to `src/App.js`. We'll also replace the existing demo code that shows create-react-app is working:
 
 ```
-import { useRoute, useCanvas } from "@canvas-js/hooks"
-// other imports...
+import { useRef } from "react"
+import { useRoute, useCanvas } from "@canvas-js/hooks";
+import "./App.css";
 
 function App() {
   const {
@@ -68,15 +69,21 @@ function App() {
     session,
   } = useCanvas()
 
-  const { error, data } = useRoute<Post>("/posts")
+  const { error, data } = useRoute("/posts")
 
-  return <>
-    <div>{core?.actions.length}</div>
-  </>
+  return (
+    <div className="App">
+      <header className="App-header">
+        <div>{data?.length || 0} posts</div>
+      </header>
+    </div>
+  )
 }
+
+export default App;
 ```
 
-Save and refresh, you should see some text on the screen: `0 actions`.
+Save and refresh, you should see some text on the screen: `0 posts`.
 
 
 ## Accepting user interactions
@@ -85,14 +92,19 @@ In Canvas, users have to sign each of their actions, to allow each peer on the n
 
 To create notes in our app, we'll collect signed `note(title)` actions from the user. We’ll do this with a simple input form.
 
-Add this block of code, right underneath the <div\> element:
+Add this block of code, right inside the <header\>, at the top:
 
 ```jsx
-<form onSubmit={() => {
+// underneath useRoute():
+const inputRef = useRef()
+
+// inside <header>:
+<form onSubmit={(e) => {
+    e.preventDefault()
     dispatch("note", inputRef.current.value)
 }}>
-  <input type="text" ref={inputRef} placeholder="Thread text" autoFocus="on" />
-  <input type="submit" value="Save" />
+  <input type="text" ref={inputRef} placeholder="What's happening?" autoFocus="on" />
+  <input type="submit" value="Post" />
 </form>
 ```
 
@@ -100,9 +112,11 @@ While we’re here, we should display the notes that we’ve been creating too. 
 
 ```jsx
 <div>
-    {data?.map((row, index) =>
-        <div key={index}>{row.text} -{row.creator}</div>
-    )}
+  {data?.map((row, index) =>
+    <div key={index}>
+      {row.from_id.slice(0, 6)}: {row.content}
+    </div>
+  )}
 </div>
 ```
 
@@ -115,38 +129,21 @@ When you see the form, enter a note and press “Save”. A few things should ha
 Congratulations! You now have a working Canvas application.
 
 
-### Logging in with sessions
+### How sessions work
 
-Earlier, when we set up our Canvas spec using the `useCore()` hook, we exported several variables with names like `login` and `logout`.
+You'll notice that the first time we created a message, you were asked to sign a message, but you weren't asked again. During the first login, we authorized a session key, which is stored in your browser and valid for a fixed amount of time.
 
-Those are used for generating sessions. When you call login, we generate a new session key, store it in the browser, and request a signature from Metamask that authorizes it for a limited amount of time.
+As long as the session key isn’t expired, you can use it to sign interactions just as you would with your main wallet.
 
-As long as the session key isn’t expired, you can use it to sign interactions, just as you would with your main wallet. (For extra security, certain actions can be configured to require a signature from your main wallet.)
+To properly verify a session, we need to check that it was signed with a valid Ethereum block ID. This requires you to provide a connection to an Ethereum endpoint, which you can do by signing up for a (free) [Infura](https://infura.io/) key and providing it to your local node:
 
-To use session logins, this is the API you should be familiar with:
-
-- `connect` is used to connect your wallet, but doesn't automatically start a session.
-- `connectNewSession` and `disconnect` are used to start a session, and to clear it from local storage.
-- `address` is the address of your connected wallet.
-- `session` is an object that contains your session key.
-
-If your session object is non-null, that means you’re logged into a session. Try adding this code at the top of your application:
-
-```jsx
-<input
-  type="button"
-  value={session?.address ? `Logout ${session?.address?.slice(0, 5)}...` : "Login"}
-  onClick={(e) => {
-    !address ? connect() : !session?.address ? connectNewSession() : disconnect()
-  }}
-/>
 ```
-
-Now you have the ability to create a note, without opening Metamask every time.
+canvas run spec.canvas.js --chain-rpc eth 1 https://mainnet.infura.io/v3/[API_KEY]
+```
 
 ### Deploying
 
-Since this is a create-react-app application, it's easy to deploy on the platform of your choice.
+Since this is a create-react-app application, it should be easy to deploy on the platform of your choice.
 
 If you're using Vercel, run `vercel` to build and deploy to the Vercel edge network. For production, use `vercel --prod` instead.
 
