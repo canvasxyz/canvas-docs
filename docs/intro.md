@@ -16,7 +16,9 @@ Every Canvas application is defined as an **offchain contract**. This is a singl
 
 To run an application, anyone with the offchain contract can execute `canvas run <contract.js>` from the command line. This launches a decentralized backend for the application, and exposes an API that you can connect to from the frontend.
 
-From the frontend, users can log in with a crypto wallet like Metamask, and create a temporary session key stored in the browser. Their interactions are signed and broadcast to the peer-to-peer network, where they can be verified by every node.
+From the frontend, users can log in with a crypto wallet like Metamask, and create a temporary session key stored in the browser. We give you React hooks to help with this!
+
+Once submitted to a hub, their interactions are signed and broadcast to the peer-to-peer network, where they can be verified by every node.
 
 ## Technology
 

@@ -28,3 +28,23 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  font-size: 94% !important;
+  border-left: 4px solid var(--ifm-color-primary-lightest) !important;
+  min-width: calc(100% - 4px) !important;
+}
+
+code {
+  font-size: 91% !important;
+  position: relative;
+  top: -0.5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+}
