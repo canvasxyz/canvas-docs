@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Now that we’ve written a Canvas application, it’s time to try running it.
 
-### Setting up
+### Setting up Node
 
 Make sure you are running Node v16. If you aren't sure, try running `node -v`:
 
@@ -26,6 +26,8 @@ nvm use 16
 
 To make future installations easier, we also recommend running `nvm alias default 16` to set your default Node to v16.
 
+### Setting up Canvas
+
 Now you can install the Canvas command-line package:
 
 ```bash
@@ -37,6 +39,8 @@ npm install -g @canvas-js/cli
 In your project directory, create `example.canvas.js` with the following code:
 
 ```js
+const database = 'sqlite'
+
 const models = {
   notes: {
     text: "string",
@@ -46,7 +50,7 @@ const models = {
 
 const routes = {
   "/latest": `SELECT * FROM notes
-      ORDER BY notes.timestamp DESC
+      ORDER BY notes.updated_at DESC
       LIMIT 30`,
   "/latest/:offset": `SELECT * FROM notes
       ORDER BY notes.updated_at DESC
@@ -59,13 +63,17 @@ const actions = {
   },
 }
 
-export { models, routes, actions }
+export { database, models, routes, actions }
 ```
 
-Now, you can run the contract using `canvas run`:
+Now, you can run the contract using `canvas run`. Make sure to select **yes** when prompted to run in unchecked mode - this means the node won't check the block hash of each message when it comes from the client:
 
 ```bash
 % canvas run example.canvas.js
+
+No chain RPC provided. Run in unchecked mode instead? [Y/n] Y
+Running in unchecked mode! Actions will be processed without verifying a blockhash.
+Peering automatically disabled.
 
 [canvas-core] Initializing new model database at /example.canvas/db.sqlite
 [canvas-core] Initialized core /example.canvas.js with database example.canvas
@@ -73,14 +81,14 @@ Now, you can run the contract using `canvas run`:
 └ GET http://localhost:8000/
 └ POST /actions
   └ { payload, session, signature }
-  └ payload: { from, spec, timestamp, call, args }
+  └ payload: { from, spec, updated_at, call, args }
   └ calls: [ createPoll, createCard, createVote ]
 └ POST /sessions
   └ { payload, signature }
-  └ payload: { from, spec, timestamp, session_public_key, session_duration }
+  └ payload: { from, spec, updated_at, session_public_key, session_duration }
 ```
 
-A few things just happened here:
+It's live! A few things just happened here:
 
 1. First, we set up a SQL database for persisting data. Since this is the first time running the application, we initialized a set of database tables for it from scratch.
 2. We also set up a sandboxed JavaScript VM, running inside a WebAssembly environment, to execute each action.
