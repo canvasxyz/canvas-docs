@@ -51,7 +51,7 @@ const config = {
         title: "Canvas Docs",
         logo: {
           alt: "Logo",
-          src: "img/logo.svg",
+          src: "img/logo.png",
         },
         items: [
           {
