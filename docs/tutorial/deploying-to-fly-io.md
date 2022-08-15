@@ -66,7 +66,7 @@ fly volumes create canvas_example_chat_data
 If your app reads from a smart contract, you'll need to provide an RPC endpoint for the chain you're connecting to. For Ethereum and L2 users, sign up for [Infura](https://infura.io/)'s [free tier](https://infura.io/pricing), create a project, and add it to the configuration:
 
 ```
-fly secrets set ETH_CHAIN_ID=1 ETH_CHAIN_RPC=https://mainnet.infura.io/v3/[INFURA_ACCESS_TOKEN]
+fly secrets set ETH_CHAIN_ID=1 ETH_CHAIN_RPC=https://mainnet.infura.io/v3/[API_KEY]
 ```
 
 **If you skip this step, you should modify the Dockerfile to add `--unchecked` to the canvas run command.** Otherwise, your app won't be able to start up in production:
