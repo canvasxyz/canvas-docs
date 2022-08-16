@@ -52,7 +52,7 @@ root.render(
 
 Now, we can add the React hooks to `src/App.js`. We'll also replace the existing demo code that shows create-react-app is working:
 
-```
+```jsx
 import { useRef } from "react"
 import { useRoute, useCanvas } from "@canvas-js/hooks";
 import "./App.css";

@@ -10,7 +10,7 @@ Now that we’ve written a Canvas application, it’s time to try running it.
 
 Make sure you are running Node v16. If you aren't sure, try running `node -v`:
 
-```bash
+```
 % node -v
 v16.15.1
 ```
@@ -19,7 +19,7 @@ If you're on a more recent version of Node, Canvas won't run because of an unpat
 
 Go to https://github.com/nvm-sh/nvm#installing-and-updating, which should give you a `curl` command for installing NVM. Once you have it installed, open a new command line window, and run:
 
-```bash
+```
 nvm install 16
 nvm use 16
 ```
@@ -30,7 +30,7 @@ To make future installations easier, we also recommend running `nvm alias defaul
 
 Now you can install the Canvas command-line package:
 
-```bash
+```
 npm install -g @canvas-js/cli
 ```
 
@@ -66,7 +66,7 @@ export const actions = {
 
 Now, you can run the contract using `canvas run`. Make sure to select **yes** when prompted to run in unchecked mode - this means the node won't check the block hash of each message when it comes from the client:
 
-```bash
+```
 % canvas run example.canvas.js
 
 No chain RPC provided. Run in unchecked mode instead? [Y/n] Y

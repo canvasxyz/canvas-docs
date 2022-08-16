@@ -107,7 +107,7 @@ v6   2a09:8280:1::3:6029        1m51s ago
 
 If you go to the new app's hostname (e.g. fragrant-star-4920.fly.dev), you should get an HTTP response that shows the node is running:
 
-```
+```js
 {"name":"QmZ3Wsp92rS1c31PJ6g1qVCQKv4jxA51qqg4TaRefBQ2vM"}
 ```
 

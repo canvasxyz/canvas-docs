@@ -36,7 +36,7 @@ Three of the files in this directory are used to deploy to Heroku:
 
 package.json:
 
-```
+```js
 {
   "scripts": {
     "build": "npm install -g @canvas-js/cli"
