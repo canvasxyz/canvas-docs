@@ -7,16 +7,16 @@ sidebar_position: 1
 On Canvas, every application’s backend is uniquely defined by an offchain contract, a file like this:
 
 ```js
-const database = 'sqlite'
+export const database = 'sqlite'
 
-const models = {
+export const models = {
   notes: {
     text: "string",
     creator: "string",
   },
 }
 
-const routes = {
+export const routes = {
   "/latest": `SELECT * FROM notes
       ORDER BY notes.updated_at DESC
       LIMIT 30`,
@@ -25,13 +25,11 @@ const routes = {
       LIMIT 30 OFFSET :offset`,
 }
 
-const actions = {
+export const actions = {
   note: function (title) {
     this.db.notes.set(this.hash, { creator: this.from, title })
   },
 }
-
-export { database, models, routes, actions }
 ```
 
 Let’s take a look at each part:

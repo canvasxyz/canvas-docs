@@ -39,16 +39,16 @@ npm install -g @canvas-js/cli
 In your project directory, create `example.canvas.js` with the following code:
 
 ```js
-const database = 'sqlite'
+export const database = 'sqlite'
 
-const models = {
+export const models = {
   notes: {
     text: "string",
     creator: "string",
   },
 }
 
-const routes = {
+export const routes = {
   "/latest": `SELECT * FROM notes
       ORDER BY notes.updated_at DESC
       LIMIT 30`,
@@ -57,13 +57,11 @@ const routes = {
       LIMIT 30 OFFSET :offset`,
 }
 
-const actions = {
+export const actions = {
   note: function (title) {
     this.db.notes.set(this.hash, { creator: this.from, title })
   },
 }
-
-export { database, models, routes, actions }
 ```
 
 Now, you can run the contract using `canvas run`. Make sure to select **yes** when prompted to run in unchecked mode - this means the node won't check the block hash of each message when it comes from the client:
