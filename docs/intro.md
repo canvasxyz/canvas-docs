@@ -14,9 +14,9 @@ Like email or IRC are protocols, and unlike Twitter or Discord which are central
 
 Every Canvas application is defined as an **offchain contract**. This is a single JavaScript file, that specifies the models, routes, and actions in the application's backend.
 
-To run an application, anyone with the offchain contract can execute `canvas run <contract.js>` from the command line. This launches a decentralized backend for the application, and exposes an API that you can connect to from the frontend.
+To run an application, anyone with the offchain contract can execute `canvas run <contract.js>` from the command line. This launches a decentralized backend for the application, with an API on port 8000 by default. Live Canvas nodes will sync with each other over a peer-to-peer network.
 
-From the frontend, users can log in with a crypto wallet like Metamask, and create a temporary session key stored in the browser. We give you React hooks to help with this!
+From the frontend, users can log in with a crypto wallet like Metamask, and create a temporary session key stored in the browser. We give you [React hooks](https://www.npmjs.com/package/@canvas-js/hooks) to help with this!
 
 Once submitted to a hub, their interactions are signed and broadcast to the peer-to-peer network, where they can be verified by every node.
 
