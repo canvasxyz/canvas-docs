@@ -49,4 +49,43 @@ export routes = {
 }
 ```
 
-In this example, we're just writing SQL for each view function to keep things simple. Later, we'll introduce view functions, which allow routes to define more expressive logic.
+### Running the contract
+
+Now, let's try running this application. First, install the Canvas command-line package:
+
+```
+npm install -g @canvas-js/cli
+```
+
+You can copy the code above into a file called example.canvas.js, or download it here.
+
+Now, you can run the contract with `canvas run example.canvas.js`.
+
+Make sure to select **yes** when prompted to run in unchecked mode - this means the node won't check the block hash of each message when it comes from the client.:
+
+```
+% canvas run example.canvas.js
+
+No chain RPC provided. Run in unchecked mode instead? [Y/n] Y
+Running in unchecked mode! Actions will be processed without verifying a blockhash.
+Peering automatically disabled.
+
+[canvas-core] Initializing new model database at /example.canvas/db.sqlite
+[canvas-core] Initialized core /example.canvas.js with database example.canvas
+[canvas-cli] Serving /example.canvas.js on port 8000:
+└ GET http://localhost:8000/
+└ POST /actions
+  └ { payload, session, signature }
+  └ payload: { from, spec, updated_at, call, args }
+  └ calls: [ createPoll, createCard, createVote ]
+└ POST /sessions
+  └ { payload, signature }
+  └ payload: { from, spec, updated_at, session_public_key, session_duration }
+```
+
+It's live! A few things just happened while initializing the application:
+
+1. We set up a model database for persisting data. Since this is the first time running the application, we also initialized a set of database tables for it from scratch.
+2. We also set up a sandboxed JavaScript VM, running inside a WebAssembly environment, to execute each action.
+3. We launched a REST API that allows for both writing new actions, and reading from the SQL views exposed by the application.
+4. Because we didn’t provide any peers, the application just executes locally without syncing to any other nodes.
