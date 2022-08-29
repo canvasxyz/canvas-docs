@@ -6,17 +6,19 @@ sidebar_position: 6
 
 Canvas is a peer-to-peer computing platform that complements blockchains. While blockchains are designed to create shared state machines that with global state, they're also expensive, difficult to scale, and often use new programming languages that create an unnecessary barrier to entry.
 
-Canvas proposes a new architecture that works more like Heroku, Firebase, and other hosted databases that developeres are already familiar with.
+Canvas proposes a new architecture that works more like Heroku, Firebase, and other hosted databases that developers are already familiar with.
 
-### Canvas architecture
+### Architecture
 
-Each application is a uniquely hashed file on IPFS, and interactions with the application are signed messages, relayed over a peer-to-peer network, stored by each node in an append-only log.
+In its initial release, Canvas is designed to support database-oriented applications.
+
+Every Canvas application is a unique hashed file on IPFS, and interactions with the application are signed messages, relayed over a peer-to-peer network, and stored by each node in an append-only log.
 
 Each signed message is checked by *executing* it within a JavaScript and WebAssembly virtual machine. During execution, actions are allowed to write to a SQL database using an interface that resembles a key-value store. Anyone can then read the data from each node, using full SQL and arbitrarily programmable views.
 
 All together, this makes it possible to write a backend for most database-oriented applications in around 50 lines of code.
 
-Today, Canvas is focused on database-oriented applications, and serving a small number of alpha partners. However, there are a few extensions to the Canvas runtime that we have planned, that will make it possible to create far more powerful applications.
+Today, Canvas is focused on database-oriented applications, as the core team works with a small number of alpha partners to refine and finalize the architecture. We have several planned extensions to the Canvas runtime, which will make it possible to create more powerful applications using the compute capabilities of Canvas nodes.
 
 ### Canvas vs. blockchains
 
@@ -50,10 +52,10 @@ Canvas is a layer on top of IPFS, that enforces both the schema and content of d
 
 This allows applications to read from the data layers they are built on, which in turn makes it possible to build fully-featured applications on Canvas — where you can interact with a Canvas application from any node, and have your actions show up on other nodes automatically.
 
-### Future Plans
+### Scalability
 
 The first version of the Canvas protocol supports JavaScript as our execution language, and SQLite or Postgres as databases.
 
 However, the Canvas protocol is designed to be modular, so it will be possible to switch out the default database for more optimized solutions. We expect there will be other implementations of the Canvas engine, in high-performance languages like Rust, using high-throughput replicated SQL, and using streaming databases that can scale up to millions of concurrent users.
 
-The other area of future development is for Canvas to support long-running, general-purpose computations. We have an idea of how this would work, and
+In the first version of Canvas, our reference implementation serves as a living spec for the protocol. As it stabilizes, we plan to release a formal specification for how different signed messages, databases, and CRDTs are expected to behave within the Canvas system.

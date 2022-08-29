@@ -6,9 +6,7 @@ sidebar_position: 5
 
 Deploying a Canvas application to Heroku is simple, and should take no more than 15 minutes.
 
-The first thing you should know is that apps on Heroku use a Postgres backend. This uses a different dialect of SQL than SQLite, which is the default way to write Canvas applications on your local machine. For most applications, the changes will be minimal, but you may have to make changes to your views.
-
-Regardless, you should familiarize yourself with how to import/export data between different applications, before trying to deploy an existing app to Heroku.
+Applications on Heroku use a different dialect of SQL (Postgres) than the default development environment for Canvas on your local machine (SQLite). You may have to make changes to your views, although for most applications, the changes will be minimal.
 
 ### Getting started
 
@@ -29,10 +27,11 @@ cd packages/example-chat-server
 
 ### The application
 
-Three of the files in this directory are used to deploy to Heroku:
+Three files in this directory are used to deploy to Heroku:
 
 * **package.json** ensures the Canvas CLI is globally installed, when running the app on Heroku.
 * **Procfile** specifies how to run the app.
+* **spec.canvas.js** is the application.
 
 package.json:
 
