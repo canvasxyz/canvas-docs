@@ -4,11 +4,9 @@ sidebar_position: 4
 
 # Deploying to Fly.io
 
-Fly.io is an application hosting platform which uses micro-VMs running on a global network, like a CDN that runs code.
+Fly.io is an application hosting platform which uses micro-VMs running on a global network, like a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) that runs code.
 
-Unlike other application hosting platforms, Fly.io apps also have access to disk storage volumes ("block storage"). This means we can deploy Canvas apps that use SQLite databases to Fly.io, just like we run them in development!
-
-Fly.io also has a liberal free tier, enough to run both a client and a server.
+Unlike most other application hosting platforms, Fly apps also have access to disk storage volumes. This means we can deploy Canvas apps that use SQLite databases to Fly, just like we run them in development. Conveniently, they also have a liberal [free tier](https://fly.io/docs/about/pricing/).
 
 
 ### Getting started
@@ -69,7 +67,7 @@ If your app reads from a smart contract, you'll need to provide an RPC endpoint 
 fly secrets set ETH_CHAIN_ID=1 ETH_CHAIN_RPC=https://mainnet.infura.io/v3/[API_KEY]
 ```
 
-**If you skip this step, you should modify the Dockerfile to add `--unchecked` to the canvas run command.** Otherwise, your app won't be able to start up in production:
+**If you skip this step, you should modify the Dockerfile to add `--unchecked` to the canvas run command.** Otherwise, your app won't be able to start in production. Replace the CMD line in Dockerfile:
 
 ```
 CMD ["canvas", "run", "--unchecked", "./spec.canvas.js", "--datadir", "/data"]
@@ -83,7 +81,7 @@ Now, you're ready to push your application!
 fly deploy
 ```
 
-Once the deployment is complete, you should have a running application at a subdomain of .fly.dev. Try running `fly info` to see where it's hosted:
+Once the deployment is complete, you should have a running application at a subdomain of .fly.dev. Use `fly info` to see where it's hosted:
 
 ```
 % fly info
@@ -111,7 +109,7 @@ If you go to the new app's hostname (e.g. fragrant-star-4920.fly.dev), you shoul
 {"name":"QmZ3Wsp92rS1c31PJ6g1qVCQKv4jxA51qqg4TaRefBQ2vM"}
 ```
 
-Jump back to the client tutorial to setup a frontend for interacting with the application.
+Now you can jump back to the client tutorial to setup a frontend for interacting with the application.
 
 ### Troubleshooting
 
