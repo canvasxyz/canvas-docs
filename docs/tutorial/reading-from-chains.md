@@ -1,12 +1,14 @@
 ---
-sidebar_position: 6
+sidebar_position: 3
 ---
 
 # Reading on-chain data
 
-Like all peer-to-peer application platforms, Canvas needs a way to determine who's allowed to post to the network.
+Like all peer-to-peer protocols, Canvas applications need a way to determine who's allowed to post to the network. To accomplish this, we support both on-chain and off-chain ways to verify user identity.
 
-We are developing two ways to manage user identity on Canvas. In the first, identities are issued on-chain, where they can be managed by any smart contract. In the other, identities will be held off-chain as [verifiable credentials](https://www.w3.org/TR/vc-data-model/). This tutorial walks you through reading on-chain identities.
+For on-chain identity, the user's identity is read from a smart contract on a blockchain, such as an identity registry or NFT contract. For off-chain identity, the user should hold a [verifiable credential](https://www.w3.org/TR/vc-data-model/), a signed message from an issuer that's held off-chain.
+
+This tutorial walks you through reading on-chain identities, using an ERC-721 contract as an example.
 
 ### Referencing a smart contract
 
@@ -34,7 +36,7 @@ Canvas uses [Ethers v5's human-readable ABI standard](https://docs.ethers.io/v5/
 In our example, [Bibos](https://bibos.xyz/) are an [ERC-721](https://eips.ethereum.org/EIPS/eip-721) compliant contract, so we use `balanceOf(address)` to check the user's balance.
 
 
-### Interacting with contracts
+### Using contracts in your spec
 
 Once you've exported a contract, you can use it from within your actions, using the `contract` global. *Note: The contract variable is an injected global right now, but in later versions, you'll import it manually.*
 
@@ -45,7 +47,7 @@ const balance = await contract.bibos.balanceOf(this.from)
 The injected contract supports any method defined in its ABI, so you can use a contract that performs more advanced operations - like checking for multiple NFTs, ensuring that a balance exceeds a threshold, or even verifying a zk-proof.
 
 
-### Adding a chain RPC endpoint
+### Running your spec
 
 To actually read the state of a contract on-chain, your local node must have access to a blockchain node. The easiest way to do this is to include an RPC endpoint of a hosted node from a provider like [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/). Or you can [set up your own node](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/), but that's beyond the scope of this tutorial.
 
