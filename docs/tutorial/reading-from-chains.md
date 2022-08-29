@@ -6,7 +6,9 @@ sidebar_position: 3
 
 Like all peer-to-peer protocols, Canvas applications need a way to determine who's allowed to post to the network. To accomplish this, we support both on-chain and off-chain ways to verify user identity.
 
-For on-chain identity, the user's identity is read from a smart contract on a blockchain, such as an identity registry or NFT contract. For off-chain identity, the user should hold a [verifiable credential](https://www.w3.org/TR/vc-data-model/), a signed message from an issuer that's held off-chain.
+For on-chain identity, the user's identity is read from a smart contract on a blockchain, such as an identity registry or NFT contract.
+
+For off-chain identity, the user should hold a [verifiable credential](https://www.w3.org/TR/vc-data-model/), a signed message from an issuer that's held off-chain.
 
 This tutorial walks you through reading on-chain identities, using an ERC-721 contract as an example.
 
@@ -36,7 +38,7 @@ Canvas uses [Ethers v5's human-readable ABI standard](https://docs.ethers.io/v5/
 In our example, [Bibos](https://bibos.xyz/) are an [ERC-721](https://eips.ethereum.org/EIPS/eip-721) compliant contract, so we use `balanceOf(address)` to check the user's balance.
 
 
-### Using contracts in your spec
+### Using a contract in your spec
 
 Once you've exported a contract, you can use it from within your actions, using the `contract` global. *Note: The contract variable is an injected global right now, but in later versions, you'll import it manually.*
 

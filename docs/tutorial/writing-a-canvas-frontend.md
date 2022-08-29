@@ -8,7 +8,7 @@ Now that we have a working Canvas backend, let's connect it to a frontend so we 
 
 If you're following along with this tutorial in your browser, make sure you have Metamask installed with a working wallet. You won't need any tokens, but you will need an Ethereum address to log in.
 
-### Start a Canvas node
+### Starting a Canvas node
 
 First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/spec.canvas.js), which includes a few more views.
 
@@ -18,7 +18,7 @@ Save it as spec.canvas.js, and start a local node:
 canvas run spec.canvas.js
 ```
 
-### Set up a new frontend
+### Setting up a new frontend
 
 Now, start by creating a React app, and installing the Canvas frontend package:
 
@@ -86,7 +86,7 @@ export default App;
 Save and refresh, you should see some text on the screen: `0 posts`.
 
 
-## Accepting user interactions
+### Accepting user interactions
 
 In Canvas, users have to sign each of their actions, to allow each peer on the network to independently verify your data.
 
@@ -141,10 +141,23 @@ To properly verify a session, we need to check that it was signed with a valid E
 canvas run spec.canvas.js --chain-rpc eth 1 https://mainnet.infura.io/v3/[API_KEY]
 ```
 
-### Deploying
+### Deploying to Vercel
 
 Since this is a create-react-app application, it should be easy to deploy on the platform of your choice.
 
-If you're using Vercel, run `vercel` to build and deploy to the Vercel edge network. For production, use `vercel --prod` instead.
+First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`.
 
-Remember to switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. Setting up your own peer? Continue to the next tutorial to find out how.
+Then, if you're using Vercel, run `vercel` from the application's root directory, to build and deploy to the Vercel network. For production, use `vercel --prod` instead.
+
+```
+% npm install -g vercel
+% vercel
+
+? Set up and deploy “~/canvas-example”? [Y/n] y
+? Which scope do you want to deploy to? My Team
+? Link to existing project? [y/N] n
+? What’s your project’s name? (canvas-example)
+🔗 Linked to yourname/canvas-example (created .vercel and added it to .gitignore)
+```
+
+Setting up your own peer? Continue to the next tutorial to find out how.
