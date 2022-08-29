@@ -14,10 +14,10 @@ To reference a smart contract from your spec, define it in the **contracts** exp
 
 ```js
 export const contracts = {
-  milady: {
+  bibos: {
     chain: "eth",
     chainId: 1,
-    address: "0x5af0d9827e0c53e4799bb226655a1de152a425a5",
+    address: "0xF528e3381372c43F5e8a55b3E6c252E32F1a26e4",
     abi: ["function balanceOf(address owner) view returns (uint balance)"],
   },
 }
@@ -31,7 +31,7 @@ export const contracts = {
 
 Canvas uses [Ethers v5's human-readable ABI standard](https://docs.ethers.io/v5/api/utils/abi/interface/), where each function in the ABI is described with a string. You don't have to include every function that the contract supports, [just the ones you're using](https://blog.ricmoo.com/human-readable-contract-abis-in-ethers-js-141902f4d917).
 
-In our example, [Miladies](https://miladymaker.net/) are an [ERC-721](https://eips.ethereum.org/EIPS/eip-721) compliant contract, so we use `balanceOf(address)` to check the user's balance.
+In our example, [Bibos](https://bibos.xyz/) are an [ERC-721](https://eips.ethereum.org/EIPS/eip-721) compliant contract, so we use `balanceOf(address)` to check the user's balance.
 
 
 ### Interacting with contracts
@@ -39,7 +39,7 @@ In our example, [Miladies](https://miladymaker.net/) are an [ERC-721](https://ei
 Once you've exported a contract, you can use it from within your actions, using the `contract` global. *Note: The contract variable is an injected global right now, but in later versions, you'll import it manually.*
 
 ```js
-const balance = await contract.milady.balanceOf(this.from)
+const balance = await contract.bibos.balanceOf(this.from)
 ```
 
 The injected contract supports any method defined in its ABI, so you can use a contract that performs more advanced operations - like checking for multiple NFTs, ensuring that a balance exceeds a threshold, or even verifying a zk-proof.
