@@ -102,6 +102,7 @@ const inputRef = useRef()
 <form onSubmit={(e) => {
     e.preventDefault()
     dispatch("createPost", inputRef.current.value)
+    inputRef.current.value = ''
 }}>
   <input type="text" ref={inputRef} placeholder="What's happening?" autoFocus="on" />
   <input type="submit" value="Post" />
