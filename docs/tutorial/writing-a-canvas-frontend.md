@@ -4,18 +4,18 @@ sidebar_position: 2
 
 # Writing a Canvas frontend
 
-Now that we have a working Canvas backend, let's connect it to a frontend so we can start interacting with it.
+Now that we have a working Canvas backend, let's connect it to a frontend.
 
-If you're following along with this tutorial in your browser, make sure you have Metamask installed with a working wallet. You won't need any tokens, but you will need an Ethereum address to log in.
+To follow along with this tutorial, make sure you have Metamask installed with a working wallet. You won't need any tokens, but you will need an Ethereum address to log in.
 
 ### Starting a Canvas node
 
-First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/spec.canvas.js), which includes a few more views.
+First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/example.canvas.js), which includes a few more views.
 
-Save it as spec.canvas.js, and start a local node:
+Save it as example.canvas.js, and start a local node:
 
 ```bash
-canvas run spec.canvas.js
+canvas run example.canvas.js
 ```
 
 ### Setting up a new frontend
@@ -34,7 +34,7 @@ You should now have a starter React application running in your browser.
 
 ![Screenshot of React starter app](/img/react-starter.png)
 
-Let's customize it with the spec from the last tutorial. Inside the starter app, open `src/index.js` with your favorite editor, and add the Canvas context provider:
+Inside the starter app, open `src/index.js` with your favorite editor, and wrap `<App/>` with the Canvas context provider:
 
 ```jsx
 import { Canvas } from '@canvas-js/hooks';
@@ -50,7 +50,7 @@ root.render(
 );
 ```
 
-Now, we can add the React hooks to `src/App.js`. We'll also replace the existing demo code that shows create-react-app is working:
+Now, we can add React hooks to `src/App.js`. We'll also replace the existing demo code that shows create-react-app is working:
 
 ```jsx
 import { useRef } from "react"
@@ -83,16 +83,16 @@ function App() {
 export default App;
 ```
 
-Save and refresh, you should see some text on the screen: `0 posts`.
+Save and refresh, and you should see some text on the screen: `0 posts`.
 
 
 ### Accepting user interactions
 
 In Canvas, users have to sign each of their actions, to allow each peer on the network to independently verify your data.
 
-To create notes in our app, we'll collect signed `note(title)` actions from the user. We’ll do this with a simple input form.
+To create notes in our app, we'll collect signed `createPost(content)` actions from the user. We’ll do this with a simple input form.
 
-Add this block of code, right inside the <header\>, at the top:
+Add this right inside the <header\>:
 
 ```jsx
 // underneath useRoute():
@@ -101,7 +101,7 @@ const inputRef = useRef()
 // inside <header>:
 <form onSubmit={(e) => {
     e.preventDefault()
-    dispatch("note", inputRef.current.value)
+    dispatch("createPost", inputRef.current.value)
 }}>
   <input type="text" ref={inputRef} placeholder="What's happening?" autoFocus="on" />
   <input type="submit" value="Post" />
@@ -126,38 +126,36 @@ When you see the form, enter a note and press “Save”. A few things should ha
 - Once you accept, you should be asked to sign a message.
 - Once you sign the message, the note you’ve just written should appear.
 
-Congratulations! You now have a working Canvas application.
+Congratulations! You now have a working application.
 
 
 ### How sessions work
 
-You'll notice that the first time we created a message, you were asked to sign a message, but you weren't asked again. During the first login, we authorized a session key, which is stored in your browser and valid for a fixed amount of time.
+You'll notice that only the first time we created a message, you were asked to sign a message. That signature was used to authorize a session key, which is stored in your browser.
 
 As long as the session key isn’t expired, you can use it to sign interactions just as you would with your main wallet.
 
 To properly verify a session, we need to check that it was signed with a valid Ethereum block ID. This requires you to provide a connection to an Ethereum endpoint, which you can do by signing up for a (free) [Infura](https://infura.io/) key and providing it to your local node:
 
 ```
-canvas run spec.canvas.js --chain-rpc eth 1 https://mainnet.infura.io/v3/[API_KEY]
+canvas run example.canvas.js --chain-rpc eth 1 https://mainnet.infura.io/v3/[API_KEY]
 ```
 
 ### Deploying to Vercel
 
 Since this is a create-react-app application, it should be easy to deploy on the platform of your choice.
 
-First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`.
+First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. To set up your own peer, you should [continue on to the deployment tutorials](./deploying-to-fly-io).
 
-Then, if you're using Vercel, run `vercel` from the application's root directory, to build and deploy to the Vercel network. For production, use `vercel --prod` instead.
+Then run `vercel` from the application's root directory to build and deploy to the Vercel network. For production, use `vercel --prod` instead.
 
 ```
 % npm install -g vercel
 % vercel
 
-? Set up and deploy “~/canvas-example”? [Y/n] y
+? Set up and deploy “~/canvas-demo”? [Y/n] y
 ? Which scope do you want to deploy to? My Team
 ? Link to existing project? [y/N] n
-? What’s your project’s name? (canvas-example)
-🔗 Linked to yourname/canvas-example (created .vercel and added it to .gitignore)
+? What’s your project’s name? (canvas-demo)
+🔗 Linked to yourname/canvas-demo (created .vercel and added it to .gitignore)
 ```
-
-Setting up your own peer? Continue to the next tutorial to find out how.
