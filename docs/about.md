@@ -4,21 +4,19 @@ sidebar_position: 6
 
 # About Canvas
 
-Canvas is a peer-to-peer computing platform that complements blockchains. While blockchains are designed to create shared state machines that with global state, they're also expensive, difficult to scale, and often use new programming languages that create an unnecessary barrier to entry.
+Canvas is a peer-to-peer computing platform that complements blockchains. While blockchains are state machines with shared global state, they also impose fees, limits on scalability, and new programming languages that create a barrier to entry.
 
-Canvas proposes a new architecture that works more like Heroku, Firebase, and other hosted databases that developers are already familiar with.
+Canvas is a new peer-to-peer architecture that gives you a developer experience more like Heroku, Firebase, and other databases you're already familiar with.
 
 ### Architecture
 
-In its initial release, Canvas is designed to support database-oriented applications.
-
-Every Canvas application is a unique hashed file on IPFS, and interactions with the application are signed messages, relayed over a peer-to-peer network, and stored by each node in an append-only log.
+Every Canvas application is a unique hashed file on IPFS, and interactions with the application are signed messages. Messages are relayed over a peer-to-peer network, and stored by each node in an append-only log.
 
 Each signed message is checked by *executing* it within a JavaScript and WebAssembly virtual machine. During execution, actions are allowed to write to a SQL database using an interface that resembles a key-value store. Anyone can then read the data from each node, using full SQL and arbitrarily programmable views.
 
-All together, this makes it possible to write a backend for most database-oriented applications in around 50 lines of code.
+All together, this makes it possible to write a backend for many common web applications in ~50 lines of code.
 
-Today, Canvas is focused on database-oriented applications, as the core team works with a small number of alpha partners to refine and finalize the architecture. We have several planned extensions to the Canvas runtime, which will make it possible to create more powerful applications using the compute capabilities of Canvas nodes.
+Today, Canvas is focused on database-oriented applications, but we have several planned extensions to the Canvas runtime, which will make it possible to create more powerful applications using the compute capabilities of Canvas nodes.
 
 ### Canvas vs. blockchains
 

@@ -4,11 +4,11 @@ sidebar_position: 5
 
 # Deploying to Heroku
 
-Heroku was one of the first application hosting platforms, founded in 2007 and used by many developers since then. Although Heroku's free tier was deprecated in 2022, some developers continue to use its paid tier, and other platforms have adopted Heroku's architecture (including hosted Postgres).
+Heroku was one of the first application hosting platforms, founded in 2007 and used by many developers since then. Although Heroku's free tier was deprecated in 2022, some developers continue to use its paid tier, and other platforms have adopted Heroku's architecture, including hosted Postgres.
 
-Deploying a Canvas application to Heroku is simple, and should take no more than 15 minutes.
+Note that Heroku uses a different dialect of SQL than the default development environment for Canvas on your local machine (SQLite).
 
-Note that Heroku uses a different dialect of SQL than the default development environment for Canvas on your local machine (SQLite). You may have to make changes to your views if they're written in SQL, although for most applications, the changes will be minimal.
+Otherwise, deploying a Canvas application to Heroku is simple, and should take no more than 15 minutes.
 
 ### Getting started
 
