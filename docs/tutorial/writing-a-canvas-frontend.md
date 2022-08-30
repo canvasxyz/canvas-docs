@@ -83,8 +83,9 @@ function App() {
 export default App;
 ```
 
-Save and refresh, and you should see some text on the screen: `0 posts`.
+Save and refresh, and you should see some text on the screen:
 
+![Screenshot of app with text that says "0 posts"](/img/react-starter-1.png)
 
 ### Accepting user interactions
 
@@ -128,6 +129,8 @@ When you see the form, enter a note and press “Save”. A few things should ha
 - Once you sign the message, the note you’ve just written should appear.
 
 Congratulations! You now have a working application.
+
+![Screenshot of app with hello world post](/img/react-starter-2.png)
 
 
 ### How sessions work
