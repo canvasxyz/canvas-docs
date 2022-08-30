@@ -40,18 +40,26 @@ In our example, [Bibos](https://bibos.xyz/) are an [ERC-721](https://eips.ethere
 
 ### Using a contract in your spec
 
-Once you've exported a contract, you can use it from within your actions, using the `contract` global. *Note: The contract variable is an injected global right now, but in later versions, you'll import it manually.*
+Once you've exported a contract, you can use it from within your actions, using the `contract()` global. *Note: The contract call is an injected global right now, but in later versions, you'll import it manually.*
 
 ```js
-const balance = await contract.bibos.balanceOf(this.from)
+const balance = await contract("bibos").balanceOf(this.from)
+```
+
+```js
+export const actions = {
+	async createPost(content) {
+		if ((await contract("bibos").balanceOf(this.from)) === "0") return false
+		this.db.posts.set(this.hash, { content, from_id: this.from })
+	}
+}
 ```
 
 The injected contract supports any method defined in its ABI, so you can use a contract that performs more advanced operations - like checking for multiple NFTs, ensuring that a balance exceeds a threshold, or even verifying a zk-proof.
 
-
 ### Running your spec
 
-To actually read the state of a contract on-chain, your local node must have access to a blockchain node. The easiest way to do this is to include an RPC endpoint of a hosted node from a provider like [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/). Or you can [set up your own node](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/), but that's beyond the scope of this tutorial.
+To read the state of an on-chain contract, your local node must have access to a blockchain node. The easiest way to do this is to include an RPC endpoint of a hosted node from a provider like [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/). Or you can [set up your own node](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/), but that's beyond the scope of this tutorial.
 
 The first way to specify an RPC is by using the **--chain-rpc** flag, which takes three arguments, the type of chain, chain ID, and RPC URL.
 

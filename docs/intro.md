@@ -5,7 +5,7 @@ slug: /
 
 # Introduction
 
-Canvas is a minimalist peer-to-peer computer, with an architecture that resembles IPFS and BitTorrent. We use signed messages, peer-to-peer networking, and CRDTs, to make it possible to build decentralized apps without launching a cryptocurrency or using a token to pay fees.
+Canvas is a minimalist peer-to-peer computer, with an architecture that resembles IPFS and BitTorrent. We use signed messages, peer-to-peer networking, and CRDTs, to make it possible to build decentralized apps without a cryptocurrency.
 
 Each Canvas application is a unique file that defines a *decentralized backend*, a set of models, routes, and actions, with the ability to read from data sources like certificate authorities or blockchains.
 
