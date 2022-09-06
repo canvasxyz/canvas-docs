@@ -70,7 +70,7 @@ fly secrets set ETH_CHAIN_ID=1 ETH_CHAIN_RPC=https://mainnet.infura.io/v3/[API_K
 **If you skip this step, you should modify the Dockerfile to add `--unchecked` to the canvas run command.** Otherwise, your app won't be able to start in production. Replace the CMD line in Dockerfile:
 
 ```
-CMD ["canvas", "run", "--unchecked", "./spec.canvas.js", "--datadir", "/data"]
+CMD ["canvas", "run", "--unchecked", "./spec.canvas.js", "--database", "file:/data/db.sqlite"]
 ```
 
 ### Deploying
