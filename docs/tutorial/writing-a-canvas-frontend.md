@@ -10,7 +10,7 @@ To follow along with this tutorial, make sure you have Metamask installed with a
 
 ### Starting a Canvas node
 
-First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/example.canvas.js), which includes a few more views.
+First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-server/spec.canvas.js), which includes a few more views.
 
 Save it as example.canvas.js, and start a local node:
 
