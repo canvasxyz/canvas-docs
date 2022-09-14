@@ -17,6 +17,6 @@ To run an application, anyone with the offchain contract can execute `canvas run
 
 From the frontend, users can log in to Canvas apps with a crypto wallet like Metamask, by signing a temporary session key stored in the browser. We give you [React hooks](https://www.npmjs.com/package/@canvas-js/hooks) to make [setting this up easy](./docs/tutorial/writing-a-canvas-frontend).
 
-In the future, we'll also provide a non-crypto native way to log in with your email that preserves strong security guarantees.
+## Building a Canvas App
 
-To learn more, you can [read about the technology](./docs/about), or [build your first Canvas app in 5 minutes](./docs/tutorial/writing-a-canvas-contract).
+To get started, you can [build your first Canvas app!](./docs/tutorial/writing-a-canvas-contract).
