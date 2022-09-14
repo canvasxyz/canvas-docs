@@ -6,7 +6,7 @@ sidebar_position: 1
 
 In this tutorial, we will be building a simple message board that allows users to sign in with their wallet and leave messages in real time.
 
-The first part of of this is to write the backend, or rather, the "contract."
+The first part of of this is to write the "backend", which we will refer to as the "contract."
 
 ## Writing a Canvas contract
 
@@ -50,10 +50,10 @@ Now, let's try running this application. First, install the Canvas command-line 
 npm install -g @canvas-js/cli
 ```
 
-Copy the code above into a file called example.canvas.js, and start a node:
+Copy the code above into a file called spec.canvas.js, and start a node:
 
 ```
-canvas run example.canvas.js
+canvas run spec.canvas.js
 ```
 
 Make sure to select **yes** when prompted to run in unchecked mode. This means the node won't use an API to check the block hash of each signed message, as it comes from the client:

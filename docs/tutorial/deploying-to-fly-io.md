@@ -69,7 +69,7 @@ fly secrets set ETH_CHAIN_ID=1 ETH_CHAIN_RPC=https://mainnet.infura.io/v3/[API_K
 **If you skip this step, you should modify the Dockerfile to add `--unchecked` to the canvas run command.** Otherwise, your app won't be able to start in production. Replace the CMD line in Dockerfile:
 
 ```
-CMD ["canvas", "run", "--unchecked", "./spec.canvas.js", "--database", "file:/data/db.sqlite"]
+CMD ["canvas", "run", "--unchecked", "./spec.canvas.js", "--datadir", "/data"]
 ```
 
 ### Deploying
@@ -108,8 +108,6 @@ If you go to the new app's hostname (e.g. fragrant-star-4920.fly.dev), you shoul
 {"name":"QmZ3Wsp92rS1c31PJ6g1qVCQKv4jxA51qqg4TaRefBQ2vM"}
 ```
 
-Now you can jump back to the client tutorial to setup a frontend for interacting with the application.
-
 ### Troubleshooting
 
 If you have any problems, here are a few troubleshooting tips:
@@ -121,7 +119,7 @@ If you have any problems, here are a few troubleshooting tips:
 
 Since this is a create-react-app application, it should be easy to deploy on the platform of your choice.
 
-First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. To set up your own peer, you should [continue on to the deployment tutorials](./deploying-to-fly-io).
+First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. You can use the URL of your deployment earlier in this tutorial.
 
 Then run `vercel` from the application's root directory to build and deploy to the Vercel network. For production, use `vercel --prod` instead.
 
