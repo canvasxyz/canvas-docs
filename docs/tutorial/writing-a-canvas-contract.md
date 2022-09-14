@@ -4,28 +4,34 @@ sidebar_position: 1
 
 # Writing a Canvas contract
 
+In this tutorial, we will be building a simple message board that allows users to sign in with their wallet and leave messages in real time.
+
+The first part of of this is to write the "backend", which we will refer to as the "contract."
+
+## Writing a Canvas contract
+
 On Canvas, every application is uniquely defined by an offchain contract, a file like this:
 
 ```js
-export const database = "sqlite"
+export const database = "sqlite";
 
 export const models = {
-	posts: {
-		content: "string",
-		from_id: "string",
-		indexes: ["updated_at"],
-	}
-}
+  posts: {
+    content: "string",
+    from_id: "string",
+    indexes: ["updated_at"],
+  },
+};
 
 export const routes = {
-	"/posts": "SELECT * FROM posts ORDER BY posts.updated_at DESC"
-}
+  "/posts": "SELECT * FROM posts ORDER BY posts.updated_at DESC",
+};
 
 export const actions = {
-	createPost(content) {
-		this.db.posts.set(this.hash, { content, from_id: this.from })
-	}
-}
+  createPost(content) {
+    this.db.posts.set(this.hash, { content, from_id: this.from });
+  },
+};
 ```
 
 Let’s take a look at each export:
@@ -44,10 +50,10 @@ Now, let's try running this application. First, install the Canvas command-line 
 npm install -g @canvas-js/cli
 ```
 
-Copy the code above into a file called example.canvas.js, and start a node:
+Copy the code above into a file called spec.canvas.js, and start a node:
 
 ```
-canvas run example.canvas.js
+canvas run spec.canvas.js
 ```
 
 Make sure to select **yes** when prompted to run in unchecked mode. This means the node won't use an API to check the block hash of each signed message, as it comes from the client:
@@ -78,3 +84,5 @@ It's live! We just took care of a few things while initializing the application:
 2. We set up a sandboxed JavaScript VM, inside a WebAssembly environment, to execute each action.
 3. We launched a REST API for accepting new actions, and accessing the application's routes.
 4. Because we didn’t provide any peers, the application just executes locally without syncing to any other nodes.
+
+Next, we're going to create a Front End that using Canvas hooks that can read from this contract.

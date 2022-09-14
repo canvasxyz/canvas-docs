@@ -31,9 +31,9 @@ cd packages/example-chat-server
 
 Three files in this directory are used to deploy to Heroku:
 
-* **package.json** ensures the Canvas CLI is globally installed, when running the app on Heroku.
-* **Procfile** specifies how to run the app.
-* **spec.canvas.js** is the application.
+- **package.json** ensures the Canvas CLI is globally installed, when running the app on Heroku.
+- **Procfile** specifies how to run the app.
+- **spec.canvas.js** is the application.
 
 package.json:
 

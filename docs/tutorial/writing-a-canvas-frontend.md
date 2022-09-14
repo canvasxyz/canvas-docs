@@ -10,18 +10,17 @@ To follow along with this tutorial, make sure you have Metamask installed with a
 
 ### Starting a Canvas node
 
-First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-server/spec.canvas.js), which includes a few more views.
+First you should have a Canvas node running in the background. You can use the example spec from the last tutorial.
 
-Save it as example.canvas.js, and start a local node:
+Save it as spec.canvas.js, and start a local node:
 
 ```bash
-canvas run example.canvas.js
+canvas run spec.canvas.js
 ```
 
 ### Setting up a new frontend
 
 Now, start by creating a React app, and installing the Canvas frontend package:
-
 
 ```bash
 npx create-react-app canvas-demo
@@ -37,10 +36,10 @@ You should now have a starter React application running in your browser.
 Inside the starter app, open `src/index.js` with your favorite editor, and wrap `<App/>` with the Canvas context provider:
 
 ```jsx
-import { Canvas } from '@canvas-js/hooks';
+import { Canvas } from "@canvas-js/hooks";
 // other imports...
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Canvas host="http://localhost:8000">
@@ -53,7 +52,7 @@ root.render(
 Now, we can add React hooks to `src/App.js`. We'll also replace the existing demo code that shows create-react-app is working:
 
 ```jsx
-import { useRef } from "react"
+import { useRef } from "react";
 import { useRoute, useCanvas } from "@canvas-js/hooks";
 import "./App.css";
 
@@ -67,9 +66,9 @@ function App() {
     disconnect,
     address,
     session,
-  } = useCanvas()
+  } = useCanvas();
 
-  const { error, data } = useRoute("/posts")
+  const { error, data } = useRoute("/posts");
 
   return (
     <div className="App">
@@ -77,7 +76,7 @@ function App() {
         <div>{data?.length || 0} posts</div>
       </header>
     </div>
-  )
+  );
 }
 
 export default App;
@@ -115,11 +114,11 @@ While we’re here, we should display the notes that we’ve been creating too. 
 
 ```jsx
 <div>
-  {data?.map((row, index) =>
+  {data?.map((row, index) => (
     <div key={index}>
       {row.from_id.slice(0, 6)}: {row.content}
     </div>
-  )}
+  ))}
 </div>
 ```
 
@@ -133,7 +132,6 @@ Congratulations! You now have a working application.
 
 ![Screenshot of app with hello world post](/img/react-starter-2.png)
 
-
 ### How sessions work
 
 You'll notice that only the first time we created a message, you were asked to sign a message. That signature was used to authorize a session key, which is stored in your browser.
@@ -146,21 +144,4 @@ To properly verify a session, we need to check that it was signed with a valid E
 canvas run example.canvas.js --chain-rpc eth 1 https://mainnet.infura.io/v3/[API_KEY]
 ```
 
-### Deploying to Vercel
-
-Since this is a create-react-app application, it should be easy to deploy on the platform of your choice.
-
-First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. To set up your own peer, you should [continue on to the deployment tutorials](./deploying-to-fly-io).
-
-Then run `vercel` from the application's root directory to build and deploy to the Vercel network. For production, use `vercel --prod` instead.
-
-```
-% npm install -g vercel
-% vercel
-
-? Set up and deploy “~/canvas-demo”? [Y/n] y
-? Which scope do you want to deploy to? My Team
-? Link to existing project? [y/N] n
-? What’s your project’s name? (canvas-demo)
-🔗 Linked to yourname/canvas-demo (created .vercel and added it to .gitignore)
-```
+Next, lets revisit the contract you made in the previous step and enable it to talk to external blockchains.
