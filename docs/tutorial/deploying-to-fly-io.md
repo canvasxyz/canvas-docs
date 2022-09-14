@@ -25,7 +25,7 @@ You'll need a few files to deploy a Canvas backend node:
 
 - [A Dockerfile](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-server/Dockerfile)
 - [A fly.toml](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-server/fly.toml)
-- [Your spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/spec.canvas.js), which we'll assume is `spec.canvas.js`
+- [Your spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-server/spec.canvas.js), which we'll assume is `spec.canvas.js`
 
 First, create a new directory, and download the example files from the links above. (If your spec is named something else, edit the Dockerfile accordingly.)
 

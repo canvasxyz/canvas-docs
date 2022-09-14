@@ -10,7 +10,7 @@ To follow along with this tutorial, make sure you have Metamask installed with a
 
 ### Starting a Canvas node
 
-First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-client/example.canvas.js), which includes a few more views.
+First you should have a Canvas node running in the background. You can use the example spec from the last tutorial, or [download this spec](https://github.com/canvasxyz/canvas/blob/main/packages/example-chat-server/spec.canvas.js), which includes a few more views.
 
 Save it as example.canvas.js, and start a local node:
 
@@ -86,19 +86,20 @@ Save and refresh, and you should see some text on the screen:
 
 ![Screenshot of app with text that says "0 posts"](/img/react-starter-1.png)
 
-### Accepting user interactions
+### Connecting a wallet and posting
 
-In Canvas, users have to sign each of their actions, to allow each peer on the network to independently verify your data.
+To create notes in our app, we'll let the user call `createPost()` from the client. This is simple - they need to be able to call `connect()` to log in, and `dispatch()` to send messages.
 
-To create notes in our app, we'll collect signed `createPost(content)` actions from the user. We’ll do this with a simple input form.
-
-Add this right inside the <header\>:
+We’ll do this with a simple input form. Add this right inside the <header\>:
 
 ```jsx
 // underneath useRoute():
 const inputRef = useRef()
 
 // inside <header>:
+<button	onClick={() => session ? disconnect() : address ? connectNewSession() : connect()}>
+    {session ? "Logout" : "Login"}
+</button>
 <form onSubmit={(e) => {
     e.preventDefault()
     dispatch("createPost", inputRef.current.value)
