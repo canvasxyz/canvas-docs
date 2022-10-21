@@ -4,19 +4,13 @@ sidebar_position: 6
 
 # About Canvas
 
-Canvas is a peer-to-peer computing platform that complements blockchains. While blockchains are state machines with shared global state, they also impose fees, limits on scalability, and new programming languages that create a barrier to entry.
+## Architecture
 
-Canvas is a new peer-to-peer architecture that gives you a developer experience more like Heroku, Firebase, and other databases you're already familiar with.
+Every Canvas application is a unique hashed file on IPFS. Interactions with the application are signed messages. Messages are relayed over a peer-to-peer network, and stored by each node in an append-only log.
 
-### Architecture
+Each signed message is checked by *executing* it within a JavaScript and WebAssembly virtual machine. During execution, actions are allowed to write to a SQLite database, using an interface that resembles a key-value store. Anyone can then read the data from each node, using full SQL and arbitrarily programmable views.
 
-Every Canvas application is a unique hashed file on IPFS, and interactions with the application are signed messages. Messages are relayed over a peer-to-peer network, and stored by each node in an append-only log.
-
-Each signed message is checked by *executing* it within a JavaScript and WebAssembly virtual machine. During execution, actions are allowed to write to a SQL database using an interface that resembles a key-value store. Anyone can then read the data from each node, using full SQL and arbitrarily programmable views.
-
-All together, this makes it possible to write a backend for many common web applications in ~50 lines of code.
-
-Today, Canvas is focused on database-oriented applications, but we have several planned extensions to the Canvas runtime, which will make it possible to create more powerful applications using the compute capabilities of Canvas nodes.
+## Tradeoffs
 
 ### Canvas vs. blockchains
 
@@ -28,6 +22,8 @@ Compared to building on smart contracts, the Canvas stack currently makes a few 
 * Node operators don't bond a token like ETH, so there is no penalty for misbehavior or going offline.
 
 In general, we recommend that ordering-sensitive operations happen on a blockchain like an Ethereum L2. Canvas provides an API for reading from smart contracts for this purpose.
+
+In the long term, we'll integrate a fast-sync light client, so reading from chains like Ethereum can be done entirely trustlessly.
 
 On the other hand, we think most applications on the web today would be easier to develop with a peer-to-peer, off-chain architecture:
 
