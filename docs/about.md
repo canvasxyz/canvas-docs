@@ -6,9 +6,11 @@ sidebar_position: 6
 
 ## Architecture
 
-Every Canvas application is a unique hashed file on IPFS. Interactions with the application are signed messages. Messages are relayed over a peer-to-peer network, and stored by each node in an append-only log.
+Every signed message on Canvas is checked by *executing* it within a JavaScript and WebAssembly virtual machine. During execution, actions are allowed to write to a SQLite database, using an interface that resembles a key-value store. Anyone can then read the data from each node, using full SQL and arbitrarily programmable views.
 
-Each signed message is checked by *executing* it within a JavaScript and WebAssembly virtual machine. During execution, actions are allowed to write to a SQLite database, using an interface that resembles a key-value store. Anyone can then read the data from each node, using full SQL and arbitrarily programmable views.
+Messages are signed with the IPFS URI of the spec intended to process them, although specs can also define custom signature formats, so they can process data from other applications, or base layers outside Canvas from networks like Ceramic or blockchains.
+
+Messages are stored by each peer in a [Merkle Search Tree](https://github.com/canvasxyz/okra), which allows peers to efficiently synchronize batches of actions with each other.
 
 ## Tradeoffs
 
@@ -48,8 +50,6 @@ This allows applications to read from the data layers they are built on, which i
 
 ### Scalability
 
-The first version of the Canvas protocol supports JavaScript as our execution language, and SQLite or Postgres as databases.
+The first version of the Canvas protocol supports JavaScript as an execution language, and SQLite as a database.
 
 However, the Canvas protocol is designed to be modular, so it will be possible to switch out the default database for more optimized solutions. We expect there will be other implementations of the Canvas engine, in high-performance languages like Rust, using high-throughput replicated SQL, and using streaming databases that can scale up to millions of concurrent users.
-
-In the first version of Canvas, our reference implementation serves as a living spec for the protocol. As it stabilizes, we plan to release a formal specification for how different signed messages, databases, and CRDTs are expected to behave within the Canvas system.
