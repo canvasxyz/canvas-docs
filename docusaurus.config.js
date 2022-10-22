@@ -35,7 +35,6 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/canvasxyz/canvas-docs/tree/main/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -59,25 +58,20 @@ const config = {
             label: "GitHub",
             position: "right",
           },
+          {
+            href: "https://twitter.com/canvas_xyz",
+            label: "Twitter",
+            position: "right",
+          },
+          {
+            href: "https://canvas.xyz",
+            label: "Home",
+            position: "right",
+          },
         ],
       },
       footer: {
         style: "light",
-        links: [
-          {
-            title: "Links",
-            items: [
-              {
-                label: "Home",
-                href: "https://canvas.xyz",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/canvas_xyz/",
-              },
-            ],
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} Canvas Technology Corp.`,
       },
       prism: {
