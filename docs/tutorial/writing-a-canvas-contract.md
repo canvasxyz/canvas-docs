@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Writing a Canvas contract
+# Writing a contract
 
 In this tutorial, we will be building a simple message board that allows users to sign in with their wallet and leave messages in real time.
 

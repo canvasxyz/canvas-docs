@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Deploying a Canvas application
+# Deploying to Fly.io & Vercel
 
 ## Deploying a Canvas contract to Fly.io
 
@@ -117,9 +117,9 @@ If you have any problems, here are a few troubleshooting tips:
 
 ## Deploying a Canvas frontend to Vercel
 
-Since this is a create-react-app application, it should be easy to deploy on the platform of your choice.
+Since the frontend we built is a create-react-app application, it should be easy to deploy on the platform of your choice.
 
-First, switch out localhost:8000 for the URL of a Canvas peer, in `src/index.js`. You can use the URL of your deployment earlier in this tutorial.
+First, in the <Canvas\> element in `src/index.js`, switch out localhost:8000 for the URL of a Canvas node. You can use the URL of your deployment on Fly.io above.
 
 Then run `vercel` from the application's root directory to build and deploy to the Vercel network. For production, use `vercel --prod` instead.
 

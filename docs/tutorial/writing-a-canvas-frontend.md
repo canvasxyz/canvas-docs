@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Writing a Canvas frontend
+# Connecting a frontend
 
 Now that we have a working Canvas backend, let's connect it to a frontend.
 
