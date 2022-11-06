@@ -4,6 +4,8 @@ sidebar_position: 4
 
 # Reading on-chain data
 
+***Canvas is early-stage software, and this tutorial may be out of date.***
+
 Like all peer-to-peer protocols, Canvas applications need a way to determine who's allowed to post to the network. To accomplish this, we support both on-chain and off-chain ways to verify user identity.
 
 For on-chain identity, the user's identity is read from a smart contract on a blockchain, such as an identity registry or NFT contract.

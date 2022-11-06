@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Connecting a frontend
 
+***Canvas is early-stage software, and this tutorial may be out of date.***
+
 Now that we have a working Canvas backend, let's connect it to a frontend.
 
 To follow along with this tutorial, make sure you have Metamask installed with a working wallet. You won't need any tokens, but you will need an Ethereum address to log in.

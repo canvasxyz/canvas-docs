@@ -4,6 +4,10 @@ sidebar_position: 5
 
 # Deploying to Fly.io & Vercel
 
+***Canvas is early-stage software, and this tutorial may be out of date.***
+
+***We now recommend deploying Canvas applications as a single monorepo, following the [examples](https://github.com/canvasxyz/canvas/tree/main/packages/example-chat-next).***
+
 ## Deploying a Canvas contract to Fly.io
 
 Fly.io is an application hosting platform which uses micro-VMs running on a global network, like a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) that runs code.

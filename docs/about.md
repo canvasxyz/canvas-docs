@@ -4,13 +4,15 @@ sidebar_position: 6
 
 # About Canvas
 
-Canvas is an off-chain runtime for web applications.
+Canvas is an off-chain runtime for web applications. It's a federated protocol similar to Bluesky's [AT Protocol](https://atproto.com/guides/overview), but focused on application developers, and those building on blockchain-anchored identity.
 
 Every signed message on Canvas is *executed* within a JavaScript/WASM virtual machine. During execution, actions are allowed to write to a SQLite database, using an interface that resembles a key-value store. Applications can then expose this data through SQL and programmable views.
 
 Messages are signed with the IPFS URI of the spec intended to process them, although specs can also define custom signature formats, so they can process data from other applications, or base layers outside Canvas.
 
 Messages are stored by each peer in a [Merkle Search Tree](https://github.com/canvasxyz/okra), which allows peers to efficiently synchronize past histories of actions with each other.
+
+To learn more, we encourage you to review our NPM packages and [check out our code](https://github.com/canvasxyz/canvas).
 
 ## Tradeoffs
 
