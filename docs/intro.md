@@ -5,9 +5,9 @@ slug: /
 
 # Introduction
 
-Canvas is a federated protocol and developer framework for building
-decentralized applications, where user interactions are signed
-messages synchronized over a P2P network.
+Canvas is a developer framework for building decentralized
+applications, where user interactions are signed messages synchronized
+over a P2P network.
 
 For developers, we expose an easy-to-use data store like Heroku or
 Postgres, which allows most application backends to be expressed in
