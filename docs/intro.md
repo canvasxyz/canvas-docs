@@ -47,6 +47,14 @@ and we're working on close integrations with Next.js and Webpack, so
 you can run a full-stack Canvas app with one command!
 
 
+## Recommended uses
+
+* Community software (chat, forums, governance tools)
+* Modular applications (widgets, app stores)
+* ZK social applications and game worlds
+* Lightweight decentralized applications anchored on L2s
+
+
 ## Building a Canvas App
 
 To get started, proceed to the tutorial to [build your first Canvas app](./docs/tutorial/writing-a-canvas-contract).
