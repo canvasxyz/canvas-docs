@@ -4,9 +4,9 @@ sidebar_position: 6
 
 # About Canvas
 
-Canvas is an off-chain runtime for web applications. It's a federated protocol similar to Bluesky's [AT Protocol](https://atproto.com/guides/overview), but focused on application developers, and those building on blockchain-anchored identity.
+Canvas is an off-chain runtime for web applications. It's a federated protocol similar to Bluesky's [AT Protocol](https://atproto.com/guides/overview), but focused on application developers and builders using blockchain-anchored identity.
 
-Every signed message on Canvas is *executed* within a JavaScript/WASM virtual machine. During execution, actions are allowed to write to a SQLite database, using an interface that resembles a key-value store. Applications can then expose this data through SQL and programmable views.
+Every signed message on Canvas is "executed" in a JavaScript/WASM virtual machine. During execution, actions are allowed to write to a SQLite database, using an interface that resembles a key-value store. Applications can then expose this data through SQL and programmable views.
 
 Messages are signed with the IPFS URI of the spec intended to process them, although specs can also define custom signature formats, so they can process data from other applications, or base layers outside Canvas.
 
@@ -16,27 +16,27 @@ To learn more, we encourage you to review our NPM packages and [check out our co
 
 ## Tradeoffs
 
-Canvas is complementary to blockchains - for blockchain developers, it seems that immutable records like identity, reputation, and financial transactions should live on a secure L1 or L2 network, while systems like Canvas can be used to create more scalable layers (and potentially finalized on-chain).
+Canvas is complementary to blockchains - for blockchain developers, we believe immutable records like identity, reputation, and financial transactions should live on a secure L1 or L2 network, while systems like Canvas can be used to create more scalable end-user applications (potentially finalized on-chain).
 
-* Off-chain apps are faster, since each node can accept actions as they are seen.
-* Off-chain apps are easier to program and query in JavaScript and SQL.
-* Apps don't require cryptocurrency to launch or use. Some applications may require you to hold an NFT, or a verifiable credential from a certificate authority.
-* Interactions with apps are more flexible. They're just signed data, that can be forked and recombined into new applications, or archived to storage layers like Filecoin or Arweave.
+* Off-chain applications are faster, since each node can accept actions as they are seen.
+* Applications don't require cryptocurrency to launch or use. Some applications may require you to hold an NFT, or a verifiable credential from a certificate authority.
+* Developers can get started without blockchain-specific skills, using TypeScript and SQL.
+* Interactions with applications are more flexible. They're just signed data, that can be forked and recombined into new applications.
 
 ### Canvas vs. blockchains
 
 Compared to building on smart contracts, the Canvas stack makes a few tradeoffs:
 
 * We don't save data to a blockchain. This makes Canvas fast, since each node can accept actions instantaneously, rather than waiting for consensus.
-* It also means that contentious operations - like competing to be in the first 1000 minters of an NFT - are impractical to implement on Canvas.
-* Blockchains generally reach some state of finality, either immediately (Tendermint) or after 15-30 blocks (PoW / PoS gadgets). Canvas nodes don't have a strict concept of finality, and have limited shared global state.
+* Contentious operations, like competing to be in the first 1000 minters of an NFT, are impractical to implement on Canvas.
+* Blockchains generally finalize, either immediately (Tendermint) or after 15-30 blocks (PoW / PoS gadgets). Canvas nodes don't have a strict concept of finality, and have limited shared global state.
 * Node operators don't bond a token like ETH, so there is no penalty for misbehavior or going offline.
 
-In general, ordering-sensitive operations should happen on a blockchain like an Ethereum L2. Canvas provides an API for reading from smart contracts for this purpose.
+In general, we recommend that ordering-sensitive operations happen on a blockchain like an Ethereum L2. Canvas provides an API for reading from smart contracts for this purpose.
 
 ### Canvas vs. storage layers
 
-[IPFS](https://ipfs.io/) and [Arweave](https://www.arweave.org/) are non-programmable data layers. Most decentralized apps archive their data to these layers, but don’t read from them, because reading from them would require imposing a data schema and scanning the entire network. The few applications that *do* read from IPFS and Arweave generally have very simple data schemas.
+[IPFS](https://ipfs.io/) and [Arweave](https://www.arweave.org/) are non-programmable data layers. Many decentralized apps archive data to these layers, but don’t read from them, since that would require imposing a data schema and scanning the entire network. A few applications that *do* read from IPFS and Arweave generally have very simple data schemas.
 
 Canvas is a layer on top of IPFS, that enforces both a schema and content for data written to it. For example, a Canvas app can check for an ENS name, DAO membership, or other identity token before allowing someone to post.
 
