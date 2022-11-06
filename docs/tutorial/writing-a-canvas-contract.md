@@ -18,7 +18,7 @@ export const models = {
     id: "string",
     content: "string",
     from_id: "string",
-    updated_at: "string",
+    updated_at: "datetime",
     indexes: ["updated_at"],
   },
 };
@@ -38,7 +38,7 @@ Let’s take a look at each export:
 
 - **Models** are database tables, like a schema for a database.
 - **Routes** are views, that take data from database tables, and display them to users.
-- **Actions** are ways the user can interact with the app. Each action is a JavaScript function running in a sandboxed WebAssembly VM, that writes to the database by calling set().
+- **Actions** are ways the user can interact with the app. Each action is a JavaScript function that writes to the database by calling `this.db.[table].set()`.
 
 In our example, when a user creates a new post, we call `this.db.posts.set()` to save it to the database. It will immediately be visible through the two routes we’ve defined above.
 
@@ -53,36 +53,46 @@ npm install -g @canvas-js/cli
 Copy the code above into a file called spec.canvas.js, and start a node:
 
 ```
-canvas run spec.canvas.js
+canvas run spec.canvas.js --unchecked
 ```
 
-Make sure to select **yes** when prompted to run in unchecked mode. This means the node won't use an API to check the block hash of each signed message, as it comes from the client:
+By default, every message is signed with the block hash of a recent Ethereum block, to prevent long-range replay attacks. However, checking the block hash requires an API, so we'll skip it for now, by running in "unchecked" mode.
 
 ```
-% canvas run example.canvas.js
+% canvas run example.canvas.js --unchecked
+✦ Using development mode. Actions will be signed with the spec's filename, not IPFS hash.
+✦ Using in-memory model database. Data will not be saved between runs.
+✦ To persist data, install the spec with:
+  canvas install /spec.canvas.js
 
-No chain RPC provided. Run in unchecked mode instead? [Y/n] Y
-Running in unchecked mode! Actions will be processed without verifying a blockhash.
-Peering automatically disabled.
-
-[canvas-core] Initializing new model database at /example.canvas/db.sqlite
-[canvas-core] Initialized core /example.canvas.js with database example.canvas
-[canvas-cli] Serving /example.canvas.js on port 8000:
+Serving file:///spec.canvas.js on port 8000:
 └ GET http://localhost:8000/
+└ GET http://localhost:8000/posts
 └ POST /actions
-  └ { payload, session, signature }
-  └ payload: { from, spec, updated_at, call, args }
-  └ calls: [ createPoll, createCard, createVote ]
 └ POST /sessions
-  └ { payload, signature }
-  └ payload: { from, spec, updated_at, session_public_key, session_duration }
 ```
 
-It's live! We just took care of a few things while initializing the application:
+To persist data and start network sync, we would run this application by its IPFS multihash.
+
+```
+% canvas install spec.canvas.js
+[canvas-cli] Creating app directory at /home/.canvas/Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd
+[canvas-cli] Creating /home/.canvas/Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd/spec.canvas.js
+[canvas-cli] Run the app with canvas run Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd
+
+% canvas run Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd --unchecked
+Serving ipfs://Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd on port 8000:
+└ GET http://localhost:8000/
+└ GET http://localhost:8000/posts
+└ POST /actions
+└ POST /sessions
+```
+
+We're live! Here is a summary of what just happened:
 
 1. We set up a model database for persisting data. Since this is the first time running the application, we also initialized a set of database tables for it from scratch.
-2. We set up a sandboxed JavaScript VM, inside a WebAssembly environment, to execute each action.
+2. We set up a sandboxed JavaScript VM, for executing each action.
 3. We launched a REST API for accepting new actions, and accessing the application's routes.
-4. Because we didn’t provide any peers, the application just executes locally without syncing to any other nodes.
+4. The application will make itself discoverable via libp2p, so anyone else running the same application can discover it. (Wait a few seconds and you can see peer discovery messages being broadcasted.)
 
-Next, we're going to create a Front End that using Canvas hooks that can read from this contract.
+Next, we're going to create a front end, using Canvas hooks, that can read from this contract.
