@@ -9,7 +9,7 @@ Canvas is a developer framework for building decentralized
 applications, where user interactions are signed messages synchronized
 over a P2P network.
 
-For developers, we expose an easy-to-use data store like Heroku or
+For developers, we provide an easy-to-use data store like Heroku or
 Postgres, which allows most application backends to be expressed in
 <50 lines of code.
 
@@ -64,7 +64,7 @@ synchronize with each other:
 * Community software (chat, forums, governance tools)
 * Knowledge tools (Q&A, notes, ratings, reviews)
 * Modular applications (widgets, app stores)
-* ZK social applications and autonomous worlds
+* ZK-proof based applications
 
 
 ## Building a Canvas App
