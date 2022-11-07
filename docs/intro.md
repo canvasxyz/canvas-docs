@@ -22,10 +22,9 @@ of signed messages, using an approach inspired by
 [CRDTs](https://crdt.tech/) and [client-side
 prediction](https://en.wikipedia.org/wiki/Client-side_prediction).
 
-Rather than only supporting messaging like most p2p broadcast
-protocols (like libp2p), Canvas also synchronizes the history of
-applications, so if you clone an application from Github, its data
-will sync along with it.
+Unlike P2P broadcast protocols (like libp2p), Canvas also
+synchronizes the history of applications, so if you clone an
+application from Github, its data will sync along with it.
 
 
 ## Using Canvas
@@ -64,7 +63,7 @@ synchronize with each other:
 * Community software (chat, forums, governance tools)
 * Knowledge tools (Q&A, notes, ratings, reviews)
 * Modular applications (widgets, app stores)
-* ZK-proof based applications
+* ZK social applications
 
 
 ## Building a Canvas App
