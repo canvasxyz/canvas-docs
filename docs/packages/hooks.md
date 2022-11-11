@@ -50,5 +50,4 @@ const { data, error } = useRoute("/posts")
 Here, `data` will be null if the core has not initialized, or will
 be an array of objects returned by the route that it queried otherwise.
 
-See the `packages/example-chat-client` directory for an example
-application using these hooks.
+See the `examples` directory for a few applications using these hooks.
