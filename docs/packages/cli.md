@@ -5,9 +5,7 @@ title: "@canvas-js/cli"
 
 [![npm](https://img.shields.io/npm/v/@canvas-js/cli?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/cli)
 
-This package includes the command line interface for using Canvas.
-
-To install, run:
+This package includes the command line interface for using Canvas. To install it, run:
 
 ```
 npm install -g @canvas-js/cli
@@ -26,6 +24,10 @@ Commands:
   canvas export <spec>    Export actions and sessions as JSON to stdout
   canvas import <spec>    Import actions and sessions from stdin
   canvas list             List all specs in the data directory
+  canvas install <spec>   Install an app in the canvas home directory
+  canvas daemon           Start the canvas daemon
+  canvas start <spec>     Start an app on the daemon
+  canvas stop <spec>      Stop an app on the daemon
 
 Options:
   --version  Show version number                                       [boolean]
@@ -43,19 +45,20 @@ Positionals:
   spec  Path to spec file, or IPFS hash of spec              [string] [required]
 
 Options:
-  --version       Show version number                                  [boolean]
-  --help          Show help                                            [boolean]
-  --port          Port to bind the core API             [number] [default: 8000]
-  --peering       Enable peering over libp2p GossipSub                 [boolean]
-  --peering-port  Port to bind libp2p TCP transport     [number] [default: 4044]
-  --ipfs          IPFS Gateway URL   [string] [default: "http://127.0.0.1:8080"]
-  --noserver      Don't bind an Express server to provide view APIs    [boolean]
-  --reset         Reset the message log and model databases
+  --version    Show version number                                     [boolean]
+  --help       Show help                                               [boolean]
+  --port       Port to bind the Core API                [number] [default: 8000]
+  --offline    Disable libp2p                         [boolean] [default: false]
+  --install    Install a local spec and run it in production mode
                                                       [boolean] [default: false]
-  --replay        Reconstruct the model database by replying the message log
+  --listen     libp2p WebSocket transport port          [number] [default: 4044]
+  --reset      Reset the message log and model databases
                                                       [boolean] [default: false]
-  --unchecked     Run the node in unchecked mode, without verifying block hashes
+  --replay     Reconstruct the model database by replying the message log
+                                                      [boolean] [default: false]
+  --unchecked  Run the node in unchecked mode, without verifying block hashes
                                                                        [boolean]
-  --verbose       Enable verbose logging              [boolean] [default: false]
-  --chain-rpc     Provide an RPC endpoint for reading on-chain data      [array]
+  --verbose    Enable verbose logging                 [boolean] [default: false]
+  --chain-rpc  Provide an RPC endpoint for reading on-chain data         [array]
+  --static     Serve a static directory from /, and API routes from /api[string]
 ```

@@ -13,7 +13,7 @@ the application is started.
 
 Models must include an `id` and `updated_at` field, with a string and
 datetime type, respectively. They may also include a list of
-indexes. Indexes may only be defined over a single column.
+indexes. Indexes may be defined over a single column, or multiple columns.
 
 ```js
 export const routes = {
@@ -22,7 +22,7 @@ export const routes = {
     content: "string",
     from_id: "string",
     updated_at: "datetime",
-    indexes: ["updated_at"]
+    indexes: [["updated_at"], ["from_id", "updated_at"]]
   }
 }
 ```
@@ -50,17 +50,18 @@ export const routes = {
 }
 ```
 
+### Advanced Routes
+
 For routes with more advanced syntax, consult the
 [SQLite documentation](https://www.sqlite.org/lang_expr.html). A few useful
 examples:
 
-* GROUP BY and [aggregate
+* Use GROUP BY and [aggregate
   functions](https://www.sqlite.org/lang_aggfunc.html) like count(),
-  min(), max(), sum(), and total() can be used to compute summary statistics.
-* GROUP BY, LEFT JOIN, and
+  min(), max(), sum(), and total() to compute summary statistics.
+* Use GROUP BY, LEFT JOIN, and
   [group_concat()](https://www.sqlite.org/lang_aggfunc.html#group_concat)
-  can be used together to create a list of objects and their
-  associations, such as a list of posts and associated comments.
+  to create a list of objects and their associations.
 
 ```js
 export const routes = {
