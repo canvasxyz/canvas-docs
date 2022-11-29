@@ -3,7 +3,7 @@ sidebar_position: 1
 title: "@canvas-js/hooks"
 ---
 
-[![npm](https://img.shields.io/npm/v/@canvas-js/hooks?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/hooks)
+[![npm](https://img.shields.io/npm/v/@canvas-js/hooks?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/hooks) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/hooks)
 
 This package includes React hooks for using Canvas in your frontend
 application.

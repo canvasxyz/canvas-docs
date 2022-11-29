@@ -3,7 +3,7 @@ sidebar_position: 4
 title: "@canvas-js/next"
 ---
 
-[![npm](https://img.shields.io/npm/v/@canvas-js/next?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/next)
+[![npm](https://img.shields.io/npm/v/@canvas-js/next?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/next) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/next)
 
 This package provides the `canvas-next` command line tool, for
 running Next.js Canvas monorepos with a combined frontend and backend.
@@ -18,7 +18,7 @@ cd my-app
 npm install @canvas-js/next
 ```
 
-Then, inside package.json, replace `next start` with `canvas-next`:
+Inside package.json, replace `next start` with `canvas-next`:
 
 ```
 scripts": {
@@ -31,4 +31,5 @@ scripts": {
 
 Now, `npm run dev` will automatically look for `spec.canvas.js` in your
 project's root directory, and start a non-persistent development server.
+
 `npm run start` will start a production server.
