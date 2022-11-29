@@ -5,7 +5,19 @@
  */
 
 /* You can override the default Infima variables here. */
+.theme-doc-sidebar-item-link-level-1,
+.theme-doc-sidebar-item-link-level-1:not(:first-child),
+.theme-doc-sidebar-item-category-level-1 > div {
+  margin-top: 1.05rem;
+  /* font-weight: var(--ifm-font-weight-bold); */
+}
+.theme-doc-sidebar-item-link-level-1:first-child {
+  margin-top: 0.575rem;
+}
+
 :root {
+  --ifm-menu-link-padding-vertical: 0.3rem;
+  --ifm-menu-link-padding-horizontal: 0.75rem;
   --ifm-color-primary: #3247cd;
   --ifm-color-primary-dark: #005ecb;
   --ifm-color-primary-darker: #00499d;
