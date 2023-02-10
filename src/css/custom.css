@@ -35,6 +35,7 @@
   --ifm-color-primary-lighter: #006BE7;
   --ifm-color-primary-lightest: #006BE7;
   --ifm-code-font-size: 95%;
+  --ifm-code-background: #faf0de;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
   --ifm-spacing-horizontal: 1.2rem;
@@ -44,6 +45,7 @@
 [data-theme='dark'] {
   --ifm-navbar-background-color: var(--ifm-background-surface-color);
   --ifm-footer-background-color: var(--ifm-background-surface-color);
+
   --ifm-color-primary: #feb903;
   --ifm-color-primary-dark: darken(--ifm-color-primary, 10%);
   --ifm-color-primary-darker: darken(--ifm-color-primary, 15%);

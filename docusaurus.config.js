@@ -47,7 +47,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "Canvas Docs",
+        title: "Canvas",
         logo: {
           alt: "Logo",
           src: "img/logo.png",

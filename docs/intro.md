@@ -20,7 +20,7 @@ where interactions happen in near-realtime, and don't require
 transacting with tokens or cryptocurrency.
 
 Canvas complements blockchains, supporting a different class of
-applications that don't rely on global consensus or ordering. User
+applications that don't require global consensus. User
 interactions are synchronized using [efficient P2P data
 structures](https://github.com/canvasxyz/okra), and their effects are
 combined using [CRDTs](https://crdt.tech/), so anyone can reproduce
@@ -59,7 +59,6 @@ synchronize with each other:
   [webpack app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)
   or [next app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
   and running `npm run start`. Your local instance should sync with the online instances in <60 seconds.
-
 
 ## Building a Canvas App
 
