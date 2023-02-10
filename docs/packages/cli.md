@@ -3,8 +3,6 @@ sidebar_position: 2
 title: "@canvas-js/cli"
 ---
 
-[![npm](https://img.shields.io/npm/v/@canvas-js/cli?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/cli) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/cli)
-
 This package includes the command line interface for using Canvas. To install it, run:
 
 ```

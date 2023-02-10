@@ -3,8 +3,6 @@ sidebar_position: 3
 title: "@canvas-js/core"
 ---
 
-[![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core)
-
 The Canvas core is an internal component that verifies, executes, and
 stores the effects of signed messages. Most developers should not use
 the core directly, but instead should use the Canvas CLI or  Hub,

@@ -3,8 +3,6 @@ sidebar_position: 4
 title: "@canvas-js/next"
 ---
 
-[![npm](https://img.shields.io/npm/v/@canvas-js/next?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/next) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/next)
-
 This package provides the `canvas-next` command line tool, for
 running Next.js Canvas monorepos with a combined frontend and backend.
 
