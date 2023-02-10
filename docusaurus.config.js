@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github")
-const darkCodeTheme = require("prism-react-renderer/themes/dracula")
+const lightCodeTheme = require("prism-react-renderer/themes/vsLight")
+const darkCodeTheme = require("prism-react-renderer/themes/okaidia")
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -51,6 +51,7 @@ const config = {
         logo: {
           alt: "Logo",
           src: "img/logo.png",
+          srcDark: "img/logo_inv.png",
         },
         items: [
           {
@@ -75,8 +76,14 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Canvas Technology Corp.`,
       },
       prism: {
-        theme: lightCodeTheme,
+        theme: {
+          ...lightCodeTheme,
+          plain: { ...lightCodeTheme.plain, backgroundColor: "#faf0de" },
+        },
         darkTheme: darkCodeTheme,
+      },
+      colorMode: {
+        defaultMode: "dark",
       },
     }),
 }
