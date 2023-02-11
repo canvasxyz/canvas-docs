@@ -8,8 +8,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/okaidia")
 const config = {
   title: "Canvas",
   tagline: "A programming framework for P2P applications",
-  url: "https://canvasxyz.github.io",
-  baseUrl: "/canvas-docs/",
+  url: "https://docs.canvas.xyz",
+  baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
