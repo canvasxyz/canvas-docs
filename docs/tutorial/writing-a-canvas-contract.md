@@ -24,14 +24,15 @@ export const models = {
 };
 
 export const routes = {
-  "/posts": "SELECT * FROM posts ORDER BY posts.updated_at DESC",
-};
+  "/posts": ({ offset = 0 }, { db }) =>
+    db.queryRaw("SELECT * FROM posts ORDER BY posts.updated_at DESC LIMIT 50 OFFSET :offset", { offset })
+}
 
 export const actions = {
-  createPost(content) {
-    this.db.posts.set(this.hash, { content, from_id: this.from });
+  createPost({ content }, { db, hash, from, timestamp }) {
+    db.posts.set(hash, { content, from_id: from });
   },
-};
+};`
 ```
 
 Let’s take a look at each export:
@@ -50,20 +51,20 @@ Now, let's try running this application. First, install the Canvas command-line 
 npm install -g @canvas-js/cli
 ```
 
-Copy the code above into a file called spec.canvas.js, and start a node:
+Copy the code above into a file called spec.canvas.js, or run `canvas init spec.canvas.js` to automatically generate it. Then, start a node:
 
 ```
 canvas run spec.canvas.js --unchecked
 ```
 
-By default, every message is signed with the block hash of a recent Ethereum block, to prevent long-range replay attacks. However, checking the block hash requires an API, so we'll skip it for now, by running in "unchecked" mode.
+Why the `--unchecked` flag? For applications that use on-chain identity, every message is signed with the block hash of a recent Ethereum block, which allows actions to read from the state of the blockchain at the moment the user signed them. However, this is totally optional, and checking for blocks requires access to synchronized blockchain node (like Infura), so we skip this step, by skipping any blockhash checking.
 
 ```
 % canvas run example.canvas.js --unchecked
 ✦ Using development mode. Actions will be signed with the spec's filename, not IPFS hash.
 ✦ Using in-memory model database. Data will not be saved between runs.
 ✦ To persist data, install the spec with:
-  canvas install /spec.canvas.js
+  canvas install spec.canvas.js
 
 Serving file:///spec.canvas.js on port 8000:
 └ GET http://localhost:8000/
@@ -72,16 +73,16 @@ Serving file:///spec.canvas.js on port 8000:
 └ POST /sessions
 ```
 
-To persist data and start network sync, we would run this application by its IPFS multihash.
+To persist data and start network sync, we would run this application by its IPFS hash.
 
 ```
 % canvas install spec.canvas.js
-[canvas-cli] Creating app directory at /home/.canvas/Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd
-[canvas-cli] Creating /home/.canvas/Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd/spec.canvas.js
-[canvas-cli] Run the app with canvas run Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd
+[canvas-cli] Creating app directory at /home/.canvas/QmQSKDMqFxYyGW3RN4FLsFiheqnwKvb2yGofjkAjRhCCx1
+[canvas-cli] Creating /home/.canvas/QmQSKDMqFxYyGW3RN4FLsFiheqnwKvb2yGofjkAjRhCCx1/spec.canvas.js
+[canvas-cli] Run the app with canvas run QmQSKDMqFxYyGW3RN4FLsFiheqnwKvb2yGofjkAjRhCCx1
 
-% canvas run Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd --unchecked
-Serving ipfs://Qmd5CMRkmcw8Gq1uQ4iPj8Ln9n1ksLLn5XZsddXWrZqkYd on port 8000:
+% canvas run QmQSKDMqFxYyGW3RN4FLsFiheqnwKvb2yGofjkAjRhCCx1 --unchecked
+Serving ipfs://QmQSKDMqFxYyGW3RN4FLsFiheqnwKvb2yGofjkAjRhCCx1 on port 8000:
 └ GET http://localhost:8000/
 └ GET http://localhost:8000/posts
 └ POST /actions
