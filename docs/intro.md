@@ -63,4 +63,7 @@ synchronize with each other:
 
 ## Building a Canvas App
 
-To get started, proceed to the tutorial to [build your first Canvas app](./docs/tutorial/writing-a-canvas-contract), or [read more about Canvas](./docs/about).
+To get started, proceed to the tutorial to [build your first Canvas
+app](./docs/tutorial/writing-a-canvas-contract), or [read more about
+Canvas](./docs/about). You can also refer to the [contract language
+reference](./docs/api) to learn about specific APIs.
