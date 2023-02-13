@@ -4,15 +4,22 @@ sidebar_position: 4
 
 # Reading on-chain data
 
-***Canvas is early-stage software, and this tutorial may be out of date.***
+Like all peer-to-peer protocols, Canvas applications need a way to
+determine who's allowed to post to the network. To accomplish this, we
+support on- and off-chain ways to verify user identity.
 
-Like all peer-to-peer protocols, Canvas applications need a way to determine who's allowed to post to the network. To accomplish this, we support both on-chain and off-chain ways to verify user identity.
+For on-chain identity, the user's identity is read from a smart
+contract on a blockchain, such as an identity registry or NFT
+contract.
 
-For on-chain identity, the user's identity is read from a smart contract on a blockchain, such as an identity registry or NFT contract.
+For off-chain identity, the user should hold a [verifiable
+credential](https://www.w3.org/TR/vc-data-model/), a signed message
+from an issuer that's held off-chain, which (currently) needs to be
+either hard-coded into the contract, or a smart contract fetched
+from on-chain.
 
-For off-chain identity, the user should hold a [verifiable credential](https://www.w3.org/TR/vc-data-model/), a signed message from an issuer that's held off-chain.
-
-This tutorial walks you through reading on-chain identities, using an ERC-721 contract as an example.
+On-chain identity is simpler, so we'll cover that here. This tutorial
+walks you through reading from an ERC-721 contract (an NFT).
 
 ### Referencing a smart contract
 
@@ -49,9 +56,9 @@ const balance = await contract("bibos").balanceOf(this.from);
 
 ```js
 export const actions = {
-  async createPost(content) {
-    if ((await contract("bibos").balanceOf(this.from)) === "0") return false;
-    this.db.posts.set(this.hash, { content, from_id: this.from });
+  async createPost({ content }, { db, from, hash, timestamp }) {
+    if ((await contract("bibos").balanceOf(from)) === "0") return false;
+    db.posts.set(hash, { content, from_id: from });
   },
 };
 ```
@@ -90,4 +97,4 @@ Note that the Ropsten and Rinkeby testnets are being deprecated with the transit
 
 Congratulations - now you have a decentralized app where writing to the contract requires holding an NFT!
 
-Next, we will deploy both the contract and the front end so that other people can use your app as well!
+Next, we will deploy both the contract and the front end so that other people can use your app as well.

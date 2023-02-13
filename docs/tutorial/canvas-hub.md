@@ -3,6 +3,8 @@ title: Canvas Hub
 sidebar_position: 6
 ---
 
+*The Canvas Hub is still under development.*
+
 The [Canvas Hub](https://canvas-hub.fly.dev/) is a pinning service for
 Canvas applications. It connects to the P2P network for each
 application, acting as a hosted peer and serving applications'
