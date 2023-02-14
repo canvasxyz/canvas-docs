@@ -25,12 +25,6 @@ To pull updates:
 git submodule update --remote
 ```
 
-To update the package documentation:
-
-```
-./update_package_docs.sh
-```
-
 ## Deploying
 
 Deploy to Github pages (requires write access to the repo):
