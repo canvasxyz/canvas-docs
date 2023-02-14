@@ -1,0 +1,6 @@
+[submodule "canvas"]
+	path = docs/canvas
+	url = https://github.com/canvasxyz/canvas
+[submodule "docs/canvas"]
+	path = docs/canvas
+	url = https://github.com/canvasxyz/canvas
