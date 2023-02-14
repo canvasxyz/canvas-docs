@@ -28,6 +28,21 @@ efficiently synchronize past histories of actions with each other.
 To learn more, we encourage you to review our NPM packages and [check
 out our code](https://github.com/canvasxyz/canvas).
 
+
+## Upgradeability
+
+The first version of the Canvas protocol supports JavaScript as an
+execution language, and SQLite as a database.
+
+However, since Canvas isn't a blockchain, the underlying message
+processor can upgraded and extended without interruptions to
+service. It's possible to switch out SQLite for replicated, streaming,
+or fully-deterministic databases, and later versions may even compile
+Canvas applications to WebAssembly (through
+[AssemblyScript](https://www.assemblyscript.org/)) or support
+other languages and VMs.
+
+
 ## Tradeoffs
 
 Canvas is complementary to blockchains - for blockchain developers, we
@@ -83,12 +98,3 @@ allowing someone to post.
 This allows applications to read from the data layers they are built
 on, which in turn makes it possible to build fully-featured modular
 applications.
-
-### Scalability
-
-The first version of the Canvas protocol supports JavaScript as an
-execution language, and SQLite as a database.
-
-However, the protocol is designed to be modular. It's possible to
-switch out the default database for replicated, streaming, or
-deterministic databases without any changes in schema.

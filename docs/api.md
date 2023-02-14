@@ -68,9 +68,7 @@ export const routes = {
   "/posts": ({ offset = 0 }, { db }) =>
     db.queryRaw(
       `SELECT id, from_id, content, updated_at FROM posts
-       ORDER BY updated_at DESC LIMIT 50 OFFSET :offset`, {
-      offset,
-    })
+       ORDER BY updated_at DESC LIMIT 50 OFFSET :offset`, { offset })
 }
 ```
 
@@ -87,13 +85,14 @@ advanced queries and routes. Here are a few examples:
 
 ```js
 export const routes = {
-  "/posts_with_reacts": `
-    SELECT posts.*,
-      group_concat(reacts.creator || ':' || reacts.value, ';') AS reacts
-    FROM posts
-    LEFT JOIN reacts ON posts.id = reacts.message_id
-    GROUP BY posts.id
-    ORDER BY updated_at DESC`,
+  "/posts_with_reacts":  ({ offset = 0 }, { db }) =>
+    db.queryRaw(`
+      SELECT posts.*,
+        group_concat(reacts.creator || ':' || reacts.value, ';') AS reacts
+      FROM posts
+      LEFT JOIN reacts ON posts.id = reacts.message_id
+      GROUP BY posts.id
+      ORDER BY updated_at DESC LIMIT 50 OFFSET :offset`, { offset }),
 }
 ```
 

@@ -31,6 +31,10 @@ npm run start
 
 You should now have a starter React application running in your browser.
 
+(If you get warnings, run `GENERATE_SOURCEMAP=false npm run
+start`. This resolves a known issue where many packages are
+missing sourcemaps required by Webpack 5.)
+
 ![Screenshot of React starter app](/img/react-starter.png)
 
 Inside the starter app, open `src/index.js` with your favorite editor. Import wagmi, ConnectKit, and the Canvas hooks and create a wagmi client, and then wrap <App /> with the providers we're using.
@@ -67,7 +71,7 @@ import { ConnectKitButton } from "connectkit";
 import { useRoute } from "@canvas-js/hooks";
 
 function App() {
-  const { data, error } = useRoute("/posts");
+  const { data } = useRoute("/posts");
 
   return (
     <div className="App">
@@ -99,8 +103,8 @@ import { useRef, useMemo } from "react";
 import { useAccount, useSigner, useProvider, useNetwork } from "wagmi";
 
 function App() {
-  const { address, isConnecting, isDisconnected } = useAccount();
-  const { error: signerError, data: signer } = useSigner()
+  const { address } = useAccount();
+  const { data: signer } = useSigner()
   const provider = useProvider()
   const { chain } = useNetwork()
 
@@ -116,7 +120,7 @@ function App() {
     signer
   )
 
-  const { data, error } = useRoute("/posts")
+  const { data } = useRoute("/posts")
   const inputRef = useRef()
 
   return (

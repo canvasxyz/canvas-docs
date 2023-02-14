@@ -8,15 +8,14 @@ Like all peer-to-peer protocols, Canvas applications need a way to
 determine who's allowed to post to the network. To accomplish this, we
 support on- and off-chain ways to verify user identity.
 
-For on-chain identity, the user's identity is read from a smart
-contract on a blockchain, such as an identity registry or NFT
-contract.
-
-For off-chain identity, the user should hold a [verifiable
-credential](https://www.w3.org/TR/vc-data-model/), a signed message
-from an issuer that's held off-chain, which (currently) needs to be
-either hard-coded into the contract, or a smart contract fetched
-from on-chain.
+* For on-chain identity, the user's identity is read from a smart
+  contract, like an identity registry or NFT contract.
+* For off-chain identity, the user should present a [verifiable
+  credential](https://www.w3.org/TR/vc-data-model/) or other
+  proof of identity within their action, like a signed message from
+  a trusted address. The credential should be verified inside the
+  action handler, using either hard-coded procedures, or code
+  retrieved from on-chain.
 
 On-chain identity is simpler, so we'll cover that here. This tutorial
 walks you through reading from an ERC-721 contract (an NFT).
