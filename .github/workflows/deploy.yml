@@ -20,8 +20,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install --frozen-lockfile
-      - name: Install dependencies
-        run: git submodule update --remote
+      - name: Pull submodules
+        run: git submodule update --init
       - name: Build website
         run: npm run build
 
