@@ -5,10 +5,10 @@ sidebar_position: 5
 # About Canvas
 
 Canvas is an off-chain runtime for web applications. It's a hybrid
-automatically federated/peer-to-peer protocol similar to
+federated/peer-to-peer protocol similar to
 [Bluesky](https://atproto.com/) or
 [Farcaster](https://www.farcaster.xyz/), with a focus on general
-applications rather than being a social network.
+applications rather than being a single social network.
 
 Every signed message on Canvas is "executed" in a JavaScript/WASM
 virtual machine. During execution, actions are allowed to write to a

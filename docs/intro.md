@@ -23,7 +23,12 @@ Canvas complements blockchains. User actions are synchronized using
 [efficient P2P data structures](https://github.com/canvasxyz/okra),
 and their effects are combined using [CRDTs](https://crdt.tech/). In
 other words, anyone who clones a Canvas application from Github can
-connect to peers and fetch its latest state.
+connect to peers, fetch its latest state, and sync data back to the
+network!
+
+When combined with public key authentication strategies like
+[WebAuthn](https://webauthn.io/), DIDs, or zero-knowledge proofs, this
+enables a new generation of decentralized applications.
 
 
 ## Using Canvas
