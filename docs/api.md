@@ -8,11 +8,8 @@ title: "Contract Language"
 Each Canvas application is defined as a single file, with JavaScript
 exports for models, routes, actions, and configuration, executed
 inside a [sandboxed ES2020 runtime](https://bellard.org/quickjs/).
-
-This is similar to the approach used by web apps like
-[Figma](https://www.figma.com/blog/how-we-built-the-figma-plugin-system/),
-and allows us to support custom action handlers, zk-proof verification,
-and other complex computations inside Canvas.
+This lets us support complex logic, like custom action handlers and
+zk-proof verification inside Canvas.
 
 
 ## Configuration
@@ -122,7 +119,7 @@ the content to the database.
 
 ```js
 export const actions = {
-  createPost({ content }, { db, from, hash, timestamp }) {
+  createPost({ content }, { db, from, hash, timestamp, contracts }) {
     db.posts.set(this.hash, { content, from_id: from })
   },
 }
@@ -142,6 +139,7 @@ everything else needed to process the action:
 - `db` is an object used for writing to the database.
   - `db.table.set(key, data)` creates or updates the data for that key.
   - `db.table.delete(key)` deletes the data corresponding to that key.
+- `contracts` provides an interface for querying on-chain smart contracts.
 
 Actions will always be processed in the order in which they were
 signed, as reported by the user, so a past-dated action will never
@@ -167,3 +165,37 @@ Replicache and other local-first realtime databases.
 Another extension we're working on is adding a reorderable list
 primitive using CRDTs, which will make it possible to create
 collaboratively edited nested lists.
+
+## Contracts
+
+To read from chains, we currently recommend using contract hooks. Export a
+global variable to declare contracts, and the Canvas node will ensure that
+the user has provided an RPC URL for it:
+
+```js
+export const contracts = {
+  bibos: {
+    chain: "eth",
+    chainId: 1,
+    address: "0xF528e3381372c43F5e8a55b3E6c252E32F1a26e4",
+    abi: ["function balanceOf(address owner) view returns (uint balance)"],
+  },
+};
+```
+
+Canvas uses [Ethers v5's human-readable ABI
+standard](https://docs.ethers.io/v5/api/utils/abi/interface/), where
+each function in the ABI is described with a string. You don't have to
+include every function that the contract supports, [just the ones you
+use](https://blog.ricmoo.com/human-readable-contract-abis-in-ethers-js-141902f4d917).
+
+Then, you can use the contracts variable inside the action context:
+
+```js
+export const actions = {
+  async createPost({ content }, { db, from, hash, timestamp, contracts }) {
+    if ((await contracts.bibos.balanceOf(from)) === "0") return false
+    db.posts.set(hash, { content, from_id: from })
+  },
+}
+```

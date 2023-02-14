@@ -48,16 +48,12 @@ In our example, [Bibos](https://bibos.xyz/) are an [ERC-721](https://eips.ethere
 
 ### Using a contract in your spec
 
-Once you've exported a contract, you can use it from within your actions, using the `contract()` global. _Note: The contract call is an injected global right now, but in later versions, you'll import it manually._
-
-```js
-const balance = await contract("bibos").balanceOf(this.from);
-```
+Once you've exported a contract, you can use it from within your actions, using the `contract` field on the action context.
 
 ```js
 export const actions = {
-  async createPost({ content }, { db, from, hash, timestamp }) {
-    if ((await contract("bibos").balanceOf(from)) === "0") return false;
+  async createPost({ content }, { db, from, hash, timestamp, contracts }) {
+    if ((await contracts.bibos.balanceOf(from)) === "0") return false;
     db.posts.set(hash, { content, from_id: from });
   },
 };
