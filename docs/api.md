@@ -198,3 +198,48 @@ export const actions = {
   },
 }
 ```
+
+## Sources
+
+To allow contracts to be upgraded, we implement the concept of
+*sources*.
+
+Sources are references to previous contracts. When running a contract
+with sources, we automatically join the libp2p gossipsub meshes for
+those sources, and process and import any actions seen on them.
+
+Sources must specify an action handler for each action they wish to
+process:
+
+```js
+const app = "Qm..."
+
+export const sources = {
+  [previousApp]: {
+    createPost({ content }, { db, hash, from }) {
+      assert(typeof content === "string")
+      db.posts.set(hash, { content, from })
+    },
+  },
+}
+```
+
+They can also reuse action handlers that have been declared earlier:
+
+```js
+export const sources = {
+  [previousApp]: {
+    createPost: actions.createPost
+  },
+  [additionalApp]: { ...actions }
+}
+```
+
+Sources are *not* transitive; to import data from multiple previous
+contracts, you should define a source for each contract individually.
+This is due to a current limitation where we don't have a guaranteed
+way of retrieving the contract text of previous contracts.
+
+Sources are effectively soft-forks of past contracts. To see them in
+action, take a look at the [sources unit
+test](https://github.com/canvasxyz/canvas/blob/main/packages/core/test/sources.test.ts).
