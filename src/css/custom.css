@@ -10,11 +10,14 @@
 .theme-doc-sidebar-item-link-level-1,
 .theme-doc-sidebar-item-link-level-1:not(:first-child),
 .theme-doc-sidebar-item-category-level-1 > div {
-  margin-top: 1.05rem;
   /* font-weight: var(--ifm-font-weight-bold); */
 }
 .theme-doc-sidebar-item-link-level-1:first-child {
-  margin-top: 0.575rem;
+  margin-top: 0.25rem;
+}
+.theme-doc-sidebar-item-category {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
 }
 
 :root {
@@ -22,8 +25,12 @@
   --ifm-background-surface-color: #faf0de;
   --ifm-navbar-background-color: #faf0de;
   --ifm-footer-background-color: #faf0de;
+  --ifm-footer-color: #928c80;
+  --ifm-footer-padding-vertical: 1.2rem;
 
   --ifm-pre-background: #faf0de !important;
+
+  --ifm-color-emphasis-700: #13171b;
 
   --ifm-menu-link-padding-vertical: 0.3rem;
   --ifm-menu-link-padding-horizontal: 0.75rem;
@@ -45,15 +52,20 @@
 [data-theme='dark'] {
   --ifm-navbar-background-color: var(--ifm-background-surface-color);
   --ifm-footer-background-color: var(--ifm-background-surface-color);
+  --ifm-footer-color: #686868;
 
   --ifm-color-primary: #feb903;
-  --ifm-color-primary-dark: darken(--ifm-color-primary, 10%);
-  --ifm-color-primary-darker: darken(--ifm-color-primary, 15%);
-  --ifm-color-primary-darkest: darken(--ifm-color-primary, 20%);
-  --ifm-color-primary-light: lighten(--ifm-color-primary, 5%);
-  --ifm-color-primary-lighter: lighten(--ifm-color-primary, 10%);
-  --ifm-color-primary-lightest: lighten(--ifm-color-primary, 15%);
+  --ifm-color-primary-dark: #feb903;
+  --ifm-color-primary-darker: #feb903;
+  --ifm-color-primary-darkest: #feb903;
+  --ifm-color-primary-light: #feb903;
+  --ifm-color-primary-lighter: #feb903;
+  --ifm-color-primary-lightest: #feb903;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+aside.theme-doc-sidebar-container > div > div > a > b {
+  display: none !important;
 }
 
 .main-wrapper {
@@ -83,6 +95,23 @@ code {
   letter-spacing: 0.02em;
   margin-left: 0.1em;
 }
+.navbar__brand {
+  margin-right: 0.6rem;
+}
+
+.navbar__item.navbar__link.navbar-badge {
+  font-size: 0.85em;
+  margin-top: 0.2em;
+  margin-left: 0.1em;
+  padding: 0.1em 0.4em 0.2em;
+  line-height: 1.4;
+  border-radius: 4px;
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-background-color);
+}
+.navbar__item.navbar__link.navbar-badge svg {
+  display: none;
+}
 
 .navbar-sidebar {
   font-family: Lexend;
@@ -98,6 +127,12 @@ nav.menu {
 }
 .menu__list .menu__list {
   margin-top: 0.35rem;
+  margin-bottom: 1rem;
+}
+.theme-doc-sidebar-item-link-level-1,
+.theme-doc-sidebar-item-link-level-1:not(:first-child),
+.theme-doc-sidebar-item-category-level-1 > div {
+  margin-top: 0.5rem;
 }
 
 .theme-doc-markdown {

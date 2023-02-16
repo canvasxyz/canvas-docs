@@ -12,14 +12,26 @@ This lets us support complex logic, like custom action handlers and
 zk-proof verification inside Canvas.
 
 
+## Table of Contents
+
+- [Configuration](#configuration)
+- [Models](#models)
+- [Routes](#routes)
+- [Actions](#actions)
+- [Contracts](#contracts)
+- [Sources](#sources)
+
+
 ## Configuration
 
 An application name is shown to users when logging into the
 application on some chains. Currently, this is only used in the
 EIP-712 signing flow for EVM-based chains, and it's optional:
 
-```js
-// Optional, defaults to "Canvas"
+```ts
+// Optional. If no name is provided, login flows will prompt for
+// "Canvas" as the application name where required.
+
 export const name = "My Application"
 ```
 
@@ -29,11 +41,20 @@ export const name = "My Application"
 Models define SQLite database tables used by the application, which
 are automatically created when the application is started.
 
-Models must include an `id` and `updated_at` field, with a string and
-datetime type. They may also include a list of indexes. Indexes may be
-defined over a single column, or multiple columns.
+* Models must include an `id` and `updated_at` field, with a string and
+  datetime type respectively.
+* Models may also include a list of `indexes`. Indexes are defined by
+  naming the column(s) indexed, and may be defined over a single column
+  or multiple columns.
+* Models support `boolean`, `string`, `integer`, `float`, and
+  `datetime` types.
 
-```js
+We automatically translate between JavaScript and SQLite data types,
+so for example, datetimes are stored as integers. Refer to our
+[interfaces](https://github.com/canvasxyz/canvas/blob/main/packages/interfaces/src/models.ts) for more info.
+
+
+```ts
 export const models = {
   posts: {
     id: "string",
@@ -48,22 +69,23 @@ export const models = {
 ## Routes
 
 Routes are functions that can read from the database, which are automatically
-served by the Canvas node on the API, just like routes in Express.
+served on the application's API.
 
-```js
+```ts
 export const routes = {
   "/posts": ({}, { db }) =>
     db.queryRaw("SELECT * FROM posts ORDER BY posts.updated_at DESC")
 }
 ```
 
-Routes accept parameters, either path parameters (e.g.
-`/posts/:address`) or query parameters (`/posts?address=<0x123>`). For
-example, a request to `/posts` below would use the default offset,
-while a request to `/posts?offset=10` would return the query with
-offset = 10:
+Routes accept parameters, including both path parameters (e.g.
+`/posts/:address`) or query parameters (`/posts?address=<0x123>`).
 
-```js
+For the example below, a request to `/posts` below would use the
+default offset = 0, while a request to `/posts?offset=10` would return
+the query with offset = 10:
+
+```ts
 export const routes = {
   "/posts": ({ offset = 0 }, { db }) =>
     db.queryRaw(
@@ -73,8 +95,8 @@ export const routes = {
 ```
 
 You can refer to the [SQLite
-reference](https://www.sqlite.org/lang_expr.html) to learn to build more
-advanced queries and routes. Here are a few examples:
+reference](https://www.sqlite.org/lang_expr.html) for more advanced
+query strategies. Here are a few examples:
 
 * Use GROUP BY and [aggregate
   functions](https://www.sqlite.org/lang_aggfunc.html) like count(),
@@ -83,9 +105,9 @@ advanced queries and routes. Here are a few examples:
   [group_concat()](https://www.sqlite.org/lang_aggfunc.html#group_concat)
   to create a list of objects and their associations.
 
-```js
+```ts
 export const routes = {
-  "/posts_with_reacts":  ({ offset = 0 }, { db }) =>
+  "/posts_with_reacts": ({ offset = 0 }, { db }) =>
     db.queryRaw(`
       SELECT posts.*,
         group_concat(reacts.creator || ':' || reacts.value, ';') AS reacts
@@ -96,11 +118,11 @@ export const routes = {
 }
 ```
 
-In this example, we fetch a list of reactions to posts. We use LEFT
-JOIN so every row in `posts` is returned regardless of whether or not
-it has reactions. If there are any `reacts` matching the post, we
-combine them into a string using `group_concat()` and return them as a
-list.
+Here, we fetch a list of reactions to posts, using LEFT JOIN so every
+row in `posts` is returned regardless of whether or not it has
+reactions. If there are any `reacts` matching the post, we combine
+them into a string using `group_concat()` and return them grouped by
+post.
 
 When using joins like these, make sure to double-check that you have
 the proper indexes on your models! It's easy to miss an index, which
@@ -113,10 +135,7 @@ Actions are how users write to the database in Canvas
 applications. For example, an action could include broadcasting a
 message in a game, or creating a thread in a forum.
 
-For example, here the user calls `createPost(content)` and we save
-the content to the database.
-
-```js
+```ts
 export const actions = {
   createPost({ content }, { db, from, hash, timestamp, contracts }) {
     db.posts.set(this.hash, { content, from_id: from })
@@ -148,18 +167,19 @@ overwrite the output of a recent-dated action.
 
 [Custom actions are coming soon.](https://github.com/canvasxyz/canvas/issues/132)
 
-### Other action extensions
+### Other action extensions & CRDTs
 
-We try to discourage reading from the database inside actions, since
+We discourage reading from the database inside actions, since
 it's easy to create action handlers that are expensive to handle. If
 we read from the database and a previously-dated action comes in that
 affects later reads, we have to re-execute the history of actions to
-regenerate the state of the application.
+regenerate the application state.
 
 There are ways to reduce this computation to a manageable amount, like
-adopting a [causal-plus consistency
-model](https://jepsen.io/consistency/models/causal) like
-Replicache and other local-first realtime databases.
+adopting the [causal+ consistency
+model](https://www.cs.cmu.edu/~dga/papers/cops-sosp2011.pdf) used by
+local-first realtime databases. Doing this efficiently is planned for
+v2, and will also enable other features like relations between models.
 
 Another extension we're working on is adding a reorderable list
 primitive using CRDTs, which will make it possible to create
@@ -171,7 +191,7 @@ To read from chains, we currently recommend using contract hooks. Export a
 global variable to declare contracts, and the Canvas node will ensure that
 the user has provided an RPC URL for it:
 
-```js
+```ts
 export const contracts = {
   bibos: {
     chain: "eth",
@@ -190,7 +210,7 @@ use](https://blog.ricmoo.com/human-readable-contract-abis-in-ethers-js-141902f4d
 
 Then, you can use the contracts variable inside the action context:
 
-```js
+```ts
 export const actions = {
   async createPost({ content }, { db, from, hash, timestamp, contracts }) {
     if ((await contracts.bibos.balanceOf(from)) === "0") return false
@@ -201,32 +221,29 @@ export const actions = {
 
 ## Sources
 
-To allow contracts to be upgraded, we implement the concept of
-*sources*.
-
 Sources are references to previous contracts. When running a contract
 with sources, we automatically join the libp2p gossipsub meshes for
 those sources, and process and import any actions seen on them.
 
-Sources must specify an action handler for each action they wish to
-process:
+This allows contracts to be upgraded by effectively soft-forking
+previous contracts.
 
-```js
-const app = "Qm..."
+```ts
+const previousApp = "Qm..."
 
 export const sources = {
   [previousApp]: {
     createPost({ content }, { db, hash, from }) {
-      assert(typeof content === "string")
       db.posts.set(hash, { content, from })
     },
   },
 }
 ```
 
-They can also reuse action handlers that have been declared earlier:
+Each source should include action handlers for the actions it
+imports. You can reuse action handlers declared earlier:
 
-```js
+```ts
 export const sources = {
   [previousApp]: {
     createPost: actions.createPost
@@ -235,11 +252,10 @@ export const sources = {
 }
 ```
 
-Sources are *not* transitive; to import data from multiple previous
-contracts, you should define a source for each contract individually.
-This is due to a current limitation where we don't have a guaranteed
-way of retrieving the contract text of previous contracts.
+Sources are *not* transitive; to import data from a contract imported
+by a previous contract, you must define it explicitly. This is because
+we don't have a guaranteed way of retrieving the contract code of
+previous contracts.
 
-Sources are effectively soft-forks of past contracts. To see them in
-action, take a look at the [sources unit
-test](https://github.com/canvasxyz/canvas/blob/main/packages/core/test/sources.test.ts).
+To see sources in action, take a look at the [unit
+tests](https://github.com/canvasxyz/canvas/blob/main/packages/core/test/sources.test.ts).

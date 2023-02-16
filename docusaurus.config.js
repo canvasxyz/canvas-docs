@@ -53,7 +53,14 @@ const config = {
           src: "img/logo.png",
           srcDark: "img/logo_inv.png",
         },
+        hideOnScroll: true,
         items: [
+          {
+            href: "#",
+            label: "pre-release",
+            position: "left",
+            className: "navbar-badge",
+          },
           {
             href: "https://github.com/canvasxyz/canvas",
             label: "GitHub",
