@@ -24,7 +24,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Other Components",
+      label: "Other Packages",
       items: [
         "canvas/packages/core/README",
         "canvas/packages/interfaces/README",

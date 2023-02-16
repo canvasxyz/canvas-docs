@@ -21,14 +21,14 @@ transacting with tokens or cryptocurrency.
 
 Canvas complements blockchains. User actions are synchronized using
 [efficient P2P data structures](https://github.com/canvasxyz/okra),
-and their effects are combined using [CRDTs](https://crdt.tech/). In
-other words, anyone who clones a Canvas application from Github can
-connect to peers, fetch its latest state, and sync data back to the
-network!
+and their effects are combined using a [CRDT](https://crdt.tech/)-like
+strategy. Compared to using libp2p directly, Canvas also provides:
 
-When combined with public key authentication strategies like
-[WebAuthn](https://webauthn.io/), DIDs, or zero-knowledge proofs, this
-enables a new generation of decentralized applications.
+* persistence
+* efficient sync for past actions
+* a concise language for defining applications, with a SQL database and ability to read from chains
+* a set of React hooks, and an [indexer/data explorer](./docs/tutorial/canvas-hub)
+* support for a wide range of cryptographies/signature formats
 
 
 ## Using Canvas
