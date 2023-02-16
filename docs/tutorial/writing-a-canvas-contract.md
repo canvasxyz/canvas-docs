@@ -12,7 +12,7 @@ The first part of of this is to write the "backend", which we will refer to as t
 
 On Canvas, every application is uniquely defined by an offchain contract, a file like this:
 
-```js
+```ts
 export const models = {
   posts: {
     id: "string",

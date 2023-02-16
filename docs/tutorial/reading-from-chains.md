@@ -24,7 +24,7 @@ walks you through reading from an ERC-721 contract (an NFT).
 
 To reference a smart contract from your spec, define it in the **contracts** export, following this format:
 
-```js
+```ts
 export const contracts = {
   bibos: {
     chain: "eth",
@@ -49,7 +49,7 @@ In our example, [Bibos](https://bibos.xyz/) are an [ERC-721](https://eips.ethere
 
 Once you've exported a contract, you can use it from within your actions, using the `contract` field on the action context.
 
-```js
+```ts
 export const actions = {
   async createPost({ content }, { db, from, hash, timestamp, contracts }) {
     if ((await contracts.bibos.balanceOf(from)) === "0") return false;

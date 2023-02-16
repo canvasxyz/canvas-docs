@@ -39,7 +39,7 @@ missing sourcemaps required by Webpack 5.)
 
 Inside the starter app, open `src/index.js` with your favorite editor. Import wagmi, ConnectKit, and the Canvas hooks and create a wagmi client, and then wrap <App /> with the providers we're using.
 
-```js
+```ts
 // other imports ignored...
 import { Canvas } from "@canvas-js/hooks";
 import { WagmiConfig, createClient } from "wagmi";
@@ -65,7 +65,7 @@ root.render(
 
 Now, we can add Canvas and ConnectKit components to our application. Inside `src/App.js`, we'll use `<ConnectKitButton>` to log in, and the `useRoute()` hook to fetch data from the backend:
 
-```jsx
+```tsx
 import "./App.css"
 import { ConnectKitButton } from "connectkit";
 import { useRoute } from "@canvas-js/hooks";
@@ -94,7 +94,7 @@ Save and refresh, and you should see some text on the screen:
 
 To create notes in our app, we'll let the user call `createPost()` from the client. We’ll do this by setting up a chain implementation using Canvas and ConnectKit, and then adding a simple input form.
 
-```jsx
+```tsx
 import "./App.css"
 import { ConnectKitButton } from "connectkit";
 import { useRoute, useSession } from "@canvas-js/hooks";
@@ -153,7 +153,7 @@ function App() {
 
 While we’re here, we should display the notes that we’ve been creating too. Add this underneath the <form\> element:
 
-```jsx
+```tsx
 <div>
   {data?.map((row, index) => (
     <div key={index}>
