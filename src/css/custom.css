@@ -96,14 +96,14 @@ code {
   margin-left: 0.1em;
 }
 .navbar__brand {
-  margin-right: 0.6rem;
+  margin-right: 0.5rem;
 }
 
 .navbar__item.navbar__link.navbar-badge {
   font-size: 0.85em;
   margin-top: 0.2em;
   margin-left: 0.1em;
-  padding: 0.1em 0.4em 0.2em;
+  padding: 0.1em 0.4em 0.14em;
   line-height: 1.4;
   border-radius: 4px;
   background: var(--ifm-color-primary-lightest);
