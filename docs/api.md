@@ -96,10 +96,12 @@ export const routes = {
 }
 ```
 
+Currently, queryRaw is lazily executed; it returns a cursor that you
+return from the route function, and your node will execute the query
+for you after the route finishes execution.
+
 <!--
-Alternatively, you can also return a string from the route, it will
-automatically be executed as a SQL query and the returned objects will
-be served to the user.
+Alternatively, you can also return a string from the route:
 
 ```ts
 export const routes = {
