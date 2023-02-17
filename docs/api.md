@@ -78,12 +78,14 @@ export const routes = {
 }
 ```
 
-Routes accept parameters, including both path parameters (e.g.
-`/posts/:address`) or query parameters (`/posts?address=<0x123>`).
+Each route takes two arguments, `params` and `context`. Params
+includes both path parameters (e.g.  `/posts/:address`) and query
+parameters (`/posts?address=<0x123>`) passed to the route.
 
-For the example below, a request to `/posts` below would use the
-default offset = 0, while a request to `/posts?offset=10` would return
-the query with offset = 10:
+The context argument includes a `db` object, which can be used to read
+from the database. In this example, a request to `/posts` uses the
+default offset = 0, while `/posts?offset=10` would query the database
+for posts with offset = 10:
 
 ```ts
 export const routes = {
@@ -93,6 +95,18 @@ export const routes = {
        ORDER BY updated_at DESC LIMIT 50 OFFSET :offset`, { offset })
 }
 ```
+
+<!--
+Alternatively, you can also return a string from the route, it will
+automatically be executed as a SQL query and the returned objects will
+be served to the user.
+
+```ts
+export const routes = {
+  "/posts": () => "SELECT * FROM posts"
+}
+```
+-->
 
 You can refer to the [SQLite
 reference](https://www.sqlite.org/lang_expr.html) for more advanced
