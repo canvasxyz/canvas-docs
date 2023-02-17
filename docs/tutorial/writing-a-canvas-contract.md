@@ -20,7 +20,7 @@ export const models = {
     from_id: "string",
     updated_at: "datetime",
     indexes: ["updated_at"],
-  },
+  }
 };
 
 export const routes = {
@@ -31,7 +31,7 @@ export const routes = {
 export const actions = {
   createPost({ content }, { db, hash, from, timestamp }) {
     db.posts.set(hash, { content, from_id: from });
-  },
+  }
 };`
 ```
 
@@ -55,12 +55,6 @@ Copy the code above into a file called spec.canvas.js, or run `canvas init spec.
 
 ```
 canvas run spec.canvas.js --unchecked
-```
-
-Why the `--unchecked` flag? For applications that use on-chain identity, every message is signed with the block hash of a recent Ethereum block, which allows actions to read from the state of the blockchain at the moment the user signed them. However, this is totally optional, and checking for blocks requires access to synchronized blockchain node (like Infura), so we skip this step, by skipping any blockhash checking.
-
-```
-% canvas run example.canvas.js --unchecked
 ✦ Using development mode. Actions will be signed with the spec's filename, not IPFS hash.
 ✦ Using in-memory model database. Data will not be saved between runs.
 ✦ To persist data, install the spec with:
@@ -73,7 +67,9 @@ Serving file:///spec.canvas.js on port 8000:
 └ POST /sessions
 ```
 
-To persist data and start network sync, we would run this application by its IPFS hash.
+Why the `--unchecked` flag? For applications that use on-chain identity, messages are signed with a block hash, which allows actions to read from the state of the blockchain at the moment the user signed them. However, this is optional, and checking for blocks requires access to a synchronized blockchain node (like Infura).
+
+To persist data and start network sync, we would run this application by its IPFS hash. An IPFS hash represents the exact fingerprint of the application code, including any comments and whitespace.
 
 ```
 % canvas install spec.canvas.js
@@ -96,4 +92,4 @@ We're live! Here is a summary of what just happened:
 3. We launched a REST API for accepting new actions, and accessing the application's routes.
 4. The application will make itself discoverable via libp2p, so anyone else running the same application can discover it. (Wait a few seconds and you can see peer discovery messages being broadcasted.)
 
-Next, we're going to create a front end, using Canvas hooks, that can read from this contract.
+Next, we're going to create a frontend that can read from this contract.

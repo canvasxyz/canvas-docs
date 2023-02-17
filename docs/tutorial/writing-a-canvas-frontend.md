@@ -25,14 +25,14 @@ Now, start by creating a React app, and installing dependencies. (For Typescript
 ```bash
 npx create-react-app canvas-demo
 cd canvas-demo
-npm install wagmi connectkit ethers @canvas-js/hooks
+npm install wagmi@0.10.x connectkit ethers @canvas-js/hooks @canvas-js/chain-ethereum
 npm run start
 ```
 
 You should now have a starter React application running in your browser.
 
-(If you get warnings, run `GENERATE_SOURCEMAP=false npm run
-start`. This resolves a known issue where many packages are
+(If you get warnings, run `GENERATE_SOURCEMAP=false npm run start` to
+start the server. This resolves a known issue where some packages are
 missing sourcemaps required by Webpack 5.)
 
 ![Screenshot of React starter app](/img/react-starter.png)
@@ -40,7 +40,7 @@ missing sourcemaps required by Webpack 5.)
 Inside the starter app, open `src/index.js` with your favorite editor. Import wagmi, ConnectKit, and the Canvas hooks and create a wagmi client, and then wrap <App /> with the providers we're using.
 
 ```ts
-// other imports ignored...
+// keep the previous imports too...
 import { Canvas } from "@canvas-js/hooks";
 import { WagmiConfig, createClient } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
@@ -149,6 +149,8 @@ function App() {
     </div>
   );
 };
+
+export default App;
 ```
 
 While we’re here, we should display the notes that we’ve been creating too. Add this underneath the <form\> element:
