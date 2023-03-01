@@ -28,13 +28,12 @@ const sidebars = {
       items: [
         "canvas/packages/core/README",
         "canvas/packages/interfaces/README",
-        "canvas/packages/next/README",
       ],
       collapsible: true,
       collapsed: true,
     },
     "about",
   ],
-}
+};
 
-module.exports = sidebars
+module.exports = sidebars;
