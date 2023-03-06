@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # How Canvas Works
 
-TODO: Full technical description of Canvas
+TODO
 
 * Every signed message on Canvas is "executed" in a JavaScript/WASM
   virtual machine.

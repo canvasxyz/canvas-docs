@@ -4,16 +4,15 @@ sidebar_position: 5
 
 # Deploying to Fly.io & Vercel
 
-*This tutorial describes how to set up a Canvas application with a separate frontend and backend. Also consider cloning the Canvas examples ([1](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next), [2](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)) for setups that serve both from one container.*
+This tutorial describes how to set up a Canvas application with a separate frontend and backend. See the [Next.js](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next) and [Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack) examples for setups that serve both from one container.
 
 ## Deploying a Canvas contract to Fly.io
 
 Fly.io is an application hosting platform which uses micro-VMs running
-on a global network.Unlike most other application hosting platforms,
-Fly provides easy access to disk storage volumes. This lets us run
-Canvas apps that use SQLite databases on Fly, just like we run them in
-development. Conveniently, Fly also has a generous [free
-tier](https://fly.io/docs/about/pricing/).
+on a global network, with access to block storage volumes. This lets
+us run Canvas apps that use SQLite databases, just like we do in
+development. Fly also has a generous [free
+tier](https://fly.io/docs/about/pricing/)!
 
 ### Getting started
 

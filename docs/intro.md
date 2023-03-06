@@ -7,17 +7,18 @@ slug: /
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
-Canvas is a peer-to-peer VM and architecture for decentralized
-applications, where user interactions are signed messages replicated
-over [libp2p](https://libp2p.io/). Compared to using a p2p library
-directly, it provides:
+Canvas is a peer-to-peer architecture for decentralized applications,
+where user interactions are signed messages replicated over
+[libp2p](https://libp2p.io/) and executed in an application runtime,
+like a serverless function.
 
-* a concise language for defining applications, with persistence inside a SQL database
+Compared to using peer-to-peer libraries directly, Canvas provides:
+
+* persistence
 * efficient sync for past actions
 * ability to [read from chains](./docs/api#contracts)
-* a set of React hooks, and an [indexer/data explorer](./docs/tutorial/canvas-hub)
+* a set of React hooks, and an [indexer/hosted peer](./docs/tutorial/canvas-hub)
 * support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
-
 
 ## Using Canvas
 
@@ -48,6 +49,7 @@ synchronize with each other:
 
 * [canvas-chat.fly.dev](https://canvas-chat.fly.dev/index.html) built with Webpack
 * [canvas-chat-2.fly.dev](https://canvas-chat-2.fly.dev) built with Next.js
+* [canvas-chat-3.fly.dev](https://canvas-chat-3.fly.dev) which imports data from the other examples into a new application
 * You can also run Canvas locally by downloading the
   [webpack app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)
   or [next app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)

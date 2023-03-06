@@ -4,9 +4,9 @@ sidebar_position: 4
 
 # Reading on-chain data
 
-Like all peer-to-peer protocols, Canvas applications need a way to
-determine who's allowed to post to the network. To accomplish this, we
-support on- and off-chain ways to verify user identity.
+To prevent unauthorized users from overloading the network, Canvas
+applications need a way to determine who's allowed to post to the
+network. This can be done using on- or off-chain identity:
 
 * For on-chain identity, the user's identity is read from a smart
   contract, like an identity registry or NFT contract.
@@ -77,7 +77,7 @@ ETH_CHAIN_ID=1
 ETH_CHAIN_RPC=https://mainnet.infura.io/v3/[API_KEY]
 ```
 
-You can refer to [Chainlist](https://chainlist.org/) for a table of common chain IDs, or use this reference:
+You can refer to [Chainlist](https://chainlist.org/) for a table of common chain IDs.
 
 | Network          | Chain ID |
 | ---------------- | -------- |
@@ -87,8 +87,6 @@ You can refer to [Chainlist](https://chainlist.org/) for a table of common chain
 | Gnosis (PoS)     | 100      |
 | Polygon (PoS)    | 137      |
 | Goerli (Testnet) | 5        |
-
-Note that the Ropsten and Rinkeby testnets are being deprecated with the transition to ETH2.
 
 Congratulations - now you have a decentralized app where writing to the contract requires holding an NFT!
 
