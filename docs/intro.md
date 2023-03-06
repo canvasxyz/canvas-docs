@@ -9,7 +9,7 @@ slug: /
 
 Canvas is a peer-to-peer architecture for decentralized applications,
 where user interactions are signed messages replicated over
-[libp2p](https://libp2p.io/), and executed in an application runtime, like a serverless function.
+[libp2p](https://libp2p.io/), and executed in an application runtime.
 
 Compared to using peer-to-peer libraries directly, Canvas provides:
 
@@ -64,5 +64,6 @@ synchronize with each other:
 
 To get started, proceed to the tutorial to [build your first Canvas
 app](./docs/tutorial/writing-a-canvas-contract), or [read more about
-Canvas](./docs/about). You can also refer to the [contract language
-reference](./docs/api) to learn about specific APIs.
+the technical details](./docs/architecture). You can also refer to the
+[contract language reference](./docs/api) to learn about specific
+APIs.
