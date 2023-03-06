@@ -9,20 +9,19 @@ slug: /
 
 Canvas is a peer-to-peer architecture for decentralized applications,
 where user interactions are signed messages replicated over
-[libp2p](https://libp2p.io/), and executed in an application runtime.
+[libp2p](https://libp2p.io/).
 
-Compared to using peer-to-peer libraries directly, Canvas provides:
+Canvas works a lot like a serverless function platform. Compared to using
+peer-to-peer libraries directly, it provides:
 
-* persistence
-* efficient sync for past actions
+* persistence, in a SQL database which exposes user-defined views
+* efficient sync, using [p2p-friendly data structures](https://github.com/canvasxyz/okra)
 * ability to [read from chains](./docs/api#contracts)
 * a set of React hooks, and an [indexer/hosted peer](./docs/tutorial/canvas-hub)
 * support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
 
-For developers, we provide an easy-to-use data store like Heroku or
-Postgres, which allows most application backends to be expressed in
-<50 lines of code. User interactions happen in near-realtime, and
-don't require transacting with tokens or cryptocurrency.
+Most application backends can be expressed in <50 lines of code, and user
+interactions happen in near-realtime.
 
 ## Using Canvas
 
@@ -34,36 +33,34 @@ Anyone can run an application with `canvas run <contract.js>` or
 if you have peering enabled, starts sync with existing
 nodes on the network.
 
-From the frontend, users can login to the app with a wallet like
-Metamask or Rainbow, by signing a temporary key stored in the
-browser. We provide [React
-hooks](https://www.npmjs.com/package/@canvas-js/hooks) for doing this,
+From the frontend, users can login to the app with a wallet or public key, by
+signing a session key stored in the browser. We provide [React
+hooks](https://www.npmjs.com/package/@canvas-js/hooks) for this,
 and template apps for
 [Next.js](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
 and
 [Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack),
-that make it possible to run a full-stack Canvas app with one
-command.
+that make it possible to run a full-stack Canvas app with one command.
 
 
 ## Demo
 
-These demo applications are deployed to separate Fly.io containers, and
-synchronize with each other:
+These demo applications are deployed to separate Fly.io regions, and
+sync with each other:
 
 * [canvas-chat.fly.dev](https://canvas-chat.fly.dev/index.html) built with Webpack
 * [canvas-chat-2.fly.dev](https://canvas-chat-2.fly.dev) built with Next.js
-* [canvas-chat-3.fly.dev](https://canvas-chat-3.fly.dev) which imports data from the other examples into a new application
-* You can also run Canvas locally by downloading the
+* [canvas-chat-3.fly.dev](https://canvas-chat-3.fly.dev) which imports data from the other examples into a new app
+* You can also run the app locally by downloading the
   [webpack app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)
   or [next app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
-  and running `npm run start`. Your local instance should sync with the online instances in <60 seconds.
+  and running `npm run start`. Your local instance should sync within <60 seconds.
 
 
 ## Building a Canvas App
 
 To get started, proceed to the tutorial to [build your first Canvas
 app](./docs/tutorial/writing-a-canvas-contract), or [read more about
-the technical details](./docs/architecture). You can also refer to the
+the technical details](./docs/architecture). Also see the
 [contract language reference](./docs/api) to learn about specific
 APIs.

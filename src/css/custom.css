@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -18,6 +18,18 @@
 .theme-doc-sidebar-item-category {
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
+}
+
+body {
+  font-family: Lexend, sans-serif;
+}
+.container {
+  padding: 0 calc(1.25 * var(--ifm-spacing-horizontal));
+}
+@media (min-width: 997px) {
+  .container {
+    padding: 0 calc(2 * var(--ifm-spacing-horizontal));
+  }
 }
 
 :root {
@@ -89,7 +101,7 @@ code {
 }
 
 .navbar__title, .navbar__items {
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
 }
 .navbar__title {
   letter-spacing: 0.02em;
@@ -114,11 +126,11 @@ code {
 }
 
 .navbar-sidebar {
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.01em;
 }
 nav.menu {
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.01em;
 }
 .menu__link {
@@ -143,7 +155,7 @@ nav.theme-doc-breadcrumbs {
 }
 
 h1, h2, h3 {
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.02em;
 }
 .markdown > h1:first-child {
@@ -159,22 +171,22 @@ h1, h2, h3 {
 article button.clean-btn {
   padding: 0.6rem 0.8rem;
   font-size: 94%;
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.02em;
 }
 .table-of-contents {
   font-size: 94%;
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.02em;
 }
 
 nav.pagination-nav {
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.02em;
 }
 footer {
   font-size: 94%;
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
   letter-spacing: 0.02em;
 }
 
