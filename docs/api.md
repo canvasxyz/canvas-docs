@@ -179,10 +179,6 @@ Actions will always be processed in the order in which they were
 signed, as reported by the user, so a past-dated action will never
 overwrite the output of a recent-dated action.
 
-### Custom actions
-
-[Custom actions are coming soon.](https://github.com/canvasxyz/canvas/issues/132)
-
 ### Other action extensions & CRDTs
 
 We discourage reading from the database inside actions, since

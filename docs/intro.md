@@ -7,28 +7,16 @@ slug: /
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
-Canvas is a developer framework for decentralized applications, where
-every user interaction is a signed message replicated over a
-peer-to-peer network, implemented using [libp2p](https://libp2p.io/).
+Canvas is a peer-to-peer VM and architecture for decentralized
+applications, where user interactions are signed messages replicated
+over [libp2p](https://libp2p.io/). Compared to using a p2p library
+directly, it provides:
 
-For developers, we provide an easy-to-use data store like Heroku
-or Postgres, which allows most application backends to be expressed in
-<50 lines of code.
-
-For users, we provide a Web2-like user experience
-where interactions happen in near-realtime, and don't require
-transacting with tokens or cryptocurrency.
-
-Canvas complements blockchains. User actions are synchronized using
-[efficient P2P data structures](https://github.com/canvasxyz/okra),
-and their effects are combined using a [CRDT](https://crdt.tech/)-like
-strategy. Compared to using libp2p directly, Canvas also provides:
-
-* persistence
+* a concise language for defining applications, with persistence inside a SQL database
 * efficient sync for past actions
-* a concise language for defining applications, with a SQL database and ability to read from chains
+* ability to [read from chains](./docs/api#contracts)
 * a set of React hooks, and an [indexer/data explorer](./docs/tutorial/canvas-hub)
-* support for a wide range of cryptographies/signature formats
+* support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
 
 
 ## Using Canvas

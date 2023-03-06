@@ -11,7 +11,13 @@ const sidebars = {
       collapsible: false,
       collapsed: false,
     },
+    "architecture",
     "api",
+    {
+      type: "doc",
+      id: "custom",
+      label: "Custom Data Formats",
+    },
     {
       type: "doc",
       id: "canvas/packages/hooks/README",
@@ -32,8 +38,7 @@ const sidebars = {
       collapsible: true,
       collapsed: true,
     },
-    "about",
   ],
-};
+}
 
-module.exports = sidebars;
+module.exports = sidebars
