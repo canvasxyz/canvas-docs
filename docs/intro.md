@@ -9,8 +9,7 @@ slug: /
 
 Canvas is a peer-to-peer architecture for decentralized applications,
 where user interactions are signed messages replicated over
-[libp2p](https://libp2p.io/) and executed in an application runtime,
-like a serverless function.
+[libp2p](https://libp2p.io/), and executed in an application runtime.
 
 Compared to using peer-to-peer libraries directly, Canvas provides:
 
@@ -19,6 +18,13 @@ Compared to using peer-to-peer libraries directly, Canvas provides:
 * ability to [read from chains](./docs/api#contracts)
 * a set of React hooks, and an [indexer/hosted peer](./docs/tutorial/canvas-hub)
 * support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
+
+For developers, we provide an easy-to-use data store like Heroku or
+Postgres, which allows most application backends to be expressed in
+<50 lines of code. User interactions happen in near-realtime, and
+don't require transacting with tokens or cryptocurrency.
+
+You can think of Canvas as serverless functions for signed messages.
 
 ## Using Canvas
 
