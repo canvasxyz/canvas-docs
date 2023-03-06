@@ -35,8 +35,8 @@ const sidebars = {
         "canvas/packages/core/README",
         "canvas/packages/interfaces/README",
       ],
-      collapsible: true,
-      collapsed: true,
+      collapsible: false,
+      collapsed: false,
     },
   ],
 }
