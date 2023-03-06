@@ -7,25 +7,27 @@ slug: /
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
-Canvas is a peer-to-peer architecture for decentralized applications,
+Canvas is a peer-to-peer framework for decentralized applications,
 where user interactions are signed messages replicated over
-[libp2p](https://libp2p.io/).
+[libp2p](https://libp2p.io/), and merged using
+[CRDT](https://crdt.tech/)-like approaches.
 
-Canvas works a lot like a serverless function platform. Compared to using
-peer-to-peer libraries directly, it provides:
+Compared to using p2p networking libraries directly, it provides:
 
 * persistence, in a SQL database which exposes user-defined views
 * efficient sync, using [p2p-friendly data structures](https://github.com/canvasxyz/okra)
 * ability to [read from chains](./docs/api#contracts)
 * a set of React hooks, and an [indexer/hosted peer](./docs/tutorial/canvas-hub)
-* support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
+* built-in support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
 
-Most application backends can be expressed in <50 lines of code, and user
+For developers, Canvas works like a serverless function platform. Most
+application backends can be expressed in <50 lines of code, and user
 interactions happen in near-realtime.
 
 ## Using Canvas
 
-Each application is a unique file or "contract", identified by its
+Each application is a unique file or
+[contract](./docs/tutorial/writing-a-canvas-contract), identified by its
 IPFS hash, that defines **models**, **routes**, and **actions**.
 
 Anyone can run an application with `canvas run <contract.js>` or
@@ -39,8 +41,7 @@ hooks](https://www.npmjs.com/package/@canvas-js/hooks) for this,
 and template apps for
 [Next.js](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
 and
-[Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack),
-that make it possible to run a full-stack Canvas app with one command.
+[Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack).
 
 
 ## Demo

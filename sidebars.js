@@ -4,6 +4,7 @@
 const sidebars = {
   sidebar: [
     "intro",
+    "roadmap",
     {
       type: "category",
       label: "Tutorial",
