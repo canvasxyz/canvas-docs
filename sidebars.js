@@ -5,6 +5,7 @@ const sidebars = {
   sidebar: [
     "intro",
     "roadmap",
+    "architecture",
     {
       type: "category",
       label: "Tutorial",
@@ -12,7 +13,6 @@ const sidebars = {
       collapsible: false,
       collapsed: false,
     },
-    "architecture",
     "api",
     {
       type: "doc",
