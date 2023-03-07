@@ -10,7 +10,7 @@ slug: /
 Canvas is a peer-to-peer framework for decentralized applications,
 where user interactions are signed messages replicated over
 [libp2p](https://libp2p.io/), and merged using
-[CRDT](https://crdt.tech/)-like approaches.
+[CRDT](https://crdt.tech/)s.
 
 Compared to using p2p networking libraries directly, it provides:
 
@@ -19,10 +19,6 @@ Compared to using p2p networking libraries directly, it provides:
 * ability to [read from chains](./docs/api#contracts)
 * a set of React hooks, and an [indexer/hosted peer](./docs/tutorial/canvas-hub)
 * built-in support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
-
-For developers, Canvas works like a serverless function platform. Most
-application backends can be expressed in <50 lines of code, and user
-interactions happen in near-realtime.
 
 ## Using Canvas
 
@@ -42,6 +38,9 @@ and template apps for
 [Next.js](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
 and
 [Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack).
+
+For projects with existing data schemas or databases, we also have
+ways of interoperating with existing data (indexing, mirroring, etc.).
 
 
 ## Demo
