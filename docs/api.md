@@ -179,29 +179,11 @@ Actions will always be processed in the order in which they were
 signed, as reported by the user, so a past-dated action will never
 overwrite the output of a recent-dated action.
 
-### Other action extensions & CRDTs
-
-We discourage reading from the database inside actions, since
-it's easy to create action handlers that are expensive to handle. If
-we read from the database and a previously-dated action comes in that
-affects later reads, we have to re-execute the history of actions to
-regenerate the application state.
-
-There are ways to reduce this computation to a manageable amount, like
-adopting the [causal+ consistency
-model](https://www.cs.cmu.edu/~dga/papers/cops-sosp2011.pdf) used by
-local-first realtime databases. Doing this efficiently is planned for
-v2, and will also enable other features like relations between models.
-
-Another extension we're working on is adding a reorderable list
-primitive using CRDTs, which will make it possible to create
-collaboratively edited nested lists.
-
 ## Contracts
 
-To read from chains, we currently recommend using contract hooks. Export a
-global variable to declare contracts, and the Canvas node will ensure that
-the user has provided an RPC URL for it:
+To read from chains, we provide contract hooks, which you can use by
+exporting a global `contracts` variable. When starting up, the Canvas
+node will ensure that the user has provided an RPC URL for it:
 
 ```ts
 export const contracts = {
@@ -233,12 +215,12 @@ export const actions = {
 
 ## Sources
 
-Sources are references to previous contracts. When running a contract
-with sources, we automatically join the libp2p gossipsub meshes for
-those sources, and process and import any actions seen on them.
+Sources are references to previous contracts, which can be used to
+soft-fork past applications by importing their actions.
 
-This allows contracts to be upgraded by effectively soft-forking
-previous contracts.
+When running a contract with sources, we automatically join the libp2p
+gossipsub meshes for those sources, and process and import any actions
+seen on them.
 
 ```ts
 const previousApp = "Qm..."
@@ -266,8 +248,7 @@ export const sources = {
 
 Sources are *not* transitive; to import data from a contract imported
 by a previous contract, you must define it explicitly. This is because
-we don't have a guaranteed way of retrieving the contract code of
-previous contracts.
+we don't have a way to retrieve the code of previous contracts.
 
 To see sources in action, take a look at the [unit
 tests](https://github.com/canvasxyz/canvas/blob/main/packages/core/test/sources.test.ts).
