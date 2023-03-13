@@ -10,21 +10,25 @@ slug: /
 Canvas is a peer-to-peer framework for decentralized applications,
 where user interactions are signed messages replicated using
 [libp2p](https://libp2p.io/) and [Merkle Search
-Trees](https://github.com/canvasxyz/okra), and merged using
-[CRDTs](https://crdt.tech/).
+Trees](https://github.com/canvasxyz/okra), and merged into a
+consistent global state using [CRDT](https://crdt.tech/)-like
+approaches.
 
-Compared to using p2p networking libraries directly, it provides:
+Compared to using p2p networking libraries directly, Canvas provides:
 
-* persistence, in a SQL database which supports user-defined views
-* efficient sync
-* upgradeability
-* standard signature verification formats, with support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
+* persistence, in a SQL database with built-in API & routing
+* efficient sync for past actions
 * ability to [read from chains](./docs/api#contracts)
+* standard signature formats, with support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) [custom data formats](./docs/custom), and upgradeability
 * developer tools including [React hooks](./docs/canvas/packages/hooks) and a [hosted peer](./docs/tutorial/canvas-hub)
 
-For developers building on blockchains and DAOs, Canvas complements the
-chain, providing a fast, forward-compatible offchain layer that can be
-used to relay data without any costs.
+For developers building blockchain-based applications, Canvas
+complements the chain, providing a fast, upgradeable offchain layer
+that can be used to relay data without costs.
+
+(Canvas does not enforce global consensus, which means that
+ordering-sensitive applications should use state channels as a design
+pattern.)
 
 ## Using Canvas
 
