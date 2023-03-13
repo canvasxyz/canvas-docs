@@ -8,17 +8,23 @@ slug: /
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
 Canvas is a peer-to-peer framework for decentralized applications,
-where user interactions are signed messages replicated over
-[libp2p](https://libp2p.io/), and merged using
-[CRDT](https://crdt.tech/)s.
+where user interactions are signed messages replicated using
+[libp2p](https://libp2p.io/) and [Merkle Search
+Trees](https://github.com/canvasxyz/okra), and merged using
+[CRDTs](https://crdt.tech/).
 
 Compared to using p2p networking libraries directly, it provides:
 
-* persistence, in a SQL database which exposes user-defined views
-* efficient sync, using [p2p-friendly data structures](https://github.com/canvasxyz/okra)
+* persistence, in a SQL database which supports user-defined views
+* efficient sync
+* upgradeability
+* standard signature verification formats, with support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
 * ability to [read from chains](./docs/api#contracts)
-* a set of React hooks, and an [indexer/hosted peer](./docs/tutorial/canvas-hub)
-* built-in support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) and [custom data formats](./docs/custom)
+* developer tools including [React hooks](./docs/canvas/packages/hooks) and a [hosted peer](./docs/tutorial/canvas-hub)
+
+For developers building on blockchains and DAOs, Canvas complements the
+chain, providing a fast, forward-compatible offchain layer that can be
+used to relay data without any costs.
 
 ## Using Canvas
 
