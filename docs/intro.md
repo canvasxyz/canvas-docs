@@ -7,28 +7,27 @@ slug: /
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
-Canvas is a peer-to-peer framework for decentralized applications,
+Canvas is a framework for peer-to-peer decentralized applications,
 where user interactions are signed messages replicated using
 [libp2p](https://libp2p.io/) and [Merkle Search
-Trees](https://github.com/canvasxyz/okra), and merged into a
-consistent global state using [CRDT](https://crdt.tech/)-like
-approaches.
+Trees](https://github.com/canvasxyz/okra#readme), and merged into a
+consistent global state using CRDTs.
 
 Compared to using p2p networking libraries directly, Canvas provides:
 
 * persistence, in a SQL database with built-in API & routing
 * efficient sync for past actions
 * ability to [read from chains](./docs/api#contracts)
-* standard signature formats, with support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages) [custom data formats](./docs/custom), and upgradeability
-* developer tools including [React hooks](./docs/canvas/packages/hooks) and a [hosted peer](./docs/tutorial/canvas-hub)
+* standard signature formats, with support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages), [custom data formats](./docs/custom), and upgradeability
+* developer tools, including [React hooks](./docs/canvas/packages/hooks) and a [hosted peer](./docs/tutorial/canvas-hub)
+
+Canvas does not enforce any type of global consensus or ordering,
+which makes it fast (nodes can finalize valid actions instantly).
+It's also easy to learn and set up (<5 min).
 
 For developers building blockchain-based applications, Canvas
 complements the chain, providing a fast, upgradeable offchain layer
 that can be used to relay data without costs.
-
-(Canvas does not enforce global consensus, which means that
-ordering-sensitive applications should use state channels as a design
-pattern.)
 
 ## Using Canvas
 
@@ -37,20 +36,20 @@ Each application is a unique file or
 IPFS hash, that defines **models**, **routes**, and **actions**.
 
 Anyone can run an application with `canvas run <contract.js>` or
-`canvas run <multihash>`. This launches an API for the application, and
-if you have peering enabled, starts sync with existing
-nodes on the network.
+`canvas run <multihash>`. This launches an API for the application
+and starts sync with existing nodes on the network.
 
 From the frontend, users can login to the app with a wallet or public key, by
 signing a session key stored in the browser. We provide [React
-hooks](https://www.npmjs.com/package/@canvas-js/hooks) for this,
+hooks](https://www.npmjs.com/package/@canvas-js/hooks),
 and template apps for
 [Next.js](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
 and
 [Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack).
 
-For projects with existing data schemas or databases, we also have
-ways of interoperating with existing data (indexing, mirroring, etc.).
+For projects with existing data schemas, we also support custom data
+formats to interoperate with any existing signed data. This is not
+documented yet; contact us for more information.
 
 
 ## Demo
@@ -71,6 +70,5 @@ sync with each other:
 
 To get started, proceed to the tutorial to [build your first Canvas
 app](./docs/tutorial/writing-a-canvas-contract), or [read more about
-the technical details](./docs/architecture). Also see the
-[contract language reference](./docs/api) to learn about specific
-APIs.
+the tech](./docs/architecture). You can also look at the
+[contract language reference](./docs/api) to see our APIs.
