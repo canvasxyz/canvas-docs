@@ -36,8 +36,10 @@ Each application is a unique file or
 IPFS hash, that defines **models**, **routes**, and **actions**.
 
 Anyone can run an application with `canvas run <contract.js>` or
-`canvas run <multihash>`. This launches an API for the application
-and starts sync with existing nodes on the network.
+`canvas run <multihash>`, or by using our [NPM
+package](./docs/canvas/packages/core) directly. This launches an API
+for the application and starts sync with existing nodes on the
+network.
 
 From the frontend, users can login to the app with a wallet or public key, by
 signing a session key stored in the browser. We provide [React
