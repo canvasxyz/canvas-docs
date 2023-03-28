@@ -80,7 +80,7 @@ const config = {
       },
       footer: {
         style: "light",
-        copyright: `Copyright © ${new Date().getFullYear()} Canvas Technology Corp.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Canvas Technologies, Inc.`,
       },
       prism: {
         theme: {

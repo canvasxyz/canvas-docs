@@ -35,4 +35,4 @@ npm run deploy
 
 You can also use `npm run build` to generate static content into the `build` directory.
 
-(C) 2022 Canvas Technology Corporation
+(C) Canvas Technologies, Inc.
