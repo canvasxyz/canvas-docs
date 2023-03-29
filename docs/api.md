@@ -8,8 +8,6 @@ title: "Contract Language"
 Each Canvas application is defined as a single file, with JavaScript
 exports for models, routes, actions, and configuration, executed
 inside a [sandboxed ES2020 runtime](https://bellard.org/quickjs/).
-This lets us support complex logic, like custom action handlers and
-zk-proof verification inside Canvas.
 
 
 ## Table of Contents

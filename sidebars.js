@@ -16,6 +16,11 @@ const sidebars = {
     "api",
     {
       type: "doc",
+      id: "formats",
+      label: "Basic Data Formats",
+    },
+    {
+      type: "doc",
       id: "custom",
       label: "Custom Data Formats",
     },
