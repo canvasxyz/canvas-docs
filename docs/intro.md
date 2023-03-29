@@ -9,31 +9,36 @@ slug: /
 
 Canvas is a framework for peer-to-peer decentralized applications,
 where user interactions are signed messages replicated using
-[libp2p](https://libp2p.io/) and [Merkle Search
-Trees](https://github.com/canvasxyz/okra#readme), and merged into a
-consistent global state using CRDTs.
+[libp2p](https://libp2p.io/) and merged into a consistent global state
+using CRDTs and [p2p-optimized data
+structures](https://github.com/canvasxyz/okra#readme).
 
 Compared to using p2p networking libraries directly, Canvas provides:
 
-* persistence, in a SQL database with built-in API & routing
-* efficient sync for past actions
+* persistence
+* efficient sync
 * ability to [read from chains](./docs/api#contracts)
-* standard signature formats, with support for [multiple chains](https://github.com/canvasxyz/canvas/tree/main/packages), [custom data formats](./docs/custom), and upgradeability
-* developer tools, including [React hooks](./docs/canvas/packages/hooks) and a [hosted peer](./docs/tutorial/canvas-hub)
+* support for [multiple chains](./docs/formats#signing), [custom data formats](./docs/custom), and [upgradeable apps](./docs/api#sources)
+* a full edge framework, including a [SQL database](./docs/api#models), [API router](./docs/api#routes), [React hooks](./docs/canvas/packages/hooks), and a [hosted peer service](./docs/tutorial/canvas-hub)
 
-Canvas does not enforce any type of global consensus or ordering,
-which makes it fast (nodes can finalize valid actions instantly).
-It's also easy to learn and set up (<5 min).
+Canvas does not enforce global consensus, which makes it fast (nodes
+can finalize valid actions instantly). It's also architecturally
+transparent and easy to understand.
 
 For developers building blockchain-based applications, Canvas
 complements the chain, providing a fast, upgradeable offchain layer
-that can be used to relay data without costs.
+that can be used to relay persistent data without costs.
+
 
 ## Using Canvas
 
 Each application is a unique file or
 [contract](./docs/tutorial/writing-a-canvas-contract), identified by its
 IPFS hash, that defines **models**, **routes**, and **actions**.
+
+Actions are signed messages that match a verifiable format, as
+defined by the contract. Their effects are processed by the P2P VM
+and written to models, which are exposed through routes.
 
 Anyone can run an application with `canvas run <contract.js>` or
 `canvas run <multihash>`, or by using our [NPM
@@ -43,15 +48,12 @@ network.
 
 From the frontend, users can login to the app with a wallet or public key, by
 signing a session key stored in the browser. We provide [React
-hooks](https://www.npmjs.com/package/@canvas-js/hooks),
+hooks](https://www.npmjs.com/package/@canvas-js/hooks)
 and template apps for
 [Next.js](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
 and
-[Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack).
-
-For projects with existing data schemas, we also support custom data
-formats to interoperate with any existing signed data. This is not
-documented yet; contact us for more information.
+[Webpack](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)
+to help with this.
 
 
 ## Demo
@@ -65,7 +67,7 @@ sync with each other:
 * You can also run the app locally by downloading the
   [webpack app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)
   or [next app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-next)
-  and running `npm run start`. Your local instance should sync within <60 seconds.
+  and running `npm run start`. Your first sync should complete within <60 seconds.
 
 
 ## Building a Canvas App
