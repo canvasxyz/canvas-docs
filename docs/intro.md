@@ -5,13 +5,14 @@ slug: /
 
 # Introduction
 
+### Fast and scalable decentralized applications using a P2P VM
+
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
 Canvas is a framework for peer-to-peer decentralized applications,
 where user interactions are signed messages replicated using
-[libp2p](https://libp2p.io/) and merged into a consistent global state
-using CRDTs and [p2p-optimized data
-structures](https://github.com/canvasxyz/okra#readme).
+[libp2p](https://libp2p.io/) and merged into a consistent state
+using CRDTs.
 
 Compared to using p2p networking libraries directly, Canvas provides:
 
@@ -36,12 +37,12 @@ Each application is a unique file or
 IPFS hash, that defines **models**, **routes**, and **actions**.
 
 Actions are signed messages that match a verifiable format, as
-defined by the contract. Their effects are processed by the P2P VM
-and written to models, which are exposed through routes.
+defined in the contract. Their effects are processed by the P2P VM,
+written to models, and exposed through the API.
 
 Anyone can run an application with `canvas run <contract.js>` or
-`canvas run <multihash>`, or by using our [NPM
-package](./docs/canvas/packages/core) directly. This launches an API
+`canvas run <multihash>`, or using our [NPM
+package](./docs/canvas/packages/core) manually. This launches an API
 for the application and starts sync with existing nodes on the
 network.
 
