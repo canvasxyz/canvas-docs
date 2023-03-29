@@ -1,7 +1,5 @@
 # Architecture
 
-TODO
-
 ### Canvas vs. blockchains
 
 Blockchains generally finalize immediately (Tendermint) or after 15-30

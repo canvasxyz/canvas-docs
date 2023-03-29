@@ -21,9 +21,8 @@ Compared to using p2p networking libraries directly, Canvas provides:
 * support for [multiple chains](./docs/formats#signing), [custom data formats](./docs/custom), and [upgradeable apps](./docs/api#sources)
 * a full edge framework, including a [SQL database](./docs/api#models), [API router](./docs/api#routes), [React hooks](./docs/canvas/packages/hooks), and a [hosted peer service](./docs/tutorial/canvas-hub)
 
-Canvas does not enforce global consensus, which makes it fast (nodes
-can finalize valid actions instantly). It's also architecturally
-transparent and easy to understand.
+Canvas does not enforce global consensus, which makes it fast, as nodes
+can finalize valid actions instantly.
 
 For developers building blockchain-based applications, Canvas
 complements the chain, providing a fast, upgradeable offchain layer
