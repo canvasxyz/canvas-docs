@@ -3,7 +3,7 @@ sidebar_position: 1
 slug: /
 ---
 
-# Introduction
+# Canvas
 
 ### Fast and scalable decentralized applications using a P2P VM
 
@@ -14,7 +14,7 @@ where user interactions are signed messages replicated using
 [libp2p](https://libp2p.io/) and merged into a consistent state
 using CRDTs.
 
-Compared to using p2p networking libraries directly, Canvas provides:
+Compared to using p2p networking libraries directly, it provides:
 
 * persistence
 * efficient sync
