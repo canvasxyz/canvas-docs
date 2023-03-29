@@ -19,7 +19,7 @@ See Github for the [full changelog](https://github.com/canvasxyz/canvas/releases
 ### v0.3.x (2023-03-28)
 
 * Support for running Canvas apps entirely in the browser.
-* Improvements to the underlying libp2p networking stack.
+* Improvements to the underlying libp2p networking stack. Time to first sync should now be much faster.
 
 ### v0.2.x (2023-03-06)
 
