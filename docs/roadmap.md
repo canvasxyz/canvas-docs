@@ -6,9 +6,9 @@ sidebar_position: 2
 
 ### Upcoming
 
-* Ability to run Canvas nodes entirely in the browser.
+* Improvements to allow Canvas cores to sync with existing databases.
 * Full support for custom actions.
-* Zero-knowledge proof verification. Our plan is to support this through injected "precompiles" so applications can call out to a SnarkJS verifier from within their code.
+* Zero-knowledge proof verification.
 
 ### Future plans
 
@@ -19,9 +19,14 @@ sidebar_position: 2
 
 See Github for the [full changelog](https://github.com/canvasxyz/canvas/releases).
 
+### v0.3.x
+
+* Support for running Canvas apps entirely in the browser.
+* Improvements to the underlying libp2p networking stack.
+
 ### v0.2.x
 
-* Preliminary support for custom actions!
+* Preliminary support for custom actions.
 * Core.applyAction and Core.applySession have been replaced with Core.apply, which can be called with either sessions, actions, or custom actions.
 * Upgraded QuickJS to add native BigInt support within contracts.
 * The libp2p node has been moved inside the Core class. Each app now runs its own libp2p node, with its own persistent PeerId.
