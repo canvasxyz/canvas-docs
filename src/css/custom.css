@@ -195,6 +195,9 @@ footer {
   font-family: Poppins, sans-serif;
   border-top: 1px solid var(--ifm-pre-background);
 }
+[data-theme='dark'] footer {
+  border-top: none;
+}
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;

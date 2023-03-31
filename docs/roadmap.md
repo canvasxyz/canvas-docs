@@ -4,12 +4,13 @@ sidebar_position: 2
 
 # Roadmap
 
-* Sync Canvas cores with databases and RPCs/HTTP APIs
+* Better sync for Canvas cores with databases and RPCs/HTTP APIs
 * Full support for custom actions
 * Zero-knowledge proof verification
 * Later
   * Adding dependencies to actions
   * Adding relations to models
+  * State channels
   * First-class support for user-defined CRDTs
 
 ## Changelog
