@@ -27,14 +27,15 @@ and [WebAssembly via AssemblyScript](https://www.assemblyscript.org/).
 
 ## Configuration
 
-Contracts should specify the chains that are expected to
-be supported, by specifying the CAIP-2 chain identifier.
+Contracts should specify the chains that are expected to be supported,
+by specifying the
+[CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+chain identifier.
 
-Both a chain and chain ID are expected to be included, as
-a contract might read from different contracts on different
-chains.
+Both a chain and chain ID are required in the identifier, because a
+contract might read from different contracts on different chains.
 
-```
+```ts
 // Optional. If no chains are provided, Ethereum mainnet
 // ["eip155:1"] will be used by default.
 
