@@ -41,17 +41,6 @@ chains.
 export const chains = ["eip155:1"]
 ```
 
-An application name is shown to users when logging into the
-application on some chains. Currently, this is only used in the
-EIP-712 signing flow for EVM-based chains, and it's optional:
-
-```ts
-// Optional. If no name is provided, login flows will prompt for
-// "Canvas" as the application name where required.
-
-export const name = "My Application"
-```
-
 
 ## Models
 
