@@ -5,30 +5,31 @@ slug: /
 
 # Canvas
 
-### Fast and scalable decentralized applications using a P2P VM
+### A peer-to-peer edge VM and database
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
-Canvas is a framework for peer-to-peer decentralized applications,
-where user interactions are signed messages replicated using
-[libp2p](https://libp2p.io/) and merged into a consistent state
-using CRDTs.
+Canvas is a framework that makes it easy to build offchain Web3
+applications, where user interactions are signed, replicated using
+[libp2p](https://libp2p.io/), and combined in a [P2P VM](./docs/api).
 
-Compared to using p2p networking libraries directly, it provides:
+It can be used as a Web3 database, a runtime for synchronizing signed
+data, or as a building block for more complex protocols.
 
-* persistence
-* efficient sync
-* ability to [read from chains](./docs/api#contracts)
-* support for [multiple chains](./docs/formats#signing), [custom data formats](./docs/custom), and [upgradeable apps](./docs/api#sources)
-* a full edge framework, including a [SQL database](./docs/api#models), [API router](./docs/api#routes), [React hooks](./docs/canvas/packages/hooks), and a [hosted peer service](./docs/tutorial/canvas-hub)
+Compared to libp2p, Canvas provides:
 
-Compared to blockchains, Canvas does not enforce global consensus,
-which allows it to be faster, as nodes can execute and merge valid
-actions instantly.
+* persistence (just define the signed actions that you'd like to accept)
+* efficient sync for large batches of actions
+* ability to [read from chains](./docs/api#contracts) and use custom functions to validate actions
+* built-in support for [multiple chains](./docs/formats#chain-implementations), [custom data formats](./docs/custom), and [upgradeability](./docs/api#sources)
+* database-like interfaces, including [SQLite](./docs/api#models), [API router](./docs/api#routes), [React hooks](./docs/canvas/packages/hooks), and [hosting](./docs/tutorial/canvas-hub)
 
-For developers building blockchain-based applications, Canvas
-complements the chain, providing a fast, upgradeable offchain layer
-that can be used to relay persistent data without costs.
+Unlike blockchains, Canvas does not enforce consensus, which means
+nodes accept actions as soon as they are validated.
+
+For Web3 developers, Canvas extends the chain, with a fast,
+upgradeable offchain layer that supports computations over on-chain
+data.
 
 
 ## Using Canvas
@@ -41,9 +42,9 @@ Actions are signed messages that match a verifiable format, as
 defined in the contract. Their effects are processed by the P2P VM,
 written to models, and exposed through the API.
 
-Anyone can run an application with `canvas run <contract.js>` or
-`canvas run <multihash>`, or using our [NPM
-package](./docs/canvas/packages/core) manually. This launches an API
+Start an application with `canvas run <contract.js>` or
+`canvas run <multihash>`, or manually initializing our [NPM
+package](./docs/canvas/packages/core). This launches an API
 for the application and starts sync with existing nodes on the
 network.
 

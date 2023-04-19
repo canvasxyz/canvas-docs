@@ -2,20 +2,25 @@
 sidebar_position: 2
 ---
 
-# Roadmap
-
-* Better sync for Canvas cores with databases and RPCs/HTTP APIs
-* Full support for custom actions
-* Zero-knowledge proof verification
-* Later
-  * Adding dependencies to actions
-  * Adding relations to models
-  * State channels
-  * First-class support for user-defined CRDTs
-
-## Changelog
+# Roadmap and changes
 
 See Github for the [full changelog](https://github.com/canvasxyz/canvas/releases).
+
+### Upcoming
+
+* Improved RPCs for syncing cores with outside databases
+* Better support for custom actions and custom sessions
+* Zero-knowledge proof verification
+* Support for model relations & action dependencies
+
+### v0.4.x (2023-04-18)
+
+* Specs now declare exactly which chains they support using `export const chains: string[]`. If one isn't declared, it defaults to ["eip155:1"] (Ethereum mainnet only).
+* Ethereum session signatures now use SIWE instead of EIP-712.
+* Ethereum session signatures are now stored in a 3-tuple string format `${domain}/${nonce}/${signatureBytes}`.
+* Major libp2p upgrades resulting in faster peer discovery times and more reliable connections. Many thanks to the libp2p team for responding quickly to some bugs we found!
+* We now use CAIP-2 chain identifiers across the board.
+* More organized and colorful logging :)
 
 ### v0.3.x (2023-03-28)
 
