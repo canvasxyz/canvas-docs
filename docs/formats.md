@@ -4,89 +4,134 @@ sidebar_position: 4
 
 # Basic Data Formats
 
-By default, Canvas supports user interactions signed using a set of
-basic data formats:
+At its core, a Canvas application deals with two types of signed messages: _sessions_ and _actions_.
 
-* **[Actions](https://github.com/canvasxyz/canvas/blob/main/packages/interfaces/src/actions.ts)**
-encode arbitrary calls, processed in the Canvas VM as user interactions.
-* **[Sessions](https://github.com/canvasxyz/canvas/blob/main/packages/interfaces/src/sessions.ts)**
-are used to log in, by delegating the ability to create Actions to a temporary session key.
+- [**Sessions**](/docs/canvas/packages/interfaces#sessions) are used to "log in" to applications, allowing the user to delegate the authority to sign actions to a temporary session key.
+- [**Actions**](/docs/canvas/packages/interfaces#actions) invoke functions defined in the contract. Actions are evaluated inside a VM and have external effects, like setting or deleting records in the model database.
 
-Specifically, Actions are defined as objects which carry an
-**[ActionPayload](#action-payload)**, signature, and optionally the
-session key they were signed with. Sessions are defined as objects
-which contain a **[SessionPayload](#session-payload)** and signature.
+Both types of messages have a payload and a signature. Canvas supports signing messages using identities from a variety of different chains, including Ethereum, Solana, Polkadot, and Cosmos chains. Canvas uses the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) standard for chain identifiers.
 
-### Action Payload
+Three basic values are required in both payload types:
+
+1. `app`: the `ipfs://...` URI of the app contract
+2. `chain`: the CAIP-2 identifier of a chain supported by the app contract
+3. `from`: the on-chain address of the user signing the message
+
+## Sessions
+
+A user can sign a `Session` to authorize a delegate key to sign actions on their behalf.
 
 ```ts
-export type ActionPayload = {
-	app: string
-	appName: string
-	from: string
-	call: string
-	callArgs: Record<string, ActionArgument>
-	chain: Chain
-	chainId: string
-	block: string | null
-	timestamp: number
+type Session = {
+  type: "session"
+  signature: string
+  payload: {
+    app: string
+    chain: string
+    from: string
+
+    sessionAddress: string  // address of the delegate key
+    sessionDuration: number // duration in milliseconds
+    sessionIssued: number   // issue time in milliseconds since 1 January 1970 00:00:00 UTC
+
+    // Blockhash of `chain` at issue time; required by peers except in --unchecked mode.
+    // Used to validate `sessionIssued`.
+    block: string | null
+  }
 }
 ```
 
-### Session Payload
+The `signature`, `address`, and `blockhash` formats vary by chain.
+
+## Actions
+
+An `Action` is can either be signed directly by a user or by a delegate key previously registered in a session.
 
 ```ts
-export type SessionPayload = {
-	app: string
-	appName: string
-	block: string | null
-	chain: Chain
-	chainId: string
-	from: string
-	sessionAddress: string
-	sessionDuration: number
-	sessionIssued: number
+type Action = {
+  type: "action"
+  signature: string
+
+	// null if signed directly; otherwise the `sessionAddress` of a session
+  session: string | null
+
+  payload: {
+    app: string
+    chain: string
+    from: string
+
+    // Name and arguments of the contract function to invoke.
+    // Action arguments must be JSON primitives
+    call: string
+    callArgs: Record<string, null | boolean | number | string>
+
+    // Blockhash of `chain` at `timestamp`; required by peers except in --unchecked mode.
+    // Used to validate `timestamp` and call external on-chain contracts.
+    block: string | null
+
+    // Milliseconds since 1 January 1970 00:00:00 UTC
+    timestamp: number
+  }
 }
 ```
 
-| Field     | Content  |
-| --------- | -------- |
-| app       | IPFS hash of the app    |
-| appName   | Name displayed to users |
-| block     | Block hash when the action occurred (optional) |
-| chain     | `ethereum` \| `cosmos` \| `solana` \| `...` |
-| chainId   | `1` \| `osmo` \| `...` |
-| from      | User address that sent the action or session |
+Again, the `signature`, `address`, and `blockhash` formats vary by chain.
 
-| Action Field | Content  |
-| ------------ | -------- |
-| call         | User address that sent the action |
-| callArgs     | Map of named arguments to the action call |
-| timestamp    | Timestamp when the action was sent |
+## Chain implementations
 
-| Session Field | Content  |
-| ------------- | -------- |
-| sessionAddress  | The session address being authorized |
-| sessionDuration | How long the session is valid |
-| sessionIssued   | Timestamp when the session was issued |
+This section documents the action and session signature formats for the different chain implementations. But you don't have to implement these yourself! We already did that. Use the methods of the [chain implementation interface](/docs/canvas/packages/interfaces#chain-implementations) if you need to sign and verify messages manually, or the [React hooks](/docs/canvas/packages/hooks) for totally automated session management and action generation.
 
-## Signing
+### Ethereum 
 
-### Ethereum
+Ethereum-based chains (CAIP namespace `eip155`) use the [SIWE](https://docs.login.xyz/) specification for session signatures and [EIP-712](https://eips.ethereum.org/EIPS/eip-712) for signing structured action payloads.
 
-Both action and session payloads are encoded according to EIP-712, and signed using signTypedData_v4.
+#### Session signatures
 
-_TODO: Explain our handling of Domain and encodings used for empty and null fields._
+The session signature format for Ethereum-based chains is `${domain}/${nonce}/${siweSignature}`, where `siweSignature` is the signature of a SIWE message deterministically derived from the session `payload`, along with the `domain` and `nonce` values.
 
-### Ethereum SIWE
+The SIWE message template is populated with the following values:
 
-Action payloads are encoded according to EIP-712, and signed using signTypedData_v4. Session payloads are encoded using SIWE.
+| SIWE field     | description                               | value                                                                |
+| -------------- | ----------------------------------------- | -------------------------------------------------------------------- |
+| domain         | DNS host name the user is logging in from | `domain`                                                             |
+| address        | the user's Ethereum address               | `payload.from`                                                       |
+| uri            | the subject resource URI                  | ```ethereum:${payload.sessionAddress}```                             |
+| issuedAt       | current time in ISO 8601                  | `new Date(payload.sessionIssued).toISOString()`                      |
+| expirationTime | session expiration time in ISO 8601       | `new Date(payload.sessionIssued).toISOString()`                      |
+| version        | SIWE message version number               | `1`                                                                  |
+| chainId        | EIP-155 Chain ID                          | chainID of `payload.chain` (component after the `eip155:` namespace) |
+| nonce          | randomized token                          | `nonce`                                                              |
+| resources      | list of additional URI references         | `[payload.app]`                                                      |
 
-_TODO: Explain exact mapping to the SIWE signature string._
+To sign a session payload for a domain `myapp.com`, generate a nonce `123123123123`, construct the SIWE message, and prompt the user to sign it. Browser wallets like MetaMask will parse the SIWE template and verify that the request is coming from the declared domain. When the user approves the signature request and you get a SIWE signature `0xABCABCABCABC...` back, set the session signature to `myapp.com/123123123123/0xABCABCABCABC...`. This is so that other Canvas peers will be able to verify the signature by reconstructing an identical SIWE message using the additional `domain` and `nonce` values.
+
+#### Action signatues
+
+The action signature format for Ethereum-based chains uses the EIP-712 standard for signed typed data.
+
+The EIP-712 data fields for an action payload are:
+
+```ts
+const actionDataFields = {
+	Message: [
+		{ name: "app", type: "string" },
+		{ name: "block", type: "string" },
+		{ name: "call", type: "string" },
+		{ name: "callArgs", type: "string" },
+		{ name: "chain", type: "string" },
+		{ name: "from", type: "string" },
+		{ name: "timestamp", type: "uint64" },
+	],
+}
+```
+
+... where the value of `callArgs` a canonical JSON serialization of the `payload.callArgs` object: no whitespace, and entries sorted lexicographically by key. The value of `block` is the empty string if `payload.block === null`. The rest of the fields are copied from the payload as-is.
+
+The message values are then signed using `signTypedData_v4`.
 
 ### Cosmos
 
-Both action and session payloads are encoded using [stable JSON stringify](#note-on-stable-stringify).
+Both action and session payloads are encoded using [canonical JSON serialization](#note-on-canonical-json-serialization).
 
 Then, action payloads are signed using an
 [ADR-036](https://docs.cosmos.network/v0.47/architecture/adr-036-arbitrary-signature)
@@ -99,49 +144,22 @@ they are signed using `signBytes`.
 
 ### Solana
 
-Both action and session payloads are encoded using stable JSON stringify, and then signed using `nacl.sign.detached` using the Solana private key.
+Both action and session payloads are encoded using canonical JSON serialization, and then signed using `nacl.sign.detached` using the Solana private key.
 
 ### NEAR
 
-Both action and session payloads are encoded using stable JSON stringify, and then signed using `nacl.sign.detached` using the NEAR private key.
+Both action and session payloads are encoded using canonical JSON serialization, and then signed using `nacl.sign.detached` using the NEAR private key.
 
 ### Polkadot
 
-Both action and session payloads are encoded using stable JSON stringify, and then signed using `signer.signRaw` using the Polkadot wallet.
+Both action and session payloads are encoded using canonical JSON serialization, and then signed using `signer.signRaw` using the Polkadot wallet.
 
-## Hashing format
+## Message IDs
 
-The hash of an action or session is defined as the sha256 hash of the
-entire [stable stringified](#note-on-stable-stringify) Action or
-Session object.
+Messages are uniquely identified by the sha256 hash of their canonical JSON serialization.
 
-This is necessary because not all chains have deterministic
-signatures, so we have to hash the signature to get a unique
-identifier for the action.
+## Note on canonical JSON serialization
 
-```ts
-export type Action = {
-	type: "action"
-	payload: ActionPayload,
-	session: string | null
-	signature: string
-}
-```
+The implementation of `JSON.stringify()` in browsers serializes object entries in their insertion order, and so is not deterministic. The encodings defined here all require object entries to be sorted lexicographically by key.
 
-```ts
-export type Session = {
-	type: "session"
-	payload: SessionPayload,
-	signature: string
-}
-```
-
-### Note on stable stringify
-
-The default `JSON.stringify()` implementation in most
-browsers relies on insertion order and is not guaranteed to be
-deterministic. The encodings defined here use a stable deterministic ordering for object fields.
-
-We recommend using a package like
-[safe-stable-stringify](https://www.npmjs.com/package/safe-stable-stringify)
-to guarantee this.
+We recommend using a package like [safe-stable-stringify](https://www.npmjs.com/package/safe-stable-stringify) configured with `{ strict: true, deterministic: true }` to guarantee this.
