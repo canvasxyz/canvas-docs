@@ -9,7 +9,9 @@ At its core, a Canvas application deals with two types of signed messages: _sess
 - [**Sessions**](/docs/canvas/packages/interfaces#sessions) are used to "log in" to applications, allowing the user to delegate the authority to sign actions to a temporary session key.
 - [**Actions**](/docs/canvas/packages/interfaces#actions) invoke functions defined in the contract. Actions are evaluated inside a VM and have external effects, like setting or deleting records in the model database.
 
-Both types of messages have a payload and a signature. Canvas supports signing messages using identities from a variety of different chains, including Ethereum, Solana, Polkadot, and Cosmos chains. Canvas uses the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) standard for chain identifiers.
+Both types of messages have a payload and a signature. Canvas supports signing messages using identities from a variety of different chains, including Ethereum, Solana, Polkadot, and Cosmos chains.
+
+We use the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) standard for chain identifiers, i.e. Ethereum mainnet is `eip155:1`.
 
 Three basic values are required in both payload types:
 
@@ -19,7 +21,7 @@ Three basic values are required in both payload types:
 
 ## Sessions
 
-A user can sign a `Session` to authorize a delegate key to sign actions on their behalf.
+A user can sign a `Session` payload to authorize a delegate key to sign actions on their behalf.
 
 ```ts
 type Session = {
@@ -45,14 +47,14 @@ The `signature`, `address`, and `blockhash` formats vary by chain.
 
 ## Actions
 
-An `Action` is can either be signed directly by a user or by a delegate key previously registered in a session.
+An `Action` payload can either be signed directly by a user, or by a delegate key previously registered in a session.
 
 ```ts
 type Action = {
   type: "action"
   signature: string
 
-	// null if signed directly; otherwise the `sessionAddress` of a session
+  // null if signed directly; otherwise the `sessionAddress` of a session
   session: string | null
 
   payload: {
@@ -81,7 +83,7 @@ Again, the `signature`, `address`, and `blockhash` formats vary by chain.
 
 This section documents the action and session signature formats for the different chain implementations. But you don't have to implement these yourself! We already did that. Use the methods of the [chain implementation interface](/docs/canvas/packages/interfaces#chain-implementations) if you need to sign and verify messages manually, or the [React hooks](/docs/canvas/packages/hooks) for totally automated session management and action generation.
 
-### Ethereum 
+### Ethereum
 
 Ethereum-based chains (CAIP namespace `eip155`) use the [SIWE](https://docs.login.xyz/) specification for session signatures and [EIP-712](https://eips.ethereum.org/EIPS/eip-712) for signing structured action payloads.
 
@@ -106,6 +108,8 @@ The SIWE message template is populated with the following values:
 To sign a session payload for a domain `myapp.com`, generate a nonce `123123123123`, construct the SIWE message, and prompt the user to sign it. Browser wallets like MetaMask will parse the SIWE template and verify that the request is coming from the declared domain. When the user approves the signature request and you get a SIWE signature `0xABCABCABCABC...` back, set the session signature to `myapp.com/123123123123/0xABCABCABCABC...`. This is so that other Canvas peers will be able to verify the signature by reconstructing an identical SIWE message using the additional `domain` and `nonce` values.
 
 #### Action signatues
+
+_For users of non-Ethereum chains, note that we may implement SIWE-style (SIWx) login messages as a default format for other chains, in the near future._
 
 The action signature format for Ethereum-based chains uses the EIP-712 standard for signed typed data.
 
