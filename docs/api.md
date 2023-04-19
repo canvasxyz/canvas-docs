@@ -6,9 +6,14 @@ title: "Contract Language"
 # Contract Language
 
 Each Canvas application is defined as a single file, with JavaScript
-exports for models, routes, actions, and configuration, executed
-inside a [sandboxed ES2020 runtime](https://bellard.org/quickjs/).
+exports for models, routes, actions, and configuration.
 
+Applications are executed in [QuickJS](https://bellard.org/quickjs/),
+a sandboxed ES2020 runtime, with P2P-friendly database accessors.
+
+As the technology matures, we'll also support
+faster runtimes including [Realms](https://github.com/tc39/proposal-shadowrealm)
+and [WebAssembly via AssemblyScript](https://www.assemblyscript.org/).
 
 ## Table of Contents
 
@@ -21,6 +26,20 @@ inside a [sandboxed ES2020 runtime](https://bellard.org/quickjs/).
 
 
 ## Configuration
+
+Contracts should specify the chains that are expected to
+be supported, by specifying the CAIP-2 chain identifier.
+
+Both a chain and chain ID are expected to be included, as
+a contract might read from different contracts on different
+chains.
+
+```
+// Optional. If no chains are provided, Ethereum mainnet
+// ["eip155:1"] will be used by default.
+
+export const chains = ["eip155:1"]
+```
 
 An application name is shown to users when logging into the
 application on some chains. Currently, this is only used in the

@@ -5,7 +5,7 @@ slug: /
 
 # Canvas
 
-### A peer-to-peer edge VM and database
+### A next-generation P2P VM and edge database
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
@@ -18,14 +18,14 @@ data, or as a building block for more complex protocols.
 
 Compared to libp2p, Canvas provides:
 
-* persistence (just define the signed actions that you'd like to accept)
+* persistence
 * efficient sync for large batches of actions
 * ability to [read from chains](./docs/api#contracts) and use custom functions to validate actions
 * built-in support for [multiple chains](./docs/formats#chain-implementations), [custom data formats](./docs/custom), and [upgradeability](./docs/api#sources)
-* database-like interfaces, including [SQLite](./docs/api#models), [API router](./docs/api#routes), [React hooks](./docs/canvas/packages/hooks), and [hosting](./docs/tutorial/canvas-hub)
+* a database-like interface: [SQLite views](./docs/api#models), [API routing](./docs/api#routes), [React hooks](./docs/canvas/packages/hooks), and [hosting](./docs/tutorial/canvas-hub)
 
-Unlike blockchains, Canvas does not enforce consensus, which means
-nodes accept actions as soon as they are validated.
+By default, Canvas does not enforce finality, which means nodes
+accept actions as soon as they are validated.
 
 For Web3 developers, Canvas extends the chain, with a fast,
 upgradeable offchain layer that supports computations over on-chain
