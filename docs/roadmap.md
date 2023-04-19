@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Roadmap and changes
+# Roadmap and changelog
 
 See Github for the [full changelog](https://github.com/canvasxyz/canvas/releases).
 

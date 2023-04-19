@@ -5,15 +5,15 @@ title: "Contract Language"
 
 # Contract Language
 
-Each Canvas application is defined as a single file, with JavaScript
-exports for models, routes, actions, and configuration.
+Each Canvas application is defined as a single file, that exports
+models, routes, and actions, otherwise known as an "offchain contract".
 
 Applications are executed in [QuickJS](https://bellard.org/quickjs/),
 a sandboxed ES2020 runtime, with P2P-friendly database accessors.
 
 As the technology matures, we'll also support
-faster runtimes including [Realms](https://github.com/tc39/proposal-shadowrealm)
-and [WebAssembly via AssemblyScript](https://www.assemblyscript.org/).
+faster runtimes including [Secure ECMAScript](https://github.com/tc39/proposal-shadowrealm)
+and WebAssembly via [AssemblyScript](https://www.assemblyscript.org/).
 
 ## Table of Contents
 
@@ -21,8 +21,8 @@ and [WebAssembly via AssemblyScript](https://www.assemblyscript.org/).
 - [Models](#models)
 - [Routes](#routes)
 - [Actions](#actions)
-- [Contracts](#contracts)
-- [Sources](#sources)
+- [On-chain contracts](#contracts)
+- [Sources and upgradeability](#sources)
 
 
 ## Configuration
@@ -255,7 +255,7 @@ export const sources = {
 
 Sources are *not* transitive; to import data from a contract imported
 by a previous contract, you must define it explicitly. This is because
-we don't have a way to retrieve the code of previous contracts.
+data availability isn't guaranteed for previous contracts.
 
 To see sources in action, take a look at the [unit
 tests](https://github.com/canvasxyz/canvas/blob/main/packages/core/test/sources.test.ts).
