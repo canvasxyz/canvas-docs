@@ -58,8 +58,9 @@ templates for developers to get started quickly.
 These demo applications are deployed to separate Fly.io regions, and
 sync with each other via p2p:
 
-* [canvas-chat.fly.dev](https://canvas-chat.fly.dev/index.html) built with Webpack
-* [canvas-chat-2.fly.dev](https://canvas-chat-2.fly.dev) built with Next.js
+* [canvas-chat-p2p.pages.dev](https://canvas-chat-p2p.pages.dev) (Webpack, client-side p2p)
+* [canvas-chat.fly.dev](https://canvas-chat.fly.dev/index.html) (Webpack, server-side p2p)
+* [canvas-chat-2.fly.dev](https://canvas-chat-2.fly.dev) (Next.js, server-side p2p)
 * [canvas-chat-3.fly.dev](https://canvas-chat-3.fly.dev) which imports data from the other examples into a new app
 * You can also run the app locally by downloading the
   [webpack app](https://github.com/canvasxyz/canvas/tree/main/examples/chat-webpack)
