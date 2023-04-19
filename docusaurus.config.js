@@ -57,7 +57,7 @@ const config = {
         items: [
           {
             href: "#",
-            label: "v0.3",
+            label: "v0.4",
             position: "left",
             className: "navbar-badge",
           },
