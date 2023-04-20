@@ -11,10 +11,11 @@ slug: /
 
 Canvas is a distributed database that makes it easy to build offchain
 applications, where user actions are signed, replicated using
-[libp2p](https://libp2p.io/), and combined in a [P2P VM](./docs/api).
+[libp2p](https://libp2p.io/), and combined in a [P2P-friendly
+VM](./docs/api).
 
-It can be used as a Web3 database, a fast and upgradeable offchain
-data layer, or a building block for more complex protocols.
+It can be used as a Web3 database, a fast offchain data layer, or a
+building block for more complex protocols.
 
 Compared to libp2p, Canvas provides:
 
