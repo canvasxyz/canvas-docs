@@ -11,7 +11,7 @@ At its core, a Canvas application deals with two types of signed messages: _sess
 
 Both types of messages have a payload and a signature. Canvas supports signing messages using identities from a variety of different chains, including Ethereum, Solana, Polkadot, and Cosmos chains.
 
-We use the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) standard for chain identifiers, i.e. Ethereum mainnet is `eip155:1`.
+We use the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) standard for chain identifiers, i.e. Ethereum mainnet is `eip155:1`, and the current Cosmos Hub mainnet is `cosmos:cosmoshub-3`.
 
 Three basic values are required in both payload types:
 
