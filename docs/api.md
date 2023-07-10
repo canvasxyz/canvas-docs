@@ -9,13 +9,12 @@ Each Canvas application is defined as a single file, that exports
 models, routes, and actions, otherwise known as an "offchain contract".
 
 Applications are executed in [QuickJS](https://bellard.org/quickjs/),
-a sandboxed ES2020 runtime, with P2P-friendly database accessors,
-where reading from the database is only possible by declaring previous
-dependent actions.
+a sandboxed ES2020 runtime, with versions using V8 Isolates and
+WebAssembly on the roadmap for later.
 
-As the technology matures, we'll also support
-faster runtimes including [Secure ECMAScript](https://github.com/tc39/proposal-shadowrealm)
-and WebAssembly via [AssemblyScript](https://www.assemblyscript.org/).
+The runtime provides peer-to-peer friendly database accessors,
+that limit what can be read from the database to immutably hashed previous
+actions.
 
 ## Table of Contents
 

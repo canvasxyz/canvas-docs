@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -22,9 +22,9 @@
 }
 
 body {
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 300;
-  line-height: 1.68;
+  line-height: 1.6;
   border-top: 4px solid var(--ifm-color-primary);
 }
 [data-theme='dark'] body {
@@ -110,7 +110,7 @@ code {
 }
 
 .navbar__title, .navbar__items {
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .navbar__title {
   margin-left: 0.1em;
@@ -134,7 +134,7 @@ code {
 }
 
 .navbar-sidebar, nav.menu {
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
   letter-spacing: 0.01em;
 }
 .menu__link {
@@ -162,7 +162,7 @@ nav.theme-doc-breadcrumbs {
 }
 
 h1, h2, h3 {
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .markdown > h1 + h3 {
   margin-top: -14px;
@@ -180,19 +180,19 @@ h1, h2, h3 {
 article button.clean-btn {
   padding: 0.6rem 0.8rem;
   font-size: 94%;
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .table-of-contents {
   font-size: 94%;
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 nav.pagination-nav {
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 footer {
   font-size: 94%;
-  font-family: Poppins, sans-serif;
+  font-family: "Inter", sans-serif;
   border-top: 1px solid var(--ifm-pre-background);
 }
 [data-theme='dark'] footer {
