@@ -5,7 +5,7 @@ slug: /
 
 # Canvas
 
-### A universal peer-to-peer database
+### A peer-to-peer VM and offchain database
 
 :::tip Upcoming Release
 Canvas 1.0 is in the final stages of implementation, with significant improvements landing soon.
@@ -15,7 +15,7 @@ Please see our [Discord](https://discord.gg/HZQuC9QEqN) for more details!
 
 [![license MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm](https://img.shields.io/npm/v/@canvas-js/core?color=33cd56&logo=npm)](https://www.npmjs.com/package/@canvas-js/core) [![npm](https://img.shields.io/github/last-commit/canvasxyz/canvas?color=33cd56&logo=github)](https://github.com/canvasxyz/canvas/tree/main/packages/core) [![tests](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml/badge.svg)](https://github.com/canvasxyz/canvas/actions/workflows/ci.yml)
 
-Canvas is a **serverless, functional, peer-to-peer database** based on
+Canvas is a **functional, reactive, peer-to-peer database** based on
 [Merkle
 sync](https://joelgustafson.com/posts/2023-05-04/merklizing-the-key-value-store-for-fun-and-profit)
 and [libp2p](https://libp2p.io).
@@ -33,10 +33,11 @@ Unlike using libp2p directly, Canvas provides:
 * ability to [read from blockchains](./docs/api#contracts) and use block timestamps for conflict resolution
 * a full set of tooling, including [React hooks](./docs/canvas/packages/hooks) and a [hosted service](./docs/tutorial/canvas-hub)
 
-Compared to blockchains and on-chain databases, Canvas provides higher
-throughput, no confirmation delays, and does not require a token or
-transaction fees. Each node has its own view of the network, which
-makes it best for traditional database-oriented applications.
+Compared to blockchains, Canvas provides higher throughput, no
+confirmation delays, and does not require a token or transaction
+fees. Each node has its own view of the network, which makes it best
+for traditional database-oriented applications, as opposed to DeFi
+and financial infrastructure.
 
 ## Using Canvas
 
